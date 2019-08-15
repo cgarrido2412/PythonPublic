@@ -1,8 +1,8 @@
 import smtplib
 smtpObj = smtplib.SMTP('smtp-mail.outlook.com', 587)
-
 smtpObj.ehlo()
 smtpObj.starttls()
-smtpObj.login('bob@example.com', ' MY_SECRET_PASSWORD')
-smtpObj.sendmail('bob@example.com', 'alice@example.com', 'Subject: Solong.\nDear Alice, so long and thanks for all the fish. Sincerely, Bob')
+password = str(input('Please enter your password:'))
+smtpObj.login('cgarrido@savers.com', password)
+smtpObj.sendmail('cgarrido@savers.com', 'cgarrido@savers.com', 'Subject: Python.\nI sent this via a script. This is a test to automate cradlepoint e-mails.')
 smtpObj.quit()
