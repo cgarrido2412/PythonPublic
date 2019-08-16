@@ -1,3 +1,4 @@
+#Make a one-player Rock-Paper-Scissors game
 import random
 print('Rock, paper, scissors!')
 player1score = 0
