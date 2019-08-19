@@ -20,7 +20,9 @@ def conversion_function(x: pd.Series) -> pd.Timestamp:
              'Mountain': 'US/Mountain',
              'Pacific': 'US/Pacific',
 	     'Australia': 'Australia/Melbourne',
-	     'Arizona': 'US/Arizona'}
+	     'Arizona': 'US/Arizona',
+             'Alaska': 'US/Alaska',
+             'Hawaii' : 'US/Hawaii'}
     raw_time = pd.Timestamp(x[1])
     loc_raw_time = raw_time.tz_localize("US/Pacific")
     return loc_raw_time.tz_convert(zones[x[0]]).replace(tzinfo=None)
