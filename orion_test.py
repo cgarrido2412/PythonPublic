@@ -3,7 +3,7 @@ from orionsdk import SwisClient
 
 
 def main():
-    npm_server = 'pc0-cde-nms1'
+    npm_server = 'HOSTNAME'
     username = str(input('Please enter your username:'))
     password = str(input('Please enter your password:'))
 
