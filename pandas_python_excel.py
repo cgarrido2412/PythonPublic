@@ -8,6 +8,7 @@ import xlrd
 import xlwt
 import time
 
+startTime = time.time()
 data = pd.read_excel('lab.xls')
 data = data.drop_duplicates('Site UP')
 data = data.drop(data[data.Duration == 0].index)
@@ -28,10 +29,9 @@ def conversion_function(x: pd.Series) -> pd.Timestamp:
     loc_raw_time = raw_time.tz_localize("US/Pacific")
     return loc_raw_time.tz_convert(zones[x[0]]).replace(tzinfo=None)
 
-startTime = time.time()
 data['Adjusted_Down'] = data[['Time_Zone', 'Site DOWN']].apply(conversion_function, axis=1)
 data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, axis=1)
-endTime = time.time()
-
 data.to_excel('final.xls', 'a+')
+
+endTime = time.time()
 print('The conversion function took %s seconds to calculate.' % (endTime - startTime))
