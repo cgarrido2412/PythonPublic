@@ -1,4 +1,5 @@
 import random
+import camelcase
 def reverse(): 
     message = str(input('Please enter message to reverse:'))
     translated = ''
@@ -18,3 +19,15 @@ def odd_even():
         print(number, 'is an even number.')
     else:
         print(number, 'is an odd number.')
+def upper_case():
+    message = str(input('Enter a message:'))
+    message = message.upper()
+    return message
+def lower_case():
+    message = str(input('Enter a message:'))
+    message = message.lower()
+    return message 
+def camelcase(): #is not working 
+    message = str(input('Enter a message:'))
+    message = message.camelcase()
+    return message
