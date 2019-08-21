@@ -29,14 +29,22 @@ def extract():
     pageObj = pdfReader.getPage(0)
     pageObj.extractText()
     return pageObj.extractText()
-def caesar_encrypt(): #the problem with the encryption method is that it ignores case sensitive characters 
+def caesar_encrypt():  
     message = str(input('Please enter the message to be encrypted: \n'))
-    message = message.upper()
     text = ''
     key = int(input('Please enter a number key: \n'))
-    l = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    L = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    l = 'abcdefghijklmnopqrstuvwxyz'
     for symbol in message:
-        if symbol in l:
+        if symbol in L:
+            n = L.find(symbol)
+            n = n + key
+            if n >= len(L):
+                n = n - len(L)
+            elif n < 0:
+                n = n + len(L)
+            text = text + L[n]
+        elif symbol in l:
             n = l.find(symbol)
             n = n + key
             if n >= len(l):
@@ -50,6 +58,7 @@ def caesar_encrypt(): #the problem with the encryption method is that it ignores
 def caesar_decrypt():
     message = input('Please enter the message to be decrypted: \n')
     LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    letters = 'abcdefghijklmnopqrstuvwxyz'
     for key in range(len(LETTERS)):
         translated = ''
         for symbol in message:
@@ -59,6 +68,12 @@ def caesar_decrypt():
                 if num < 0:
                     num = num + len(LETTERS)
                 translated = translated + LETTERS[num]
+            elif symbol in letters:
+                num = letters.find(symbol)
+                num = num - key
+                if num < 0:
+                    num = num + len(letters)
+                translated = translated + letters[num]
             else:
                 translated = translated + symbol
         print('Key # %s: %s' % (key, translated))
