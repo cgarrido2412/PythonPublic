@@ -27,6 +27,7 @@ def caesar_encrypt():
 def caesar_decrypt():
     message = input('Please enter the message to be decrypted: \n')
     LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    letters = 'abcdefghijklmnopqrstuvwxyz'
     for key in range(len(LETTERS)):
         translated = ''
         for symbol in message:
@@ -36,6 +37,12 @@ def caesar_decrypt():
                 if num < 0:
                     num = num + len(LETTERS)
                 translated = translated + LETTERS[num]
+            elif symbol in letters:
+                num = letters.find(symbol)
+                num = num - key
+                if num < 0:
+                    num = num + len(letters)
+                translated = translated + letters[num]
             else:
                 translated = translated + symbol
         print('Key # %s: %s' % (key, translated))
