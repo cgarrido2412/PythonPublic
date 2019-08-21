@@ -1,41 +1,103 @@
-#C:\Users\cgarrido\AppData\Local\Programs\Python\Python37\Scripts>
-import pandas as pd
-from pandas import Timestamp
-import pytz
-from pytz import all_timezones
-import datetime
-import xlrd
-import xlwt
-import time
+# Transposition Cipher Encrypt/Decrypt File
+# http://inventwithpython.com/hacking (BSD Licensed)
 
-startTime = time.time()
-data = pd.read_excel('lab.xls')
-data = data.drop_duplicates('Site UP')
-data = data.drop(data[data.Duration == 0].index)
-data['Site DOWN'] = pd.to_datetime(data['Site DOWN'])
-data['Site UP'] = pd.to_datetime(data['Site UP'])
+import time, os, sys, transpositionEncrypt, transpositionDecrypt 
 
-def conversion_function(x: pd.Series) -> pd.Timestamp:  
-    zones = {'Atlantic': 'Canada/Atlantic',
-             'Central': 'US/Central',
-             'Eastern': "US/Eastern",
-             'Mountain': 'US/Mountain',
-             'Pacific': 'US/Pacific',
-	     'Australia': 'Australia/Melbourne',
-	     'Arizona': 'US/Arizona',
-             'Alaska': 'US/Alaska',
-             'Hawaii' : 'US/Hawaii'}
-    raw_time = pd.Timestamp(x[1])
-    loc_raw_time = raw_time.tz_localize("US/Pacific")
-    return loc_raw_time.tz_convert(zones[x[0]]).replace(tzinfo=None)
+def main():
+    inputFilename = 'frankenstein.txt'
+    # BE CAREFUL! If a file with the outputFilename name already exists,
+    # this program will overwrite that file.
+    outputFilename = 'frankenstein.encrypted.txt'
+    myKey = 10
+    myMode = 'encrypt' # set to 'encrypt' or 'decrypt'
 
-data['Adjusted_Down'] = data[['Time_Zone', 'Site DOWN']].apply(conversion_function, axis=1)
-data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, axis=1)
-data = data.set_index('Adjusted_Down')
+    # If the input file does not exist, then the program terminates early.
+    if not os.path.exists(inputFilename):
+        print('The file %s does not exist. Quitting...' % (inputFilename))
+        sys.exit()
 
-#below does not filter for store hours, still having problems over multiple dates 
-filtered_data = data[(data.index > '09:00:00') & (data.index <= '21:00:00')]
-data.to_excel('TEST.xls', 'a+')
+    # If the output file already exists, give the user a chance to quit.
+    if os.path.exists(outputFilename):
+        print('This will overwrite the file %s. (C)ontinue or (Q)uit?' % (outputFilename))
+        response = input('> ')
+        if not response.lower().startswith('c'):
+            sys.exit()
 
-endTime = time.time()
-print('The conversion function took %s seconds to calculate.' % (endTime - startTime))
+    # Read in the message from the input file
+    fileObj = open(inputFilename)
+    content = fileObj.read()
+    fileObj.close()
+
+    print('%sing...' % (myMode.title()))
+
+    # Measure how long the encryption/decryption takes.
+    startTime = time.time()
+    if myMode == 'encrypt':
+        translated = transpositionEncrypt.encryptMessage(myKey, content)
+    elif myMode == 'decrypt':
+        translated = transpositionDecrypt.decryptMessage(myKey, content)
+    totalTime = round(time.time() - startTime, 2)
+    print('%sion time: %s seconds' % (myMode.title(), totalTime))
+
+    # Write out the translated message to the output file.
+    outputFileObj = open(outputFilename, 'w')
+    outputFileObj.write(translated)
+    outputFileObj.close()
+
+    print('Done %sing %s (%s characters).' % (myMode, inputFilename, len(content)))
+    print('%sed file is %s.' % (myMode.title(), outputFilename))
+
+
+# If transpositionCipherFile.py is run (instead of imported as a module)
+# call the main() function.
+if __name__ == '__main__':
+    main()
+
+def caesar_encrypt():  
+    message = str(input('Please enter the message to be encrypted: \n'))
+    text = ''
+    key = int(input('Please enter a number key: \n'))
+    L = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    l = 'abcdefghijklmnopqrstuvwxyz'
+    for symbol in message:
+        if symbol in L:
+            n = L.find(symbol)
+            n = n + key
+            if n >= len(L):
+                n = n - len(L)
+            elif n < 0:
+                n = n + len(L)
+            text = text + L[n]
+        elif symbol in l:
+            n = l.find(symbol)
+            n = n + key
+            if n >= len(l):
+                n = n - len(l)
+            elif n < 0:
+                n = n + len(l)
+            text = text + l[n]
+        else:
+            text = text + symbol
+    print('Your encrypted message is: \n' + text)
+def caesar_decrypt():
+    message = input('Please enter the message to be decrypted: \n')
+    LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    letters = 'abcdefghijklmnopqrstuvwxyz'
+    for key in range(len(LETTERS)):
+        translated = ''
+        for symbol in message:
+            if symbol in LETTERS:
+                num = LETTERS.find(symbol)
+                num = num - key
+                if num < 0:
+                    num = num + len(LETTERS)
+                translated = translated + LETTERS[num]
+            elif symbol in letters:
+                num = letters.find(symbol)
+                num = num - key
+                if num < 0:
+                    num = num + len(letters)
+                translated = translated + letters[num]
+            else:
+                translated = translated + symbol
+        print('Key # %s: %s' % (key, translated))
