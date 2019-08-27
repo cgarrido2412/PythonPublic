@@ -14,7 +14,8 @@ import time
 
 #Timer for the script starts, opens excel as dataframe and eliminates duplicates + durations with "0" value
 startTime = time.time()
-data = pd.read_excel('outage_8_21_2019.xls') #consider making this a user input string
+name = str(input('Please enter the full filename:'))
+data = pd.read_excel(name) 
 data = data.drop_duplicates('Site UP')
 data = data.drop(data[data.Duration == 0].index)
 data['Site DOWN'] = pd.to_datetime(data['Site DOWN'])
@@ -38,11 +39,11 @@ def conversion_function(x: pd.Series) -> pd.Timestamp:
 #Application of conversion function, then saves the spreadsheet
 data['Adjusted_Down'] = data[['Time_Zone', 'Site DOWN']].apply(conversion_function, axis=1)
 data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, axis=1)
-data.to_excel('outage_8_21_2019.xls') #This is the spreadsheet you'll want to work with and edit 
+data.to_excel(name) #This is the spreadsheet you'll want to work with and edit 
 
 #index based on local down time, drop anything outside of business hours and saves as new .xls file
 data = data.set_index('Adjusted_Down')
-filtered_data = data[(data.index > '08/21/19 09:00:00') & (data.index <= '08/21/19 21:00:00')]
+filtered_data = data[(data.index > '08/26/19 09:00:00') & (data.index <= '08/26/19 21:00:00')]
 filtered_data.to_excel('estimated.xls') 
 
 #Timer for the script stops, prints total time elapsed within python shell 
