@@ -10,7 +10,6 @@ import time
 
 startTime = time.time()
 data = pd.read_excel('lab.xls')
-data = data.drop_duplicates('Site UP')
 data = data.drop(data[data.Duration == 0].index)
 data['Site DOWN'] = pd.to_datetime(data['Site DOWN'])
 data['Site UP'] = pd.to_datetime(data['Site UP'])
@@ -31,6 +30,7 @@ def conversion_function(x: pd.Series) -> pd.Timestamp:
 
 data['Adjusted_Down'] = data[['Time_Zone', 'Site DOWN']].apply(conversion_function, axis=1)
 data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, axis=1)
+data = data.drop_duplicates('Adjusted_Up')
 data.to_excel('final.xls', 'a+')
 
 endTime = time.time()
