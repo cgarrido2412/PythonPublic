@@ -1,3 +1,4 @@
+#A rock paper scissors game that can be played alone against a random choice computer or "with" another person
 import random
 while True:
     print('Rock, Paper, Scissors!')
