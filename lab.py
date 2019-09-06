@@ -71,19 +71,11 @@ def conditional_formatting():
     workbook  = writer.book
     worksheet = writer.sheets['Sheet1']
 
-data = pd.read_excel('lab.xlsx')
-data['duration'] = data['Adjusted_Up'] - data['Adjusted_Down']
-data['duration'] = data['duration']/np.timedelta64(1,'m')
-dfn = data [(data.Adjusted_Down >= '09:00:00') & (data.Adjusted_Down <= '21:00:00')]
-dfx = data [(data.Adjusted_Up >= '09:00:00') & (data.Adjusted_Up <= '21:00:00')]
-daytime = data[(dfx-dfn).astype('timedelta64[h]')]
-
-##site_open = data[(data.Adjusted_Down >= '09:00:00')]
-##site_close = data[(data.Adjusted_Down <= '21:00:00')]
-##data['daytime'] = data['site_open'] - data['site_close']
-##data['daytime'] = data['daytime']/np.timedelta64(1, 'm')
-
-##data[data.Adjusted_Down.apply(lambda x : x.split(' ')[1]) >= '09:00:00']
-
-#Try using to_datetime to convert Adjusted_Down and Adjusted_Up column &
-#then subtract them normally. You can also use dt.hour to subset the hours for each day between 9AM & 9PM
+def store_hours():
+    data = pd.read_excel('lab.xlsx')
+    data['duration'] = data['Adjusted_Up'] - data['Adjusted_Down']
+    data['duration'] = data['duration']/np.timedelta64(1,'m')
+    dfn = data [(data.Adjusted_Down >= '09:00:00') & (data.Adjusted_Down <= '21:00:00')]
+    dfx = data [(data.Adjusted_Up >= '09:00:00') & (data.Adjusted_Up <= '21:00:00')]
+    daytime = data[(dfx-dfn).astype('timedelta64[h]')]
+    #data[data.Adjusted_Down.apply(lambda x : x.split(' ')[1]) >= '09:00:00']
