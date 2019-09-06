@@ -9,6 +9,16 @@ import time
 import numpy as np
 import xlsxwriter
 
+#only for leave function
+from threading import Timer
+
+def leave():
+    def timeout():
+        print("15 minutes have passed!")
+    t = Timer(15 * 60, timeout)
+    t.start()
+    t.join()
+
 def in_business_hours():
     data = pd.read_excel('lab.xlsx')
     data['duration'] = data['Adjusted_Up'] - data['Adjusted_Down']
