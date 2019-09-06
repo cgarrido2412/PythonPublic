@@ -7,11 +7,19 @@ import xlrd
 import xlwt
 import time
 import numpy as np
+import xlsxwriter
 
 def in_business_hours():
     data = pd.read_excel('lab.xlsx')
     data['duration'] = data['Adjusted_Up'] - data['Adjusted_Down']
     data['duration'] = data['duration']/np.timedelta64(1,'m')
+
+def conditional_formatting():
+    data = pd.read_excel('lab.xlsx')
+    writer = pd.ExcelWriter('lab.xlsx', engine='xlsxwriter')
+    data.to_excel(writer, sheet_name='Sheet1')
+    workbook  = writer.book
+    worksheet = writer.sheets['Sheet1']
 
 data = pd.read_excel('lab.xlsx')
 data['duration'] = data['Adjusted_Up'] - data['Adjusted_Down']
