@@ -16,7 +16,7 @@ data['duration'] = data['Adjusted_Up'] - data['Adjusted_Down']
 data['duration'] = data['duration']/np.timedelta64(1,'m')
 
 def explode():
-    s = df.apply(lambda row: pd.date_range(row['Adjusted_Down'], row['Adjusted_Up'], freq='T'), axis=1).explode()
+    s = data.apply(lambda row: pd.date_range(row['Adjusted_Down'], row['Adjusted_Up'], freq='T'), axis=1).explode()
     s.dt.time.between(time(9), time(21)).sum()    
 
 def by_month():
