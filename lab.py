@@ -21,15 +21,15 @@ data['duration'] = data['duration']/np.timedelta64(1,'m')
 s = data.apply(lambda row: pd.date_range(row['Adjusted_Down'], row['Adjusted_Up'], freq='T'), axis=1).explode()
 
 #returns total amount of downtime between 9-21 but not by store 
-s.dt.time.between(time(9), time(21)).sum()  
+total = s.dt.time.between(time(9), time(21)).sum()  
 
 #range of index[0] for s 
-slist = range(0, 227)
+slist = range(0, 227) #already includes the +1 
 
 #due to thy this loop itterates, it returns the same thing as 'duration' column 
 for num in slist:
-    x = s[num].count()
-    print(x)  
+    Duration = s[num].count()
+    print(Duration)  
 
 #secondary function to test
 def by_month():
