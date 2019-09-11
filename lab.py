@@ -1,43 +1,52 @@
+#Columns should be in the following format before running the script:
+#STORE | REGION | DESIGN | VENDOR | TIME_ZONE | SITE DOWN | SITE UP | DURATION
+
+#open cli and navigate to C:\Users\USERNAME\AppData\Local\Programs\Python\Python37\Scripts>
+#use "pip install APPLICATION" i.e., "pip install pandas" to download modules and allow them to be imported
 import pandas as pd
 from pandas import Timestamp
 import pytz
 from pytz import all_timezones
 import datetime
-from datetime import time
-from threading import Timer
-import time as t
 import xlrd
 import xlwt
-import numpy as np
-import xlsxwriter
+import time
 
-data = pd.read_excel('lab.xlsx')
+#Timer for the script starts, opens excel as dataframe and eliminates duplicates + durations with "0" value
+startTime = time.time()
+fileName = str(input('Please enter the filename:'))
+data = pd.read_excel(fileName)
+data = data.drop(data[data.Duration == 0].index)
+data['Site DOWN'] = pd.to_datetime(data['Site DOWN'])
+data['Site UP'] = pd.to_datetime(data['Site UP'])
 
-#creates new column 'duration' by indexing difference between up and down time. returns float
-data['duration'] = data['Adjusted_Up'] - data['Adjusted_Down']
-data['duration'] = data['duration']/np.timedelta64(1,'m')
+#Defines time conversion function, looks at value in "Time_Zone" and localizes it to matching dictionary value
+def conversion_function(x: pd.Series) -> pd.Timestamp:  
+    zones = {'Atlantic': 'Canada/Atlantic',
+             'Central': 'US/Central',
+             'Eastern': "US/Eastern",
+             'Mountain': 'US/Mountain',
+             'Pacific': 'US/Pacific',
+	     'Australia': 'Australia/Melbourne',
+	     'Arizona': 'US/Arizona',
+             'Alaska': 'US/Alaska',
+             'Hawaii' : 'US/Hawaii'}
+    raw_time = pd.Timestamp(x[1])
+    loc_raw_time = raw_time.tz_localize("US/Pacific")
+    return loc_raw_time.tz_convert(zones[x[0]]).replace(tzinfo=None)
 
-#returns a minute by minute breakdown in between Adjusted_Down and Adjusted_Up
+#Application of conversion function, removes duplicate adjusted_up times, then saves
+data['Adjusted_Down'] = data[['Time_Zone', 'Site DOWN']].apply(conversion_function, axis=1)
+data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, axis=1)
+data = data.drop_duplicates('Adjusted_Up')
+
+#Calculates number of minutes between Down and Up times, then creates a sum from all outages between 0900-2100
+#Currently does not give value / minutes per outage or per store. Only sum value
 s = data.apply(lambda row: pd.date_range(row['Adjusted_Down'], row['Adjusted_Up'], freq='T'), axis=1).explode()
+total = s.dt.time.between(time(9), time(21)).sum()
 
-#returns total amount of downtime between 9-21 but not by store 
-total = s.dt.time.between(time(9), time(21)).sum()  
+data.to_excel('python_analyzed_report.xls', 'a+')
 
-#range of index[0] for s 
-slist = range(0, 227) #already includes the +1 
-
-#due to thy this loop itterates, it returns the same thing as 'duration' column 
-for num in slist:
-    Duration = s[num].count()
-    print(Duration)  
-
-#secondary function to test
-def by_month():
-    s = data.apply(lambda row: pd.date_range(row['Adjusted_Down'], row['Adjusted_Up'], freq='T'), axis=1).explode()
-    downtime = pd.DataFrame({
-        'Month': s.astype('datetime64[M]'),
-        'IsDayTime': s.dt.time.between(time(9), time(21))
-    })
-    downtime.groupby('Month')['IsDayTime'].sum()
-
-#data.to_excel('delete.xls', 'a+')
+#Timer for the script stops, prints total time elapsed within python shell 
+endTime = time.time()
+print('The conversion function took %s seconds to calculate.' % (endTime - startTime))
