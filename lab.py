@@ -45,6 +45,7 @@ data = data.drop_duplicates('Adjusted_Up')
 s = data.apply(lambda row: pd.date_range(row['Adjusted_Down'], row['Adjusted_Up'], freq='T'), axis=1).explode()
 total = s.dt.time.between(time(9), time(21)).sum()
 
+#Save to a final spreadsheet
 data.to_excel('python_analyzed_report.xls', 'a+')
 
 #Timer for the script stops, prints total time elapsed within python shell 
