@@ -44,6 +44,7 @@ data = data.drop_duplicates('Adjusted_Up')
 #Currently does not give value / minutes per outage or per store. Only sum value
 s = data.apply(lambda row: pd.date_range(row['Adjusted_Down'], row['Adjusted_Up'], freq='T'), axis=1).explode()
 total = s.dt.time.between(time(9), time(21)).sum()
+print(total)
 
 #Save to a final spreadsheet
 data.to_excel('python_analyzed_report.xls', 'a+')
