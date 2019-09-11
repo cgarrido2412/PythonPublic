@@ -12,7 +12,7 @@ import xlrd
 import xlwt
 import time
 
-#Timer for the script starts, opens excel as dataframe and eliminates duplicates + durations with "0" value
+#Timer for the script starts, opens excel as dataframe and eliminates durations with "0" value
 startTime = time.time()
 fileName = str(input('Please enter the filename:'))
 data = pd.read_excel(fileName)
