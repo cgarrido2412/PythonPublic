@@ -10,10 +10,10 @@ from pytz import all_timezones
 import datetime
 import xlrd
 import xlwt
-import time
+import time as t
 
 #Timer for the script starts, opens excel as dataframe and eliminates durations with "0" value
-startTime = time.time()
+startTime = t.t()
 fileName = str(input('Please enter the filename:'))
 data = pd.read_excel(fileName)
 data = data.drop(data[data.Duration == 0].index)
@@ -49,5 +49,5 @@ total = s.dt.time.between(time(9), time(21)).sum()
 data.to_excel('python_analyzed_report.xls', 'a+')
 
 #Timer for the script stops, prints total time elapsed within python shell 
-endTime = time.time()
+endTime = t.t()
 print('The conversion function took %s seconds to calculate.' % (endTime - startTime))
