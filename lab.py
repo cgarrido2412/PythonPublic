@@ -35,7 +35,7 @@ def conversion_function(x: pd.Series) -> pd.Timestamp:
     loc_raw_time = raw_time.tz_localize("US/Pacific")
     return loc_raw_time.tz_convert(zones[x[0]]).replace(tzinfo=None)
 
-#Application of conversion function, removes duplicate adjusted_up times, then saves
+#Application of conversion function, removes duplicate adjusted_up times
 data['Adjusted_Down'] = data[['Time_Zone', 'Site DOWN']].apply(conversion_function, axis=1)
 data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, axis=1)
 data = data.drop_duplicates('Adjusted_Up')
