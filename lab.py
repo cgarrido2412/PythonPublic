@@ -33,7 +33,7 @@ for num in slist:
 
 #percentage of minutes during business hours
 percentage = (total / sum(data['duration'])) * 100
-print(percentage)
+print('The percentage of outage minutes during business hours is:', percentage)
 
 #secondary function to test
 def by_month():
