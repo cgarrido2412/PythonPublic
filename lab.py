@@ -31,6 +31,10 @@ for num in slist:
     Duration = s[num].count()
     print(Duration)  
 
+#percentage of minutes during business hours
+percentage = (total / sum(data['duration'])) * 100
+print(percentage)
+
 #secondary function to test
 def by_month():
     s = data.apply(lambda row: pd.date_range(row['Adjusted_Down'], row['Adjusted_Up'], freq='T'), axis=1).explode()
