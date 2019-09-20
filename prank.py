@@ -1,4 +1,5 @@
 import pyautogui
+import time
 
 def prank():
     #to rick roll someone 
@@ -7,10 +8,11 @@ def prank():
     #Windows button
     #pyautogui.position()
     #Point(x=22, y=1064)
-    pyautogui.moveTo(22, 1064, duration=0.5)
+    pyautogui.moveTo(22, 1064, duration=0.25)
     pyautogui.click()
     pyautogui.typewrite('chrome')
-    pyautogui.moveTo(225, 512, duration=0.5)
+    time.sleep(5)
+    pyautogui.moveTo(225, 512, duration=0.25)
     pyautogui.click()
+    time.sleep(5)
     pyautogui.typewrite('https://youtu.be/dQw4w9WgXcQ')
-
