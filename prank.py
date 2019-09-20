@@ -19,3 +19,20 @@ def prank():
     pyautogui.typewrite('https://youtu.be/dQw4w9WgXcQ')
     time.sleep(1)
     pyautogui.typewrite(['enter'])
+
+def brave_prank():
+    #experimenting with keyboard shortcuts
+    pyautogui.typewrite(['winleft'])
+    time.sleep(1)
+    pyautogui.typewrite('run')
+    time.sleep(1)
+    pyautogui.typewrite(['enter'])
+    time.sleep(1)
+    pyautogui.typewrite('brave')
+    time.sleep(1)
+    pyautogui.typewrite(['enter'])
+    time.sleep(1)
+    pyautogui.typewrite('https://youtu.be/dQw4w9WgXcQ')
+    time.sleep(1)
+    pyautogui.typewrite(['enter'])
+    time.sleep(1) 
