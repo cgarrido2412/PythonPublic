@@ -28,6 +28,26 @@ carImg = pygame.image.load('racecar.png')
 def car(x,y):
     gameDisplay.blit(carImg,(x,y))
 
+#Create text_objects
+def text_objects(text, font):
+    textSurface = font.render(text, True, black)
+    return textSurface, textSurface.get_rect()
+
+#define message_display
+def message_display(text):
+    #This part needs troubleshooting
+    #largeText = pygame.font.Font('Control Panel\Appearance and Personalization\Fonts\Arial.ttf', 115)
+    TextSurf, TextRect = text_objects(text, largeText)
+    TextRect.center = ((display_width/2),(display_height/2))
+    gameDisplay.blit(TextSurf, TextRect)
+    pygame.display.update()
+    time.sleep(2)
+    game_loop()
+
+#define crash
+def crash():
+    message_display('You Crashed')
+
 #main game loop
 def game_loop():
     x = (display_width * 0.45)
@@ -50,7 +70,7 @@ def game_loop():
         gameDisplay.fill(white)
         car(x,y)
         if x > display_width - car_width or x < 0:
-            gameExit = True
+            crash()
         pygame.display.update()
         clock.tick(60)
 game_loop()
