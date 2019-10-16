@@ -62,9 +62,9 @@ while True:
             break
         
 	#Will print the score if the game isn't over
-	else:
+        else:
             print('Player 1 score: ', player1score)
             print('Computer score: ', computerScore)
 
-#When the game loop breaks, message prints that the game is over. Then the game loop restarts. 
+#When the game loop breaks, message prints that the game is over. 
 print('Game over, thanks for playing!') 
