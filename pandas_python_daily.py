@@ -3,6 +3,11 @@
 #Last Revision: 18 Oct. 2019
 #Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis
 #Notes: saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'
+print('Author: Charles Garrido')
+print('Creation Date: 4 Aug. 2019')
+print('Last Revision: 18 Oct. 2019')
+print('Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis')
+print("saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'")
 
 #import modules for code to work, for modules that are not native to python use "pip install MODULE"
 import pandas as pd
