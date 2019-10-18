@@ -6,8 +6,12 @@ import datetime
 import xlrd
 import xlwt
 import time
+day = str(input("Enter the day(integer):"))
+month = str(input('Enter the month(integer):'))
+year = str(input('Enter the year(integer):'))
+filename = (month + '_' + day + '_' + year + '.xls')
 startTime = time.time() 
-data = pd.read_excel('E:\Savers\Spreadsheets\Outage\outage_10_16_2019.xls', header=[2]) 
+data = pd.read_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename, header=[2]) 
 data = data.drop_duplicates('Site UP') 
 data = data.drop(data[data.Duration == 0].index) 
 data = data.drop(data[data.Duration == 1].index) 
@@ -29,9 +33,9 @@ def conversion_function(x: pd.Series) -> pd.Timestamp:
 data['Adjusted_Down'] = data[['Time_Zone', 'Site DOWN']].apply(conversion_function, axis=1)
 data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, axis=1)
 data.insert(9, 'Notes', value='')
-data.to_excel('E:\Savers\Spreadsheets\Outage\outage_10_16_2019.xls') 
+data.to_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename) 
 data = data.set_index('Adjusted_Down')
-filtered_data = data[(data.index > '10/16/19 09:00:00') & (data.index <= '10/16/19 21:00:00')]
+filtered_data = data[(data.index > '10/17/19 09:00:00') & (data.index <= '10/17/19 21:00:00')]
 filtered_data.to_excel('estimated.xls') 
 endTime = time.time()
 print('The conversion function took %s seconds to calculate.' % (endTime - startTime))
