@@ -10,6 +10,10 @@ day = str(input("Enter the day(integer):"))
 month = str(input('Enter the month(integer):'))
 year = str(input('Enter the year(integer):'))
 filename = (month + '_' + day + '_' + year + '.xls')
+print('filename is:', filename)
+date = (month + '/' + day + '/' + year)
+storeOpen = '09:00:00'
+storeClose = '21:00:00'
 startTime = time.time() 
 data = pd.read_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename, header=[2]) 
 data = data.drop_duplicates('Site UP') 
@@ -35,7 +39,8 @@ data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, 
 data.insert(9, 'Notes', value='')
 data.to_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename) 
 data = data.set_index('Adjusted_Down')
-filtered_data = data[(data.index > '10/17/19 09:00:00') & (data.index <= '10/17/19 21:00:00')]
-filtered_data.to_excel('estimated.xls') 
+#try to create storeOpenParameter variable which combines 'date' and 'storeOpen'
+#filtered_data = data[(data.index > '10/17/19 09:00:00') & (data.index <= '10/17/19 21:00:00')]
+#filtered_data.to_excel('estimated.xls') 
 endTime = time.time()
 print('The conversion function took %s seconds to calculate.' % (endTime - startTime))
