@@ -1,13 +1,13 @@
 #Author: Charles Garrido
 #Creation Date: 4 Aug. 2019
-#Last Revision: 18 Oct. 2019
+#Last Revision: 21 Oct. 2019
 #Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis
-#Notes: saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'
+#Notes: Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'
 print('Author: Charles Garrido')
 print('Creation Date: 4 Aug. 2019')
-print('Last Revision: 18 Oct. 2019')
+print('Last Revision: 21 Oct. 2019')
 print('Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis')
-print("saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'")
+print("Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'")
 
 #import modules for code to work, for modules that are not native to python use "pip install MODULE"
 import pandas as pd
@@ -20,11 +20,11 @@ import xlwt
 import time
 
 #define date, filename, and store open and close hours
-day = str(input("Enter the day(integer):"))
-month = str(input('Enter the month(integer):'))
-year = str(input('Enter the year(integer):'))
+day = str(input("Enter the day(integer): "))
+month = str(input('Enter the month(integer): '))
+year = str(input('Enter the year(integer): '))
 filename = (month + '_' + day + '_' + year + '.xls')
-print('filename is:', filename)
+print('filename is: outage_' + filename)
 date = (month + '/' + day + '/' + year)
 storeOpen = '09:00:00'
 storeClose = '21:00:00'
@@ -66,7 +66,7 @@ data.insert(9, 'Notes', value='')
 data.to_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename) 
 
 #an attempt to filter store outage minutes by what happens within business hours, not necessary for script to function
-data = data.set_index('Adjusted_Down')
+#data = data.set_index('Adjusted_Down')
 #try to create storeOpenParameter variable which combines 'date' and 'storeOpen'
 #filtered_data = data[(data.index > '10/17/19 09:00:00') & (data.index <= '10/17/19 21:00:00')]
 #filtered_data.to_excel('estimated.xls')
