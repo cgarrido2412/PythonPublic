@@ -1,47 +1,30 @@
 import pandas as pd
-from pandas import Timestamp
-import pytz
-from pytz import all_timezones
-import datetime
-from datetime import time
-from threading import Timer
-import time as t
-import xlrd
-import xlwt
-import numpy as np
-import xlsxwriter
 
-data = pd.read_excel('lab.xlsx')
+data = pd.read_excel('E:\Savers\Python\Python3 - Master\lab.xlsx')
 
-#creates new column 'duration' by indexing difference between up and down time. returns float
-data['duration'] = data['Adjusted_Up'] - data['Adjusted_Down']
-data['duration'] = data['duration']/np.timedelta64(1,'m')
+def breakdown(x, y):
+    string1 = x.split()
+    variable1 = string1[0]
+    dateVariable = variable1.split('-')
+    variable2 = string1[1]
+    dateVariable2 = variable2.split(':')
+    hour = int(dateVariable2[0])
+    minute = int(dateVariable2[1])
+    seconds = int(dateVariable2[2])
 
-#returns a minute by minute breakdown in between Adjusted_Down and Adjusted_Up
-s = data.apply(lambda row: pd.date_range(row['Adjusted_Down'], row['Adjusted_Up'], freq='T'), axis=1).explode()
+    string1B = y.split()
+    variable1B = string1B[0]
+    dateVariableB = variable1B.split('-')
+    variable2B = string1B[1]
+    dateVariable2B = variable2B.split(':')
+    hourB = int(dateVariable2B[0])
+    minuteB = int(dateVariable2B[1])
+    secondsB = int(dateVariable2B[2])
 
-#returns total amount of downtime between 9-21 but not by store 
-total = s.dt.time.between(time(9), time(21)).sum()  
-
-#range of index[0] for s 
-slist = range(0, 227) #already includes the +1 
-
-#due to thy this loop itterates, it returns the same thing as 'duration' column 
-for num in slist:
-    Duration = s[num].count()
-    print(Duration)  
-
-#percentage of minutes during business hours
-percentage = (total / sum(data['duration'])) * 100
-print('The percentage of outage minutes during business hours is:', percentage)
-
-#secondary function to test
-def by_month():
-    s = data.apply(lambda row: pd.date_range(row['Adjusted_Down'], row['Adjusted_Up'], freq='T'), axis=1).explode()
-    downtime = pd.DataFrame({
-        'Month': s.astype('datetime64[M]'),
-        'IsDayTime': s.dt.time.between(time(9), time(21))
-    })
-    downtime.groupby('Month')['IsDayTime'].sum()
-
-#data.to_excel('delete.xls', 'a+')
+    if hourB > hour:
+        sumMinutes = (hourB - hour)*60
+        sumMinutes = sumMinutes + (minuteB - minute)
+        print(sumMinutes)
+    elif hourB == hour:
+        sumMinutes = (minuteB - minute)
+        print(sumMinutes)
