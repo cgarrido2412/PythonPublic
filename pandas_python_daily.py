@@ -1,11 +1,11 @@
 #Author: Charles Garrido
 #Creation Date: 4 Aug. 2019
-#Last Revision: 21 Oct. 2019
+#Last Revision: 23 Oct. 2019
 #Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis
 #Notes: Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'
 print('Author: Charles Garrido')
 print('Creation Date: 4 Aug. 2019')
-print('Last Revision: 21 Oct. 2019')
+print('Last Revision: 23 Oct. 2019')
 print('Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis')
 print("Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'")
 
@@ -91,14 +91,25 @@ def breakdown(x, y):
     minuteB = int(dateVariable2B[1])
     secondsB = int(dateVariable2B[2])
 
-    if hourB > hour:
-        sumMinutes = (hourB - hour)*60
-        sumMinutes = sumMinutes + (minuteB - minute)
-        print(sumMinutes)
-        
-    elif hourB == hour:
-        sumMinutes = (minuteB - minute)
-        print(sumMinutes)
+    if hour in range(9, 21):
+
+        #print site name next to sumMinutes
+        if hourB > hour:
+            sumMinutes = (hourB - hour)*60
+            sumMinutes = sumMinutes + (minuteB - minute)
+            print(sumMinutes)
+
+        elif hourB == hour:
+            sumMinutes = (minuteB - minute)
+            print(sumMinutes)
+
+    else:
+        pass
+
+for index, row in data.iterrows():
+    data1 = str(row['Adjusted_Down'])
+    data2 = str(row['Adjusted_Up'])
+    breakdown(data1, data2) 
 
 #timer for script ends, prints total time elapsed
 endTime = time.time()
