@@ -69,7 +69,7 @@ def breakdown(x, y):
     minuteB = int(dateVariable2B[1])
     secondsB = int(dateVariable2B[2])
 
-    if hour in range(9, 21):
+    if hour and hourB in range(9, 21):
 
         #print site name next to sumMinutes
         if hourB > hour:
@@ -85,6 +85,9 @@ def breakdown(x, y):
         pass
 
 for index, row in data.iterrows():
+    print(str(row['Store']))
+    print(str(row['Adjusted_Down']))
+    print(str(row['Adjusted_Up']))
     data1 = str(row['Adjusted_Down'])
     data2 = str(row['Adjusted_Up'])
     breakdown(data1, data2) 
