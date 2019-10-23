@@ -9,6 +9,7 @@ print('Last Revision: 21 Oct. 2019')
 print('Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis')
 print("Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'")
 
+
 #import modules for code to work, for modules that are not native to python use "pip install MODULE"
 import pandas as pd
 from pandas import Timestamp
@@ -43,7 +44,9 @@ data = data.drop(data[data.Duration == 1].index)
 #sets 'Site DOWN/UP' as date columns, then defines a conversion function to change the date series to dataframe timestamp
 data['Site DOWN'] = pd.to_datetime(data['Site DOWN']) 
 data['Site UP'] = pd.to_datetime(data['Site UP'])
-def conversion_function(x: pd.Series) -> pd.Timestamp:  
+
+def conversion_function(x: pd.Series) -> pd.Timestamp:
+    
     zones = {'Atlantic': 'Canada/Atlantic',
              'Central': 'US/Central',
              'Eastern': "US/Eastern",
@@ -53,6 +56,7 @@ def conversion_function(x: pd.Series) -> pd.Timestamp:
 	     'Arizona': 'US/Arizona',
              'Alaska': 'US/Alaska',
              'Hawaii' : 'US/Hawaii'}
+    
     raw_time = pd.Timestamp(x[1])
     loc_raw_time = raw_time.tz_localize("US/Pacific")
     return loc_raw_time.tz_convert(zones[x[0]]).replace(tzinfo=None)
@@ -63,13 +67,38 @@ data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, 
 data.insert(9, 'Notes', value='')
 
 #saves the spreadsheet
-data.to_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename) 
+data.to_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename)
 
-#an attempt to filter store outage minutes by what happens within business hours, not necessary for script to function
-#data = data.set_index('Adjusted_Down')
-#try to create storeOpenParameter variable which combines 'date' and 'storeOpen'
-#filtered_data = data[(data.index > '10/17/19 09:00:00') & (data.index <= '10/17/19 21:00:00')]
-#filtered_data.to_excel('estimated.xls')
+#In progress, working on breakdown function which will determine minutes within business hours
+def breakdown(x, y):
+    #First breakdown downtime timestamp. Example string "2019-08-11 10:31:00"
+    string1 = x.split() #"2019-08-11" "10:31:00"
+    variable1 = string1[0] #"2019-08-11"
+    dateVariable = variable1.split('-') #"2019" "08" "11"
+    variable2 = string1[1] #"10:31:00"
+    dateVariable2 = variable2.split(':') #"10" "31" "00"
+    hour = int(dateVariable2[0]) #"10"
+    minute = int(dateVariable2[1]) #"31"
+    seconds = int(dateVariable2[2]) #"00"
+
+    #For uptime
+    string1B = y.split()
+    variable1B = string1B[0]
+    dateVariableB = variable1B.split('-')
+    variable2B = string1B[1]
+    dateVariable2B = variable2B.split(':')
+    hourB = int(dateVariable2B[0])
+    minuteB = int(dateVariable2B[1])
+    secondsB = int(dateVariable2B[2])
+
+    if hourB > hour:
+        sumMinutes = (hourB - hour)*60
+        sumMinutes = sumMinutes + (minuteB - minute)
+        print(sumMinutes)
+        
+    elif hourB == hour:
+        sumMinutes = (minuteB - minute)
+        print(sumMinutes)
 
 #timer for script ends, prints total time elapsed
 endTime = time.time()
