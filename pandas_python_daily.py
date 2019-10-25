@@ -1,14 +1,9 @@
-#Author: Charles Garrido
-#Creation Date: 4 Aug. 2019
-#Last Revision: 23 Oct. 2019
-#Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis
-#Notes: Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'
-print('Author: Charles Garrido')
-print('Creation Date: 4 Aug. 2019')
-print('Last Revision: 23 Oct. 2019')
-print('Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis')
-print("Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'")
-
+def start_script():
+    print('Author: Charles Garrido')
+    print('Creation Date: 4 Aug. 2019')
+    print('Last Revision: 24 Oct. 2019')
+    print('Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis')
+    print("Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'")
 
 #import modules for code to work, for modules that are not native to python use "pip install MODULE"
 import pandas as pd
@@ -21,6 +16,7 @@ import xlwt
 import time
 
 #define date, filename, and store open and close hours
+start_script()
 day = str(input("Enter the day(integer): "))
 month = str(input('Enter the month(integer): '))
 year = str(input('Enter the year(integer): '))
@@ -107,6 +103,7 @@ def breakdown(x, y):
         pass
 
 for index, row in data.iterrows():
+    print(row['Store'], 'Adjusted_Down:', row['Adjusted_Down'], 'Adjusted_Up:', row['Adjusted_Up'])
     data1 = str(row['Adjusted_Down'])
     data2 = str(row['Adjusted_Up'])
     breakdown(data1, data2) 
