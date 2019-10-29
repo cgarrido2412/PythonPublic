@@ -1,0 +1,239 @@
+/*
+set system scripts op file check-vc-ports.slax
+set event-options policy vc-port-change events system_shutdown
+set event-options policy vc-port-change then event-script check-vc-ports.slax arguments check-member 0
+set event-options policy vc-port-change then event-script check-vc-ports.slax arguments vc-ports "vcp-255/0/22 vcp-255/0/23"
+set event-options policy vc-port-change then event-script check-vc-ports.slax arguments change-interfaces "ge-0/0/22 ge-0/0/23"
+set event-options event-script file check-vc-ports.slax
+*/
+
+version 1.0;
+
+ns junos = "http://xml.juniper.net/junos/*/junos";
+ns xnm = "http://xml.juniper.net/xnm/1.1/xnm";
+ns jcs = "http://xml.juniper.net/junos/commit-scripts/1.0";
+
+import "../import/junos.xsl";
+
+var $arguments = {
+  <argument> {
+      <name> "member";
+      <description> "check virtual-chassis member (0,1,2 etc)";
+  }
+  <argument> {
+      <name> "vc-ports";
+      <description> "virtual-chassis ports to check";
+  }
+  <argument> {
+      <name> "change-interfaces";
+      <description> "interface list to bring up or down based on vc-ports status";
+  }
+  <argument> {
+      <name> "debug";
+      <description> "if set to 1, show progress on console, higher values increase detail";
+  }
+}
+
+param $member;
+param $vc-ports;
+param $change-interfaces;
+param $debug;
+
+match / {
+  <event-script-input> {
+
+    var $trigger = event-script-input/trigger-event/id;
+
+    if ($debug > 1) {
+        expr jcs:output("member=", $member);
+        expr jcs:output("vc-ports=", $vc-ports);
+        expr jcs:output("change-interfaces=", $change-interfaces);
+    }
+
+     var $rpc1 = <get-virtual-chassis-port-information>;
+     var $result1 = jcs:invoke($rpc1);
+
+     var $vcup = { call get-vc-port-oper-status($ports = $vc-ports, $r = $result1); }
+
+     if ("" == $vcup) {
+
+       call log-notice($message = "none of the vc-ports (" _ $vc-ports _ ") is up");
+
+       var $rpc-config-req = <get-configuration database="committed" inherit="inherit">;
+       var $configuration = jcs:invoke($rpc-config-req);
+
+       var $xml = { call bring-interfaces-down($interfaces = $change-interfaces, $config = $configuration); }
+       call doConfigChange($xml);
+
+     } else {
+
+       call log-notice($message = "at least one of the vc-ports (" _ $vc-ports _ ") is up");
+
+       var $rpc-config-req = <get-configuration database="committed" inherit="inherit">;
+       var $configuration = jcs:invoke($rpc-config-req);
+
+       var $xml = { call bring-interfaces-up($interfaces = $change-interfaces, $config = $configuration); }
+       call doConfigChange($xml);
+     }
+  }
+}
+
+template get-vc-port-oper-status( $ports, $r )  {
+
+  var $vc-ports := jcs:split(" ",$ports);
+
+  for-each($vc-ports) {
+    var $port = .;
+    var $fpc = "fpc" _ $member;
+    var $op-status = $r/multi-routing-engine-item[re-name==$fpc]/virtual-chassis-port-information/port-list/port-information[port-name==$port]/port-status;
+    if ("Up" == $op-status) {
+      expr "Up ";
+    }
+  }
+}
+
+template doConfigChange($xml) {
+
+    var $con = jcs:open();
+
+    if (not($con)) {
+      call log-error($message = "Not able to connect to local mgd");
+    }
+    var $config-private = <open-configuration> {
+       <private>;
+    }
+    var $private-results = jcs:execute($con, $config-private);
+
+    var $load-configuration = <load-configuration> {
+      <configuration> {
+        copy-of $xml;
+      }
+    }
+
+   var $load-results = jcs:execute($con, $load-configuration);
+
+   var $commit-configuration = <commit-configuration> {
+     <log> "check-vc-ports.slax";
+   }
+
+   var $commit-results = jcs:execute($con, $commit-configuration);
+
+   var $close-private = <close-configuration>;
+
+   var $close-configuration-results = jcs:execute($con, $close-private);
+   var $close-results = jcs:close($con);
+
+   for-each ($commit-results//xnm:warning) {
+      call log-warning($message = message);
+   }
+
+   if ($commit-results//xnm:error) {
+      for-each ($results//xnm:error) {
+         call log-error($message = message);
+      }
+   } else {
+      call log-notice($message = "succeeded.");
+   }
+
+   if ($debug) {
+      <op-script-results> {
+         copy-of $commit-results;
+      }
+   }
+}
+
+template bring-interfaces-down( $interfaces, $config ) {
+
+  var $iflist := jcs:split(" ",$interfaces);
+
+  for-each($iflist) {
+
+    var $ifname = .;
+
+    var $split = jcs:split("\\.", $ifname);
+    var $ifd = $split[1];
+
+    if ($config/interfaces/interface[name=$ifd]) {
+
+      if ($config/interfaces/interface[name=$ifd]/disable) {
+
+        call log-notice($message = "Interface " _ $ifname _ " is already disabled.");
+
+      } else {
+
+        call log-notice($message = "disabling interface " _ $ifname _ " ... ");
+
+        <interfaces> {
+          <interface> {
+            <name> $ifd;
+            <disable>;
+          }  
+        } 
+
+      }
+
+    } else {
+      call log-error($message = "Interface " _ $ifname _ " not found in committed config");
+    }
+  }
+}
+
+template bring-interfaces-up( $interfaces, $config ) {
+
+  var $iflist := jcs:split(" ",$interfaces);
+
+  for-each($iflist) {
+
+    var $ifname = .;
+
+    var $split = jcs:split("\\.", $ifname);
+    var $ifd = $split[1];
+
+    if ($config/interfaces/interface[name=$ifd]) {
+
+      if (not($config/interfaces/interface[name=$ifd]/disable)) {
+
+        call log-notice($message = "Interface " _ $ifname _ " is already up.");
+
+      } else {
+
+        call log-notice($message = "enabling interface " _ $ifname _ " ... ");
+
+        <interfaces> {
+          <interface> {
+            <name> $ifd;
+            <disable delete="disable">;
+          }  
+        } 
+
+      }
+
+    } else {
+      call log-error($message = "Interface " _ $ifname _ " not found in committed config");
+    }
+  }
+}
+
+template log-notice($message) {
+
+  if ($debug) {
+    expr jcs:output("notice: ", $message);
+  }
+  expr jcs:syslog("user.notice","check-vc-ports.slax[Notice]: ", $message);
+}
+
+template log-error($message) {
+
+  if ($debug) {
+    expr jcs:output("error: ", $message);
+  }
+  expr jcs:syslog("user.error", "check-vc-ports.slax[Error]: ", $message);
+}
+
+template log-warning($message) {
+
+  if ($debug) {
+    expr jcs:output("warning: ", $message);
+  } 
+  expr jcs:syslog("user.warning", "check-vc-ports.slax[Warning]: ", $message);
+}
