@@ -1,7 +1,7 @@
 def start_script():
     print('Author: Charles Garrido')
     print('Creation Date: 4 Aug. 2019')
-    print('Last Revision: 25 Oct. 2019')
+    print('Last Revision: 28 Oct. 2019')
     print('Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis')
     print("Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'")
     
@@ -22,13 +22,12 @@ try:
     filename = (month + '_' + day + '_' + year + '.xls')
     print('filename is: outage_' + filename)
     date = (month + '/' + day + '/' + year)
-    storeOpen = '09:00:00'
-    storeClose = '21:00:00'
+    storeOpen = 9
+    storeClose = 21
     startTime = time.time()
     
     try:
         data = pd.read_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename, header=[2])
-        data = data.drop_duplicates('Site UP') 
         data = data.drop(data[data.Duration == 0].index) 
         data = data.drop(data[data.Duration == 1].index)
         data['Site DOWN'] = pd.to_datetime(data['Site DOWN']) 
@@ -52,7 +51,9 @@ try:
         
         data['Adjusted_Down'] = data[['Time_Zone', 'Site DOWN']].apply(conversion_function, axis=1)
         data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, axis=1)
-        data.insert(9, 'Notes', value='')
+        data = data.drop_duplicates('Adjusted_Up')
+        data.insert(6, 'During_Hours', value='')
+        data.insert(10, 'Notes', value='')
         data.to_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename)
         
         def breakdown(x, y):
@@ -75,8 +76,8 @@ try:
             hourB = int(dateVariable2B[0])
             minuteB = int(dateVariable2B[1])
             secondsB = int(dateVariable2B[2])
-            
-            if hour in range(9, 21):
+          
+            if hour and hourB in range(storeOpen, storeClose):
                 
                 if hourB > hour:
                     sumMinutes = (hourB - hour)*60
@@ -91,10 +92,9 @@ try:
                 pass
             
         for index, row in data.iterrows():
-            print(row['Store'], 'Adjusted_Down:', row['Adjusted_Down'], 'Adjusted_Up:', row['Adjusted_Up'])
             data1 = str(row['Adjusted_Down'])
             data2 = str(row['Adjusted_Up'])
-            breakdown(data1, data2)
+            print(row['Store'], 'Adjusted_Down:', row['Adjusted_Down'], 'Adjusted_Up:', row['Adjusted_Up'], breakdown(data1, data2))
             
         endTime = time.time()
         print('The conversion function took %s seconds to calculate.' % (endTime - startTime))
