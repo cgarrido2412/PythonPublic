@@ -5,6 +5,7 @@ set event-options policy vc-port-change events ui_reboot_event
 set event-options policy vc-port-change then event-script check-vc-ports.slax arguments check-member 0
 set event-options policy vc-port-change then event-script check-vc-ports.slax arguments vc-ports "vcp-255/0/22 vcp-255/0/23"
 set event-options policy vc-port-change then event-script check-vc-ports.slax arguments change-interfaces "ge-0/0/22 ge-0/0/23"
+set event-options policy vc-port-change then event-script check-vc-ports.slax arguments debug 1
 set event-options event-script file check-vc-ports.slax
 */
 
