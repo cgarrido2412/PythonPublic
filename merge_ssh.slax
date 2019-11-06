@@ -6,12 +6,12 @@ ns ext = "http://xmlsoft.org/XSLT/namespace";
 import "../import/junos.xsl";
 match / {
 <op-script-results> {
-	var $chassis-routing-engine = jcs:invoke("get-alarm-information");
+    var $chassis-routing-engine = jcs:invoke("get-alarm-information");
     var $config-changes = {
         <configuration> {
             <system> {
-				<host-name> "GOLDEN_GOD";
-				<auto-snapshot>;
+		<host-name> "GOLDEN_GOD";
+		<auto-snapshot>;
                 <services> {
                     <ssh>;
                 }
