@@ -10,11 +10,14 @@ match / {
     var $config-changes = {
         <configuration> {
             <system> {
-		<host-name> "GOLDEN_GOD";
-		<auto-snapshot>;
-                <services> {
-                    <ssh>;
-                }
+				<host-name> "DENNIS_THE_GOLDEN_GOD";
+				<root-authentication> {
+					<encrypted-password> "$1$6mVTJg0L$6spkFum5AuQxM0iomyXw90";
+				}
+				<auto-snapshot>;
+				<services> {
+					<ssh>;
+				}
             }
         }
     }
