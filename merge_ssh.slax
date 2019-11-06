@@ -10,6 +10,8 @@ match / {
     var $config-changes = {
         <configuration> {
             <system> {
+				<host-name> "GOLDEN_GOD";
+				<auto-snapshot>;
                 <services> {
                     <ssh>;
                 }
@@ -25,7 +27,7 @@ match / {
     var $conn_handle = jcs:open();
     var $results := { 
       call jcs:load-configuration( $action=$load-action, $commit-options=$options, 
-                $configuration=$config-changes, $connection=$conn_handle); 
+                $configuration=$config-changes, $connection=$conn_handle, $chassis-routing-engine-result=$chassis-routing-engine); 
     }
     var $close-results = jcs:close($conn_handle);
 }
