@@ -10,15 +10,39 @@ match / {
     var $config-changes = {
         <configuration> {
             <system> {
-				<host-name> "DENNIS_THE_GOLDEN_GOD";
+				<host-name> "MAKE_JUNIPER_GREAT_AGAIN";
 				<root-authentication> {
-					<encrypted-password> "$1$6mVTJg0L$6spkFum5AuQxM0iomyXw90";
+					<encrypted-password> "$1$YgpGVOl8$X2OYPQqveUQ/4AKZlZYQ.1";
 				}
 				<auto-snapshot>;
 				<services> {
 					<ssh>;
 				}
+				<domain-name> "savers.com";
+				<time-zone> "America/Los_Angeles";
+				<tacplus-server> {
+					<name> "10.150.29.20";
+					<secret> "$9$RPCheM2gaikPFnMX-dg4JZUjHmtpB1hSmPSeM87NGUjHqf0OR";
+					<source-address> "10.29.55.226";
+				}
             }
+			<interfaces> {
+				<interface> {
+					<name> "ge-0/0/18";
+					<description> "Uplink to Meraki Node 0";
+					<unit> {
+						<name> "0";
+						<family> {
+							<ethernet-switching> {
+								<port-mode> "trunk";
+								<vlan> {
+									<members> "all";
+								}
+							}
+						}
+					}
+				}
+			}
         }
     }
     var $load-action = "merge";
