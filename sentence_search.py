@@ -1,3 +1,8 @@
+##>>> txt = 'the quick brown fox'
+##>>> txt2 = 'the'
+##>>> txt2 in txt
+##True
+
 def manual():
     file = input('Enter file path:')
     
