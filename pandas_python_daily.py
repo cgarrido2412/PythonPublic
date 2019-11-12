@@ -1,7 +1,7 @@
 def start_script():
     print('Author: Charles Garrido')
     print('Creation Date: 4 Aug. 2019')
-    print('Last Revision: 28 Oct. 2019')
+    print('Last Revision: 12 Nov. 2019')
     print('Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis')
     print("Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'")
     
@@ -30,6 +30,7 @@ try:
         data = pd.read_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename, header=[2])
         data = data.drop(data[data.Duration == 0].index) 
         data = data.drop(data[data.Duration == 1].index)
+        data = data.drop(data[data.Store == '2955-FW-1'].index)
         data['Site DOWN'] = pd.to_datetime(data['Site DOWN']) 
         data['Site UP'] = pd.to_datetime(data['Site UP'])
         
@@ -89,7 +90,7 @@ try:
                     print(sumMinutes)
                     
             else:
-                pass
+                print(0)
             
         for index, row in data.iterrows():
             data1 = str(row['Adjusted_Down'])
