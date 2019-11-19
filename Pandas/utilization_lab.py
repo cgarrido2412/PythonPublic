@@ -25,8 +25,8 @@ def utilization_report(file1, file2):
                                   'Full Name':'Store'})
     data2 = pd.read_excel(file2, header=[2], usecols=range(1,4))
     data2 = data2.rename(columns={'Received Percent Utilization - Average':d2,
-                          "Received Percent Utilization - Max":d2,
-                          'Full Name':'Store'})
+                                  "Received Percent Utilization - Max":d2,
+                                  'Full Name':'Store'})
     data3 = pd.merge(data2, data1, on='Store')
     print(data3)
     data3.to_excel('lab3.xls', 'a+')
