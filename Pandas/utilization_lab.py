@@ -1,23 +1,18 @@
 import pandas as pd
 
+def file_test(file):
+    try:
+        open(file)
+    except:
+        print('Unable to open:', file)
+        exit()
+        
 file1 = input('Enter file path: \n')
+file_test(file1)
 
-try:
-    open(file1)
-    
-except:
-    print('Unable to open:', file1)
-    exit()
-    
 file2 = input('Enter second file path: \n')
+file_test(file2)
 
-try:
-    open(file2)
-    
-except:
-    print('Unable to open:', file2)
-    exit()
-    
 def utilization_report(file1, file2):
     data1 = pd.read_excel(file1, header=[2], usecols=range(1,4))
     data2 = pd.read_excel(file2, header=[2], usecols=range(1,4))
