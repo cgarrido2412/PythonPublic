@@ -77,8 +77,6 @@ except:
 def breakdown(x, y):
     #First breakdown downtime timestamp. Example string "2019-08-11 10:31:00"
     string1 = x.split() 
-    variable1 = string1[0] 
-    dateVariable = variable1.split('-') 
     variable2 = string1[1] 
     dateVariable2 = variable2.split(':') 
     hour = int(dateVariable2[0]) 
@@ -87,8 +85,6 @@ def breakdown(x, y):
     
     #For uptime
     string1B = y.split()
-    variable1B = string1B[0]
-    dateVariableB = variable1B.split('-')
     variable2B = string1B[1]
     dateVariable2B = variable2B.split(':')
     hourB = int(dateVariable2B[0])
