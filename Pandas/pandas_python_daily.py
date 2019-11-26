@@ -1,9 +1,11 @@
-def start_script():
-    print('Author: Charles Garrido')
-    print('Creation Date: 4 Aug. 2019')
-    print('Last Revision: 25 Nov. 2019')
-    print('Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis')
-    print("Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'")
+#! Python 3
+'''
+Author: Charles Garrido.
+Creation Date: 4 Aug. 2019.
+Last Revision: 26 Nov. 2019.
+Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis. 
+Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'.
+'''
     
 import pandas as pd
 from pandas import Timestamp
@@ -14,7 +16,6 @@ import xlrd
 import xlwt
 import time
 
-start_script()
 day = str(input("Enter the day(integer): "))
 month = str(input('Enter the month(integer): '))
 year = str(input('Enter the year(integer): '))
