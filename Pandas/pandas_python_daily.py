@@ -42,11 +42,7 @@ def drop_data(data):
     data['Site DOWN'] = pd.to_datetime(data['Site DOWN']) 
     data['Site UP'] = pd.to_datetime(data['Site UP'])
 
-try:
-    drop_data(data)
-	
-except:
-    print('Unable to drop data.')
+drop_data(data)
 
 def conversion_function(x: pd.Series) -> pd.Timestamp:
     
@@ -72,11 +68,7 @@ def apply(data):
     data.insert(10, 'Notes', value='')
     data.to_excel(full_file)
 
-try:
-    apply(data)
-	
-except:
-    print('Unable to apply conversion function.')
+apply(data)
 
 def breakdown(x, y):
     #First breakdown downtime timestamp. Example string "2019-08-11 10:31:00"
@@ -116,6 +108,3 @@ for index, row in data.iterrows():
     
 endTime = time.time()
 print('The conversion function took %s seconds to calculate.' % (endTime - startTime))
-    
-
-        
