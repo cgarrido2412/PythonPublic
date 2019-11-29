@@ -27,12 +27,10 @@ print('filename is: outage_' + filename)
 storeOpen = 9
 storeClose = 21
 startTime = time.time()
-wack = '\ '
-wack = wack.strip()
-filepath_start = 'E:\Savers\Spreadsheets\Outage' 
+full_file = 'E:\Savers\Spreadsheets\Outage\\' + year + '\outage_' + filename
 
 try:
-    data = pd.read_excel(filepath_start + wack + year + wack + 'outage_' + filename, header=[2])
+    data = pd.read_excel(full_file, header=[2])
 	
 except:
     print('Unable to open:', filename)
@@ -72,7 +70,7 @@ def apply(data):
     data = data.drop_duplicates('Adjusted_Up')
     data.insert(6, 'During_Hours', value='')
     data.insert(10, 'Notes', value='')
-    data.to_excel(filepath_start + wack + year + wack + 'outage_' + filename)
+    data.to_excel(full_file)
 
 try:
     apply(data)
