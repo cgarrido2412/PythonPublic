@@ -2,7 +2,7 @@
 '''
 Author: Charles Garrido.
 Creation Date: 4 Aug. 2019.
-Last Revision: 26 Nov. 2019.
+Last Revision: 29 Nov. 2019.
 Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis. 
 Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'.
 '''
@@ -12,22 +12,27 @@ from pandas import Timestamp
 import pytz
 from pytz import all_timezones
 import datetime
+from datetime import date
 import xlrd
 import xlwt
 import time
 
-day = str(input("Enter the day(integer): "))
-month = str(input('Enter the month(integer): '))
-year = str(input('Enter the year(integer): '))
+today = date.today()
+day = int(today.strftime('%d')) - 1
+day = str(day)
+month = today.strftime('%m')
+year = today.strftime('%Y')
 filename = (month + '_' + day + '_' + year + '.xls')
 print('filename is: outage_' + filename)
-date = (month + '/' + day + '/' + year)
 storeOpen = 9
 storeClose = 21
 startTime = time.time()
+wack = '\ '
+wack = wack.strip()
+filepath_start = 'E:\Savers\Spreadsheets\Outage' 
 
 try:
-    data = pd.read_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename, header=[2])
+    data = pd.read_excel(filepath_start + wack + year + wack + 'outage_' + filename, header=[2])
 	
 except:
     print('Unable to open:', filename)
@@ -67,7 +72,7 @@ def apply(data):
     data = data.drop_duplicates('Adjusted_Up')
     data.insert(6, 'During_Hours', value='')
     data.insert(10, 'Notes', value='')
-    data.to_excel('E:\Savers\Spreadsheets\Outage\outage_' + filename)
+    data.to_excel(filepath_start + wack + year + wack + 'outage_' + filename)
 
 try:
     apply(data)
