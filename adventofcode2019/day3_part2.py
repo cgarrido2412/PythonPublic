@@ -100,16 +100,8 @@ def shortest_from_zero():
         length_from_zero.append(intersection)
 
     return str(min(length_from_zero))
-
-def fewest_steps():
-    for kanye in intersections:
-        step_count_list = [first_line[kanye] + second_line[kanye]]
-    step_count_list
         
 print('Nailed it! \n' + 'The shortest distance from original point is:', shortest_from_zero())
 
-try:
-    fewest_steps()
-
-except:
-    print('You dun messed up somewhere.')
+kanye = ((first_line[i], second_line[i]) for i in intersections)
+print(kanye)
