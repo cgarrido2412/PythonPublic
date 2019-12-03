@@ -50,13 +50,6 @@ U98,R91,D20,R16,D67,R40,U7,R15,U6,R7 = distance 135
 What is the Manhattan distance from the central port to the closest intersection?
 '''
 
-map_directions = {'L': -1,
-                  'R': 1,
-                  'U': 1,
-                  'D': -1}
-
-coordinates = list
-
 #first test
 test_string_1 = 'R75,D30,R83,U83,L12,D49,R71,U7,L72'
 move_directions_test_1 = test_string_1.split(',')
