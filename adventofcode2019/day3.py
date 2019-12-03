@@ -50,7 +50,6 @@ U98,R91,D20,R16,D67,R40,U7,R15,U6,R7 = distance 135
 What is the Manhattan distance from the central port to the closest intersection?
 '''
 
-#designate wire directions in dictionary to grid like values
 map_directions = {'L': -1,
                   'R': 1,
                   'U': 1,
@@ -72,51 +71,44 @@ move_directions_test_2 = ['U62','R66','U55','R34','D71','R55','D58','R83']
 
 def nailed_it(move_direction):
     full_coordinate_list = []
-
-    # Set the current position
     x = 0
     y = 0
-
-    # Loop through all the directions
+    
     for move in move_direction:
         direction = move[0]
         distance = int(move[1:])
 
-        x_movement = y_movement = 0
+        x_movement = 0
+        y_movement = 0
 
         if direction == "L":
             x_movement = -1
+            
         if direction == "R":
             x_movement = 1
+            
         if direction == "D":
             y_movement = -1
+            
         if direction == "U":
             y_movement = 1
 
-        #TODO: Clean up this
         for _ in range(0, distance):
             x += x_movement
             y += y_movement
-
             location = str(x)+","+str(y)
-
             full_coordinate_list.append(location)
 
     return full_coordinate_list
 
 first_line = nailed_it(move_directions_test_1)
 second_line = nailed_it(move_directions_test_2)
-
-#TODO: Clearer variable names
 intersections = list(set(first_line) & set(second_line))
 length = []
 
-
-#TODO: Clean this up
 for intersection in intersections:
     intersection = intersection.split(",")
     intersection = abs(int(intersection[0])) + abs(int(intersection[1]))
     length.append(intersection)
     
-
 print('Nailed it! \n' + str(min(length)))
