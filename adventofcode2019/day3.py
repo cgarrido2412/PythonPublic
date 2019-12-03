@@ -62,8 +62,8 @@ move_directions_test_1 = ['R75','D30','R83','U83','L12','D49','R71','U7','L72']
 move_directions_test_2 = ['U62','R66','U55','R34','D71','R55','D58','R83']
 
 #second test
-#move_directions_second_test_1 = [R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51]
-#move_directions_second_test_2 = [U98,R91,D20,R16,D67,R40,U7,R15,U6,R7]
+move_directions_second_test_1 = ['R98','U47','R26','D63','R33','U87','L62','D20','R33','U53','R51']
+move_directions_second_test_2 = ['U98','R91','D20','R16','D67','R40','U7','R15','U6','R7']
 
 #assigned input values
 #move_directions_1 = ['R998','U494','L814','D519','R407','U983','R307','D745','R64','D29','L935','D919','L272','D473',R689,U560,L942,U264,R816,U745,R209,U227,R241,U111,L653,D108,R823,U254,L263,U987,L368,D76,R665,D646,L759,U425,L581,D826,R829,D388,L234,U33,L48,U598,L708,D764,L414,D75,L163,U802,L183,U893,L486,U947,L393,D694,L454,D600,R377,U312,R89,D178,L652,D751,R402,D946,R213,U985,R994,D336,R573,D105,L442,U965,R603,U508,L17,U191,L37,U678,L506,U823,R878,D709,L348,U167,L355,U314,L164,D672,L309,U895,R358,D769,R869,U598,R63,D68,R105,U133,R357,U588,L154,D631,L939,D235,R506,D885,R958,D896,L195,U292,L952,D616,L824,D497,R99,D121,R387,D155,L70,U580,L890,D368,L910,U645,L786,U977,R9,U781,L454,U783,L382,U321,L195,U196,L239,U764,R18,D71,R97,U77,L803,U963,L704,U94,L511,U747,L798,D905,L679,D135,R455,U650,R947,U14,L722,D245,L490,D183,L276,U559,L901,D767,R827,U522,L380,U494,R402,U70,R589,D582,R206,U756,L989,U427,L704,D864,R885,D9,R872,U454,R912,U752,R197,U304,L728,U879,R456,D410,L141,U473,R246,U498,R443,D297,R333,D123,R12,D665,R684,D531,R601,D13,L260,U60,R302,D514,R416,D496,L562,D334,L608,U74,R451,U251,R961,U166,L368,U146,R962,U973,R120,U808,R480,D536,L690,D958,R292,U333,R656,U305,R46,U831,L756,D907,L638,D969,L445,U541,R784,U148,R338,D264,R72,D637,R759,D709,L611,D34,R99,U305,R143,D191,R673,D753,R387,U994,R720,D896,R95,U703,L499,D453,R96,U808,L485,U127,L856,U357,L543,U382,R411,U969,L532,U64,R303,U457,L412,D140,R146,D67,R147,D681,L1,D994,L876,D504,R46,U683,L992,U640,L663,D681,L327,U840,R543,U97,R988,U792,R36] 
@@ -84,13 +84,13 @@ def nailed_it(move_direction):
         if direction == "L":
             x_movement = -1
             
-        if direction == "R":
+        elif direction == "R":
             x_movement = 1
             
-        if direction == "D":
+        elif direction == "D":
             y_movement = -1
             
-        if direction == "U":
+        elif direction == "U":
             y_movement = 1
 
         for _ in range(0, distance):
@@ -101,8 +101,8 @@ def nailed_it(move_direction):
 
     return full_coordinate_list
 
-first_line = nailed_it(move_directions_test_1)
-second_line = nailed_it(move_directions_test_2)
+first_line = nailed_it(move_directions_second_test_1)
+second_line = nailed_it(move_directions_second_test_2)
 intersections = list(set(first_line) & set(second_line))
 length = []
 
