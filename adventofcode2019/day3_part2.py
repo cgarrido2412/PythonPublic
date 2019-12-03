@@ -102,13 +102,14 @@ def shortest_from_zero():
     return str(min(length_from_zero))
 
 def fewest_steps():
-    step_count_list = [first_line[i] + second_line[i] for i in intersections]
-    return min(step_count_list)
+    for kanye in intersections:
+        step_count_list = [first_line[kanye] + second_line[kanye]]
+    step_count_list
         
 print('Nailed it! \n' + 'The shortest distance from original point is:', shortest_from_zero())
 
 try:
-    print('Nailed it again! \n' + 'The fewest steps until an interesction is:', str(fewest_steps()))
+    fewest_steps()
 
 except:
     print('You dun messed up somewhere.')
