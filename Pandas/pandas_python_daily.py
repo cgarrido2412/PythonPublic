@@ -2,7 +2,7 @@
 '''
 Author: Charles Garrido.
 Creation Date: 4 Aug. 2019.
-Last Revision: 29 Nov. 2019.
+Last Revision: 3 Dec. 2019.
 Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis. 
 Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'.
 '''
@@ -28,17 +28,30 @@ storeOpen = 9
 storeClose = 21
 startTime = time.time()
 full_file = 'E:\Savers\Spreadsheets\Outage\\' + year + '\outage_' + filename
+mode = input('Is this [monthly] or [daily]? \n')
 
-try:
-    data = pd.read_excel(full_file, header=[2])
-	
-except:
-    print('Unable to open:', filename)
+if mode == 'monthly':
+    
+    try:
+        data = pd.read_excel(full_file, header=[2], names = ['Store', 'Region', 'Design', 'Vendor', 'Time_Zone', 'Site DOWN',
+                                                             'Site UP', 'Duration'])
+            
+    except:
+        print('Unable to open:', full_file)
+
+elif mode == 'daily':
+
+    try:
+        data = pd.read_excel(full_file, header=[2])
+
+    except:
+        print('Unable to open:', full_file)
 
 def drop_data(data):
     data = data.drop(data[data.Duration == 0].index) 
     data = data.drop(data[data.Duration == 1].index)
     data = data.drop(data[data.Store == '2955-FW-1'].index)
+    data = data.drop(data[data.Store == 'TDX=ESX=VPN'].index)
     data['Site DOWN'] = pd.to_datetime(data['Site DOWN']) 
     data['Site UP'] = pd.to_datetime(data['Site UP'])
 
@@ -87,7 +100,7 @@ def breakdown(x, y):
     minuteB = int(dateVariable2B[1])
     secondsB = int(dateVariable2B[2])
   
-    if hour and hourB in range(storeOpen, storeClose):
+    if hour or hourB in range(storeOpen, storeClose):
         
         if hourB > hour:
             sumMinutes = (hourB - hour)*60
