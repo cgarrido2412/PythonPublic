@@ -78,7 +78,6 @@ def nailed_it(move_direction):
     for move in move_direction:
         direction = move[0]
         distance = int(move[1:])
-
         x_movement = 0
         y_movement = 0
 
@@ -94,7 +93,7 @@ def nailed_it(move_direction):
         elif direction == "U":
             y_movement = 1
 
-        for _ in range(0, distance):
+        for variable in range(0, distance):
             x += x_movement
             y += y_movement
             location = str(x)+","+str(y)
