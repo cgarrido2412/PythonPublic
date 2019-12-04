@@ -39,7 +39,7 @@ for number in range(start, stop + 1):
     increasing_check = True
     multiple_characters = False
     previous_character = ''
-    count = 0
+    count = 1
 
     for digit in str(number):
         
@@ -51,7 +51,7 @@ for number in range(start, stop + 1):
             multiple_characters = True
             count += 1
             
-            if count > 2:
+            if count == 3:
                 multiple_characters = False
 
             else:
