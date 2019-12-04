@@ -31,35 +31,31 @@ Given this additional criterion, but still ignoring the range rule, the followin
 How many different passwords within the range given in your puzzle input meet all of the criteria?
 '''
 
+from collections import Counter
+
 start = 272091
 stop = 815432
 matches = []
 
 for number in range(start, stop + 1):
     increasing_check = True
-    multiple_characters = False
-    previous_character = ''
-    count = 1
+    double_digit_check = False
+    previous_digit = []
 
     for digit in str(number):
         
-        if digit < previous_character:
-            increasing_check = False
-            break
-        
-        elif digit == previous_character:
-            multiple_characters = True
-            count += 1
+        if len(previous_digit) > 0:
             
-            if count == 3:
-                multiple_characters = False
+            if digit < previous_digit[-1]:
+                increasing_check = False
+                break
+            
+            if previous_digit.count(digit) > 0:
+                double_digit_check = True
 
-            else:
-                continue 
-
-        previous_character = digit
-        
-    if increasing_check and multiple_characters:
+        previous_digit.append(digit)
+    
+    if increasing_check and double_digit_check and 2 in Counter(previous_digit).values():
         matches.append(number)
         
 print(len(matches))
