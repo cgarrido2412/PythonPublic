@@ -50,7 +50,7 @@ for number in range(start, stop + 1):
                 increasing_check = False
                 break
             
-            if previous_digit.count(digit) > 0:
+            elif previous_digit.count(digit) > 0:
                 double_digit_check = True
 
         previous_digit.append(digit)
