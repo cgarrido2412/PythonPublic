@@ -111,39 +111,6 @@ def Intcode(input_string, input_variable):
         elif opcode == 4:
             output.append(get_param(input_string, modes, index, 0))
             index = index + 2
-            
-        elif opcode == 5:
-            if get_param(input_string, modes, index, 0) is not 0:
-                index = get_param(input_string, modes, index, 1)
-                
-            else:
-                output.append(0)
-                index = index + 3
-                
-        elif opcode == 6:
-            
-            if get_param(input_string, modes, index, 0) is 0:
-                index = get_param(input_string, modes, index, 1)
-                
-            else:
-                output.append(0)
-                index = index + 3
-                
-        elif opcode == 7:
-            if get_param(input_string, modes, index, 0) < get_param(input_string, modes, index, 1):
-                input_string[input_string[index + 3]] = 1
-                
-            else:
-                input_string[input_string[index + 3]] = 0
-                index = index + 4
-                
-        elif opcode == 8:
-            if get_param(input_string, modes, index, 0) == get_param(input_string, modes, index, 1):
-                input_string[input_string[index + 3]] = 1
-                
-            else:
-                input_string[input_string[index + 3]] = 0
-                index = index + 4
                 
         elif opcode == 99:
             program_running = False
