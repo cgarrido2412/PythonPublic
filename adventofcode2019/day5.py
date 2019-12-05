@@ -80,9 +80,7 @@ input_string = '3,225,1,225,6,6,1100,1,238,225,104,0,101,20,183,224,101,-63,224,
 def first_module(input_string):
     input_string_orig = [int(x) for x in input_string.split(",")]
     input_string_copy = input_string_orig[:]
- 
     output = Intcode(input_string_copy, 1)
- 
     print('Part 1: {}'.format(output))
   
 def Intcode(input_string, input_variable):
