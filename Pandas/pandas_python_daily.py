@@ -45,6 +45,7 @@ try:
                     
             except:
                 print('Unable to open:', full_file)
+                break
 
         elif mode == 'daily':
 
@@ -54,6 +55,7 @@ try:
 
             except:
                 print('Unable to open:', full_file)
+                break
 
         else:
             print('Invalid input.')
