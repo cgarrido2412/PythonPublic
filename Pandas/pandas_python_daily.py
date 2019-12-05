@@ -30,23 +30,34 @@ try:
     startTime = time.time()
     full_file = 'E:\Savers\Spreadsheets\Outage\\' + year + '\outage_' + filename
     mode = input('Is this [monthly] or [daily]? \n')
+    mode = mode.strip()
+    mode = mode.lower()
+    acceptable_answer = False
 
-    if mode == 'monthly':
+    while acceptable_answer is False:
         
-        try:
-            data = pd.read_excel(full_file, header=[2], names = ['Store', 'Region', 'Design', 'Vendor', 'Time_Zone', 'Site DOWN',
-                                                                 'Site UP', 'Duration'])
-                
-        except:
-            print('Unable to open:', full_file)
+        if mode == 'monthly':
+            
+            try:
+                data = pd.read_excel(full_file, header=[2], names = ['Store', 'Region', 'Design', 'Vendor', 'Time_Zone', 'Site DOWN',
+                                                                     'Site UP', 'Duration'])
+                acceptable_answer = True
+                    
+            except:
+                print('Unable to open:', full_file)
 
-    elif mode == 'daily':
+        elif mode == 'daily':
 
-        try:
-            data = pd.read_excel(full_file, header=[2])
+            try:
+                data = pd.read_excel(full_file, header=[2])
+                acceptable_answer = True
 
-        except:
-            print('Unable to open:', full_file)
+            except:
+                print('Unable to open:', full_file)
+
+        else:
+            print('Invalid input.')
+            break
 
     data = data.drop(data[data.Duration == 0].index) 
     data = data.drop(data[data.Duration == 1].index)
@@ -98,7 +109,7 @@ try:
         minuteB = int(dateVariable2B[1])
         secondsB = int(dateVariable2B[2])
       
-        if hour or hourB in range(storeOpen, storeClose):
+        if hour and hourB in range(storeOpen, storeClose):
             
             if hourB > hour:
                 sumMinutes = (hourB - hour)*60
