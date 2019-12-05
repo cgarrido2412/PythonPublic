@@ -130,5 +130,4 @@ def get_param(input_string, modes, index, param_index):
     else:
         return input_string[input_string[index + param_index + 1]]
  
-# Do the stuff
 first_module(input_string)
