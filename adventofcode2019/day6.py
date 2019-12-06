@@ -79,14 +79,14 @@ with open(file) as working_file:
     
     for variable, line in enumerate(working_file):
         data = [str(x.strip()) for x in line.split(')')] #AAA)BBB
-        a = data[0] #AAA
-        b = data[1] #BBB
+        yeezus = data[0] #AAA
+        yandhi = data[1] #BBB
         
-        if a in object_dictionary:
-            object_dictionary[a].append(b)
+        if yeezus in object_dictionary:
+            object_dictionary[yeezus].append(yandhi)
             
         else:
-            object_dictionary[a] = [b]
+            object_dictionary[yeezus] = [yandhi]
 
     number = 0
     count = 0
