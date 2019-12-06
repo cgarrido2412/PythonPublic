@@ -77,7 +77,7 @@ file_test(file)
 
 with open(file) as working_file:
     
-    for variable, line in enumerate(working_file):
+    for wavy, line in enumerate(working_file):
         data = [str(x.strip()) for x in line.split(')')] #AAA)BBB
         yeezus = data[0] #AAA
         yandhi = data[1] #BBB
