@@ -45,7 +45,6 @@ try:
                     
             except:
                 print('Unable to open:', full_file)
-                break
 
         elif mode == 'daily':
 
@@ -55,7 +54,6 @@ try:
 
             except:
                 print('Unable to open:', full_file)
-                break
 
         else:
             print('Invalid input.')
@@ -87,12 +85,12 @@ try:
     def apply(data):
         data['Adjusted_Down'] = data[['Time_Zone', 'Site DOWN']].apply(conversion_function, axis=1)
         data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, axis=1)
-        data = data.drop_duplicates('Adjusted_Up')
         data.insert(6, 'During_Hours', value='')
         data.insert(10, 'Notes', value='')
         data.to_excel(full_file)
 
     apply(data)
+    data = data.drop_duplicates('Adjusted_Up')
 
     def breakdown(x, y):
         #First breakdown downtime timestamp. Example string "2019-08-11 10:31:00"
