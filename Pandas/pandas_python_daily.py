@@ -2,7 +2,7 @@
 '''
 Author: Charles Garrido.
 Creation Date: 4 Aug. 2019.
-Last Revision: 5 Dec. 2019.
+Last Revision: 6 Dec. 2019.
 Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis. 
 Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'.
 '''
