@@ -88,6 +88,12 @@ with open(file) as working_file:
         else:
             object_dictionary[yeezus] = [yandhi]
 
+    position = 'COM'
+    target_you = 'YOU'
+    target_san = 'SAN'
+    index_you = 0
+    index_san = 0    
+
     def this_is_the_way(position, target, path):
         point = path + [position]
 
@@ -104,14 +110,8 @@ with open(file) as working_file:
                     if way:
                         return way
 
-    check = False
-    position = 'COM'
-    target_you = 'YOU'
-    target_san = 'SAN'
     path_you = this_is_the_way(position, target_you, [])
     path_san = this_is_the_way(position, target_san, [])
-    index_you = 0
-    index_san = 0
 
     for kanye, west in enumerate(path_you):
 
