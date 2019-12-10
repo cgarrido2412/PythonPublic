@@ -122,13 +122,16 @@ def part2():
             
     print(colors)
 
-part = input('Which part are we solving? \n[part1] [part2] \n')
+finished = False
+while finished is False:
+    part = input('Which part are we solving? \n[part1] [part2] \n')
+    if part == 'part1':
+        part1()
+        finished = True
+        
+    elif part == 'part2':
+        part2()
+        finished = True
 
-if part == 'part1':
-    part1()
-    
-elif part == 'part2':
-    part2()
-
-else:
-    print('Invalid selection.')
+    else:
+        print('Invalid selection.')
