@@ -35,11 +35,16 @@ To make sure the image wasn't corrupted during transmission, the Elves would lik
 contains the fewest 0 digits. On that layer, what is the number of 1 digits multiplied by the number of 2 digits?
 
 --- Part Two ---
-Now you're ready to decode the image. The image is rendered by stacking the layers and aligning the pixels with the same positions in each layer. The digits indicate the color of the corresponding pixel: 0 is black, 1 is white, and 2 is transparent.
+Now you're ready to decode the image. The image is rendered by stacking the layers and aligning the pixels with
+the same positions in each layer. The digits indicate the color of the corresponding pixel: 0 is black, 1 is
+white, and 2 is transparent.
 
-The layers are rendered with the first layer in front and the last layer in back. So, if a given position has a transparent pixel in the first and second layers, a black pixel in the third layer, and a white pixel in the fourth layer, the final image would have a black pixel at that position.
+The layers are rendered with the first layer in front and the last layer in back. So, if a given position has a
+transparent pixel in the first and second layers, a black pixel in the third layer, and a white pixel in the
+fourth layer, the final image would have a black pixel at that position.
 
-For example, given an image 2 pixels wide and 2 pixels tall, the image data 0222112222120000 corresponds to the following image layers:
+For example, given an image 2 pixels wide and 2 pixels tall, the image data 0222112222120000 corresponds to the
+following image layers:
 
 Layer 1: 02
          22
@@ -95,7 +100,7 @@ def part1():
 
 def part2():
     #{'black':0, 'white':1, 'transparent':2}
-    kanye = 0
+    kanye = 0 #using kanye as index
     colors = ""
     while kanye < len(single_layer_list[0]):
         
@@ -104,10 +109,10 @@ def part2():
             if single_layer[kanye] != "2":
                 
                 if single_layer[kanye] == "0":
-                    colors += " "
+                    colors += " " #playing with this and else value toggles image clarity
                     
                 else:
-                    colors += "1"
+                    colors += "0" #Using '0' to make image easier to read
                     
                 break
             
