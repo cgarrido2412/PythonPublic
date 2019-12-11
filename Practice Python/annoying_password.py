@@ -1,9 +1,33 @@
+#!Python3
 import random
+
+def validate_integer(s):
+
+    try:
+        int(s)
+        return True
+
+    except ValueError:
+        return False
 
 try:    
 
     def generate():
-        length = int(input('Specify a password length (integer): \n'))
+        integer_check = False
+
+        while integer_check is False:
+
+            try:
+                length = int(input('Specify a password length (integer): \n'))
+
+                if validate_integer(length) is True:
+                    integer_check = True
+
+                else:
+                    pass
+
+            except ValueError:
+                print('You need to type an integer.')
         similar_characters = 'il|1LoO0il|1LoO0il|1LoO0il|1LoO0il|1LoO0'
         ambiguous_characters = '{}[]()//\'"`~,;:.<>'
         character_pool = similar_characters + ambiguous_characters
@@ -16,10 +40,15 @@ try:
         check = input('Generate another? [y/n] \n')
 
         if check == 'n':
+            print('Exiting...')
             finished = True
 
+        elif check =='y':
+            break
+
         else:
-            pass
+            print('Only choose [y/n] \nExiting...')
+            break
 
 except KeyboardInterrupt:
     print('Program terminated by user.')
