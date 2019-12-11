@@ -44,7 +44,7 @@ try:
             finished = True
 
         elif check =='y':
-            break
+            pass 
 
         else:
             print('Only choose [y/n] \nExiting...')
