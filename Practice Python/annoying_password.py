@@ -1,7 +1,7 @@
 #!Python3
 import random
 
-def validate_integer(s):
+def validate_integer(s): 
 
     try:
         int(s)
