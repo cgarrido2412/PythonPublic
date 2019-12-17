@@ -1,9 +1,32 @@
 #!Python3
 
+def validate_integer(x):
+
+    try:
+        int(x)
+        return True
+
+    except ValueError:
+        return False
+
 def caesar_encrypt():  
     message = str(input('Please enter the message to be encrypted: \n'))
     text = ''
-    key = int(input('Please enter a number key: \n'))
+    integer_check = False
+
+    while integer_check is False:
+
+        try:
+            key = int(input('Please enter a number key: \n'))
+
+            if validate_integer(key) is True:
+                integer_check = True
+
+            else:
+                pass
+
+        except ValueError:
+            print('You need to type an integer.')
     L = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     l = 'abcdefghijklmnopqrstuvwxyz'
 
