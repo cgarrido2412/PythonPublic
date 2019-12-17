@@ -18,7 +18,7 @@ try:
         while integer_check is False:
 
             try:
-                length = int(input('Specify a password length (integer): \n'))
+                length = int(input('Specify a password length (integer) up to 58 characters: \n'))
 
                 if validate_integer(length) is True:
                     integer_check = True
