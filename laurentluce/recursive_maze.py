@@ -26,16 +26,16 @@ We start at cell x=0 and y=0.
 '''
 def search(x, y):
     if grid[x][y] == 2:
-        print 'found at %d,%d' % (x, y)
+        print ('found at %d,%d' % (x, y))
         return True
     elif grid[x][y] == 1:
-        print 'wall at %d,%d' % (x, y)
+        print ('wall at %d,%d' % (x, y))
         return False
     elif grid[x][y] == 3:
-        print 'visited at %d,%d' % (x, y)
+        print ('visited at %d,%d' % (x, y))
         return False
     
-    print 'visiting %d,%d' % (x, y)
+    print ('visiting %d,%d' % (x, y))
 
     # mark as visited
     grid[x][y] = 3
