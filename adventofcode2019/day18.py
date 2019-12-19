@@ -135,3 +135,23 @@ maze = '''######################################################################
 #.....#..........e....#.........#...#...#.......#.............#...........#.....#
 #################################################################################'''
 rows = maze.split('\n')
+def search(x,y):
+    if rows[x][y] =='m': #or win parameter
+        print('Found at %d,%d' % (x,y))
+        return True
+    elif rows[x][y] == '#':
+        print('Wall at %d,%d' % (x,y))
+        return False
+    elif rows[x][y] == 3:
+        print('Visited at %d,%d' % (x,y))
+        return False
+    print('Visiting %d,%d' & (x,y))
+    rows[x][y] = 3
+    if ((x < len(rows)-1 and search(x+1, y))
+        or (y > 0 and search(x, y-1))
+        or (x > 0 and search(x-1, y))
+        or (y < len(rows)-1 and search(x, y+1))):
+        return True
+
+    return False
+search(40,40)
