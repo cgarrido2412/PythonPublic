@@ -187,6 +187,15 @@ maze = maze.replace('#', '1')
 maze = maze.replace('.', '0')
 maze = maze.replace('m', '2')
 maze = maze.replace('@', '0')
+delete = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+for character in maze:
+
+    if character in delete:
+        maze = maze.replace(character, '0')
+
+    else:
+        pass
 
 for i in maze:
 
@@ -197,9 +206,16 @@ for i in maze:
         pass
     
 rows = maze.split('\n')
+
+#Using list comprehension - split a list having single integer 
+rows = [int(x) if x.isdigit() else x for z in rows for x in str(z)]
+
+#subset of this list (data) by splitting the orginal list into chunks of 81
+rows = [rows[x:x+81] for x in range(0, len(rows), 81)] 
 print(rows)
 grid = rows
 
+#Solving maze using recursivity 
 def search(x, y):
 
     if grid[x][y] == 2:
