@@ -210,9 +210,8 @@ rows = maze.split('\n')
 #Using list comprehension - split a list having single integer 
 rows = [int(x) if x.isdigit() else x for z in rows for x in str(z)]
 
-#subset of this list (data) by splitting the orginal list into chunks of 81
+#subset of list by splitting the orginal list into chunks of 81
 rows = [rows[x:x+81] for x in range(0, len(rows), 81)] 
-print(rows)
 grid = rows
 
 #Solving maze using recursivity 
