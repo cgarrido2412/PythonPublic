@@ -137,6 +137,7 @@ maze = '''######################################################################
 maze = maze.replace('#', '1')
 maze = maze.replace('.', '0')
 maze = maze.replace('m', '2')
+maze = maze.replace('@', '0')
 for i in maze:
     try:
         int(i)
@@ -144,23 +145,30 @@ for i in maze:
         pass
 rows = maze.split('\n')
 print(rows)
-def search(x,y):
-    if rows[x][y] == 2: #or win parameter
-        print('Found at %d,%d' % (x,y))
+grid = rows
+def search(x, y):
+    if grid[x][y] == 2:
+        print ('found at %d,%d' % (x, y))
         return True
-    elif rows[x][y] == 1:
-        print('Wall at %d,%d' % (x,y))
+    elif grid[x][y] == 1:
+        print ('wall at %d,%d' % (x, y))
         return False
-    elif rows[x][y] == 3:
-        print('Visited at %d,%d' % (x,y))
+    elif grid[x][y] == 3:
+        print ('visited at %d,%d' % (x, y))
         return False
-    print('Visiting %d,%d' & (x,y))
-    rows[x][y] = 3
-    if ((x < len(rows)-1 and search(x+1, y))
+    
+    print ('visiting %d,%d' % (x, y))
+
+    # mark as visited
+    grid[x][y] = 3
+
+    # explore neighbors clockwise starting by the one on the right
+    if ((x < len(grid)-1 and search(x+1, y))
         or (y > 0 and search(x, y-1))
         or (x > 0 and search(x-1, y))
-        or (y < len(rows)-1 and search(x, y+1))):
+        or (y < len(grid)-1 and search(x, y+1))):
         return True
 
     return False
-search(40,40)
+
+search(40, 40)
