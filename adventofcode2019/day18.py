@@ -183,16 +183,24 @@ maze = '''######################################################################
 #.....#..........e....#.........#...#...#.......#.............#...........#.....#
 #################################################################################'''
 
+keys = 'abcdefghijklmnopqrstuvwxyz'
+door = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 maze = maze.replace('#', '1')
 maze = maze.replace('.', '0')
-maze = maze.replace('m', '2')
 maze = maze.replace('@', '0')
-delete = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 for character in maze:
 
-    if character in delete:
-        maze = maze.replace(character, '0')
+    if character in keys:
+        maze = maze.replace(character, '2')
+
+    else:
+        pass
+
+for symbol in maze:
+
+    if symbol in door:
+        maze = maze.replace(symbol, '1')
 
     else:
         pass
