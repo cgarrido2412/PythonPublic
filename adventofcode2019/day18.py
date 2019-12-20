@@ -134,12 +134,21 @@ maze = '''######################################################################
 #.###.#.#.#############.###.###.#.#.###.###.###.#########.###.###.#########.###.#
 #.....#..........e....#.........#...#...#.......#.............#...........#.....#
 #################################################################################'''
+maze = maze.replace('#', '1')
+maze = maze.replace('.', '0')
+maze = maze.replace('m', '2')
+for i in maze:
+    try:
+        int(i)
+    except:
+        pass
 rows = maze.split('\n')
+print(rows)
 def search(x,y):
-    if rows[x][y] =='m': #or win parameter
+    if rows[x][y] == 2: #or win parameter
         print('Found at %d,%d' % (x,y))
         return True
-    elif rows[x][y] == '#':
+    elif rows[x][y] == 1:
         print('Wall at %d,%d' % (x,y))
         return False
     elif rows[x][y] == 3:
