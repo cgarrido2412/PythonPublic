@@ -78,8 +78,8 @@ petri_dish = '''#.##.
 ##..#
 .#...'''
 lines = petri_dish.rstrip().split('\n') #['#.##.', '###.#', '#...#', '##..#', '.#...']
-row_length = 5 #the x of the puzzle
-column_length = 5 #the column_length of the puzzle
+row_length = 5 #the width of the puzzle
+column_length = 5 #the height of the puzzle
 directions = [(0, -1),(0, 1),(-1, 0),(1, 0)] #down, right, left, up
 current_status = {}
 
