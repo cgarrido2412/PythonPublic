@@ -14,12 +14,11 @@ import re
 from collections import Counter
 html = urllib.request.urlopen('http://www.pythonchallenge.com/pc/def/equality.html').read().decode()
 data = re.findall("<!--(.*?)-->", html, re.DOTALL)[-1]
-c = Counter(data)
-my_list = re.findall('[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}[abcdefghijklmnopqrstuvwxyz]{1}[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}', data)
-freq = {}
-for items in my_list:
-    freq[items] = my_list.count(items)
-print(freq)
-for elem in my_list:
-    new_freq = {x.replace(elem, '') for x in freq}
-print(new_freq)
+'''
+[^A-Z]+ will match anything NOT an uppercase letter
+[A-Z]{3} followed by exactly three uppercase letters
+([a-z]) then a lower case letter
+[A-Z]{3} and exactly three upppercase letters
+[^A-Z]+ followed by anything NOT an uppercase letter 
+'''
+print(''.join(re.findall('[^A-Z]+[A-Z]{3}([a-z])[A-Z]{3}[^A-Z]+', data)))
