@@ -15,5 +15,8 @@ from collections import Counter
 html = urllib.request.urlopen('http://www.pythonchallenge.com/pc/def/equality.html').read().decode()
 data = re.findall("<!--(.*?)-->", html, re.DOTALL)[-1]
 c = Counter(data)
-solution = re.findall('[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}[abcdefghijklmnopqrstuvwxyz]{1}[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}', data)
-print(solution)
+my_list = re.findall('[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}[abcdefghijklmnopqrstuvwxyz]{1}[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{3}', data)
+freq = {}
+for items in my_list:
+    freq[items] = my_list.count(items)
+print(freq)
