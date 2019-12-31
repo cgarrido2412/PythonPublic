@@ -20,3 +20,6 @@ freq = {}
 for items in my_list:
     freq[items] = my_list.count(items)
 print(freq)
+for elem in my_list:
+    new_freq = {x.replace(elem, '') for x in freq}
+print(new_freq)
