@@ -8,3 +8,8 @@ def remove_duplicates(list_one):
         return list_one
     return list_two
 print(remove_duplicates([1,2,2,2,3]))
+
+def another_way(x):
+    return list(dict.fromkeys(x))
+my_list = another_way([1,1,1,1,2])
+print(my_list)
