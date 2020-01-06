@@ -1,23 +1,27 @@
 #!Python3
-import wikipedia
 
-try:
-    program_running = True
+def start():
+    import wikipedia
 
-    while program_running is True:
-        query = input('\nEnter something to lookup, type [?] for a random article summary or press [enter] to exit:\n')
+    try:
+        program_running = True
 
-        if query == "":
-            program_running = False
+        while program_running is True:
+            query = input('\nEnter something to lookup, type [?] for a random article summary or press [enter] to exit:\n')
 
-        elif query == '?':
-            result = (wikipedia.random(pages=1))
-            result = wikipedia.page(result)
-            print(result.summary)
+            if query == "":
+                program_running = False
 
-        else:
-            search = wikipedia.page(query)
-            print(search.summary)
+            elif query == '?':
+                result = (wikipedia.random(pages=1))
+                result = wikipedia.page(result)
+                print(result.summary)
 
-except KeyboardInterrupt:
-    print('\nProgram terminated.\n')
+            else:
+                search = wikipedia.page(query)
+                print(search.summary)
+
+    except KeyboardInterrupt:
+        print('\nProgram terminated.\n')
+
+start()
