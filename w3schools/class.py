@@ -2,7 +2,7 @@
 
 class Rectangle:
 
-    def __init__(self, length, width, unit_cost=0):
+    def __init__(self, length, width):
         self.length = length
         self.width = width
 
@@ -21,35 +21,15 @@ def integer_check(x):
     except ValueError:
         return False
 
-valid_length = False
-length = input('Enter rectangle length [integer]: \n')
-
-while valid_length is False:
-
-    try:
-
-        if integer_check(length) is True:
-            valid_length = True
-
-        else:
-            pass
-
-    except ValueError:
-        print('You must have an integer for input.')
-
-valid_width = False
+length = input('Enter rectangle length [integer]: \n')    
 width = input('Enter rectangle width [integer]: \n')
 
-while valid_width is False:
+if integer_check(length) and integer_check(width) is True:
+    length = int(length)
+    width = int(width)
+    r = Rectangle(length, width)
+    print('Area of Rectangle: %s in^2' % (r.get_area()))
+    print('Perimeter of Rectangle: %s in' % (r.get_perimeter()))
 
-    if integer_check(width) is True:
-        valid_width = True
-
-    else:
-        pass
-
-length = int(length)
-width = int(width)
-r = Rectangle(length, width)
-print('Area of Rectangle: %s cm^2' % (r.get_area()))
-print('Perimeter of Rectangle: %s cm' % (r.get_perimeter()))
+else:
+    print('Invalid input parameters, only integers will work.')
