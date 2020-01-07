@@ -1,7 +1,7 @@
 #!Python 3
 storeOpen = 9
 storeClose = 22
-string1 = '2019-08-11 06:31:42'
+string1 = '2019-08-11 22:31:42'
 string2 = '2019-08-11 23:33:51'
 
 def breakdown(x,y):
@@ -41,10 +41,16 @@ def breakdown(x,y):
         if hourB > hour:
             sumMinutes = (hourB - hour)*60
             sumMinutes = sumMinutes + (minuteB - minute)
+            if sumMinutes < 0:
+                sumMinutes = 0
+            else:
+                pass
             print(sumMinutes)
 
         elif hourB == hour:
             sumMinutes = minuteB - minute
+            if sumMinutes < 0:
+                sumMinutes = 0
             print(sumMinutes)
         
     else:
