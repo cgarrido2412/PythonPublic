@@ -36,6 +36,8 @@ program_running = True
 
 while program_running is True:
     continue_running = input('Generate a phrase? [y/n]\n')
+    continue_running = continue_running.strip()
+    continue_running = continue_running.lower()
 
     if continue_running == 'y':
         res = key, val = random.choice(list(phrases.items())) 
