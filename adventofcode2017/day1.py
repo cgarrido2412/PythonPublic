@@ -1,4 +1,4 @@
-#!Python3
+#! /usr/bin/env pytyhon3
 '''
 Review a sequence of digits and find the sum of all digits that match the next digit in the
 list. The list is circular, so the digit after the last digit is the first digit in the list.
@@ -40,4 +40,21 @@ if first_number == last_number:
         my_list.append(number)
         
 answer = [int(x) for x in my_list]
-print(sum(answer))
+print('Part one:', sum(answer))
+
+'''
+Now... consider the digit halfway around the circular list. That is, if your list contains 10 items, only include
+a digit in your sum if the digit 10/2 = 5 steps forward matches it. Fortunately, your list has an even number of
+elements.
+
+For example:
+
+1212 produces 6: the list contains 4 items, and all four digits match the digit 2 items ahead.
+1221 produces 0, because every comparison is between a 1 and a 2.
+123425 produces 4, because both 2s match each other, but no other digit has a match.
+123123 produces 12.
+12131415 produces 4.
+'''
+
+part2 = [int(x) for i,x in enumerate(puzzle_input) if x==puzzle_input[(i+int(puzzle_input.__len__()/2)) % (puzzle_input.__len__())]]
+print("Part two: " + str(sum(part2)))
