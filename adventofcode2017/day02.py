@@ -29,6 +29,10 @@ for i in range(len(list_rows)):
 
 row_totals = []
 for i in range(len(integer_list)):
-    row_totals.append(min(integer_list[i]) and max(integer_list[i]))
+    #row_totals.append(min(integer_list[i]) and max(integer_list[i]))
+    minimum = min(integer_list[i])
+    maximum = max(integer_list[i])
+    row_totals.append(minimum)
+    row_totals.append(maximum)
 
 print(sum(row_totals))
