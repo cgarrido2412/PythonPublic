@@ -1,5 +1,5 @@
 #! /usr/bin/env pytyhon3
-#DOES NOT WORK YET
+#WRONG ANSWER (TOO HIGH)
 '''
 For each row, determine the difference between the largest value and the smallest value; the checksum is the sum
 of all of these differences.
@@ -17,12 +17,18 @@ In this example, the spreadsheet's checksum would be 8 + 4 + 6 = 18.
 What is the checksum for the spreadsheet in your puzzle input?
 '''
 puzzle = open('lab.txt', 'r').read()
-lines = puzzle.split('\n')
+lines = puzzle.split('\n') #splits the text file by line break
 list_rows = []
 for i in range(len(lines)):
     numbers = lines[i].split('\t')
     list_rows.append(numbers)
 
-new_list = []
+integer_list = []
 for i in range(len(list_rows)):
-    new_list.append([int(x) for x in list_rows[i]])
+    integer_list.append([int(x) for x in list_rows[i]]) #Turns each string into an integer for each list
+
+row_totals = []
+for i in range(len(integer_list)):
+    row_totals.append(min(integer_list[i]) and max(integer_list[i]))
+
+print(sum(row_totals))
