@@ -29,7 +29,8 @@ phrases = {'Ad astra per aspera':'Through adversity to the stars',
            'Ars longa, vita brevis':'Art is long, life is short',
            'Nemo mortalium omnibus horis sapit':'Of mortal men, none is wise at all times',
            'Quid infantes sumus':'What are we, babies',
-           'Mea navis aëricumbens anguillis abundant':'My hovercraft is full of eels'}
+           'Mea navis aëricumbens anguillis abundant':'My hovercraft is full of eels',
+           'Bibo ergo sum':'I drink, therefore I am'}
 
 program_running = True
 
