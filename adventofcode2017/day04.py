@@ -39,7 +39,7 @@ def between_lists(li1, li2):
                 li3.append(item)
     else:
         return li1
-    return li3
+    return li3 #between_lists([1, 2, 3], [1, 2, 4]) only returns [3]
 
 puzzle = open('lab.txt', 'r').read()
 puzzle = puzzle.split('\n')
