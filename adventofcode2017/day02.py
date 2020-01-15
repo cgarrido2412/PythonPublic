@@ -37,7 +37,7 @@ for i in range(len(integer_list)):
     maximum_totals.append(maximum)
 
 answer_list = []
-for i in range(0, len(maximum_totals)):
+for i in range(len(maximum_totals)):
     answer_list.append(maximum_totals[i] - minimum_totals[i])
 
 print(sum(answer_list))
