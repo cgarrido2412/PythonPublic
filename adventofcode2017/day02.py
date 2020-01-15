@@ -1,5 +1,4 @@
 #! /usr/bin/env pytyhon3
-#WRONG ANSWER (TOO HIGH)
 '''
 For each row, determine the difference between the largest value and the smallest value; the checksum is the sum
 of all of these differences.
@@ -27,12 +26,18 @@ integer_list = []
 for i in range(len(list_rows)):
     integer_list.append([int(x) for x in list_rows[i]]) #Turns each string into an integer for each list
 
-row_totals = []
+minimum_totals = []
 for i in range(len(integer_list)):
-    #row_totals.append(min(integer_list[i]) and max(integer_list[i]))
     minimum = min(integer_list[i])
-    maximum = max(integer_list[i])
-    row_totals.append(minimum)
-    row_totals.append(maximum)
+    minimum_totals.append(minimum)
 
-print(sum(row_totals))
+maximum_totals = []
+for i in range(len(integer_list)):
+    maximum = max(integer_list[i])
+    maximum_totals.append(maximum)
+
+answer_list = []
+for i in range(0, len(maximum_totals)):
+    answer_list.append(maximum_totals[i] - minimum_totals[i])
+
+print(sum(answer_list))
