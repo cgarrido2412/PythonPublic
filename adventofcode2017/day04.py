@@ -54,4 +54,4 @@ for i in range(len(new_list)):
     my_list.append(deduplicate(new_list[i]))  
 
 my_list = set(x for l in my_list for x in l) 
-print(len(my_list)) #3671 incorrect. 
+print(len(my_list)) #3671 incorrect, too high
