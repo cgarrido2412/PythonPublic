@@ -31,6 +31,16 @@ def remove_duplicates(list_one):
         return list_one
     return list_two
 
+def between_lists(li1, li2):
+    li3 = []
+    if li1:
+        for item in li1:
+            if item not in li2:
+                li3.append(item)
+    else:
+        return li1
+    return li3
+
 puzzle = open('lab.txt', 'r').read()
 puzzle = puzzle.split('\n')
 
@@ -42,6 +52,10 @@ for i in range(len(puzzle)):
 my_list = []
 for i in range(len(new_list)):
     my_list.append(deduplicate(new_list[i])) #This is the problem, I have to deduplicate BETWEEN lists. 
+
+test_list = []
+for i in range(len(my_list)):
+    test_list.append(between_lists(my_list[i], my_list[i+1]))
 
 answer_list = []
 for i in range(len(my_list)):
