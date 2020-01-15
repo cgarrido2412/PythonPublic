@@ -53,9 +53,10 @@ my_list = []
 for i in range(len(new_list)):
     my_list.append(deduplicate(new_list[i])) #This is the problem, I have to deduplicate BETWEEN lists. 
 
-test_list = []
-for i in range(len(my_list)):
-    test_list.append(between_lists(my_list[i], my_list[i+1]))
+charles_list = []
+for i in range(0, len(my_list)+1):
+    commonList = set();
+    [commonList.add(x) for x in my_list[i] for y in my_list[i+1] if x == y]
 
 answer_list = []
 for i in range(len(my_list)):
