@@ -21,6 +21,16 @@ def check_duplicates(some_list):
 def deduplicate(x):
     return list(dict.fromkeys(x))
 
+def remove_duplicates(list_one):
+    list_two = []
+    if list_one:
+        for item in list_one:
+            if item not in list_two:
+                list_two.append(item)
+    else:
+        return list_one
+    return list_two
+
 puzzle = open('lab.txt', 'r').read()
 puzzle = puzzle.split('\n')
 
