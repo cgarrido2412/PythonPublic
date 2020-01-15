@@ -28,3 +28,14 @@ new_list = []
 for i in range(len(puzzle)):
     x = puzzle[i].split()
     new_list.append(x)
+
+my_list = []
+for i in range(len(new_list)):
+    my_list.append(deduplicate(new_list[i]))
+
+answer_list = []
+for i in range(len(my_list)):
+    x = len(my_list[i])
+    answer_list.append(x)
+
+print(sum(answer_list)) #ANSWER IS TOO HIGH
