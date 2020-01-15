@@ -51,16 +51,7 @@ for i in range(len(puzzle)):
 
 my_list = []
 for i in range(len(new_list)):
-    my_list.append(deduplicate(new_list[i])) #This is the problem, I have to deduplicate BETWEEN lists. 
+    my_list.append(deduplicate(new_list[i]))  
 
-charles_list = []
-for i in range(0, len(my_list)+1):
-    commonList = set();
-    [commonList.add(x) for x in my_list[i] for y in my_list[i+1] if x == y]
-
-answer_list = []
-for i in range(len(my_list)):
-    x = len(my_list[i])
-    answer_list.append(x)
-
-print(sum(answer_list)) #ANSWER IS TOO HIGH
+my_list = set(x for l in my_list for x in l) 
+print(len(my_list)) #3671 incorrect. 
