@@ -31,7 +31,7 @@ for i in range(len(puzzle)):
 
 my_list = []
 for i in range(len(new_list)):
-    my_list.append(deduplicate(new_list[i]))
+    my_list.append(deduplicate(new_list[i])) #This is the problem, I have to deduplicate BETWEEN lists. 
 
 answer_list = []
 for i in range(len(my_list)):
