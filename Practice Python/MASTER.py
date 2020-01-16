@@ -107,3 +107,12 @@ def guessing_game_one():
         else:
             print('That is not the right number.')
             pass
+
+def list_overlap_comprehensions():
+    import random
+    a = random.sample(range(1, 100), 25)
+    b = random.sample(range(1, 100), 25)
+    c = [x for x in a if x in b]
+    print('List A:', a)
+    print('List B:', b)
+    print('Common items:', c)
