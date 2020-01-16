@@ -55,3 +55,55 @@ def list_overlap():
     b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     c = [x for x in a if x in b]
     print(c)
+
+def string_lists():
+    word = input("Please enter a word:\n")
+    reverse_word = worrd[::-1]
+    if word == reverse_word:
+        print("This word is a palindrome")
+    else:
+        print("This word is not a palindrome")
+
+def list_comprehensions():
+    a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+    b = [x for x in a if x % 2 == 0]
+    print(b)
+
+def rock_paper_scissors():
+    import random
+    print('Rock, paper, scissors!')
+    while True:
+        gameDictionary = {'rock':1,
+                          'paper':2,
+                          'scissors':3}
+        player1 = str(input('Player one chooses:\n')).lower()
+        player1 = player1.strip()
+        one = gameDictionary.get(player1)
+        computer_choice_list = ['rock', 'paper', 'scissors']
+        computer_choice = random.sample(computer_choice_list, 1)
+        print('Computer chooses:', computer_choice[0])
+        two = gameDictionary.get(computer_choice[0])
+        result = one - two
+        if result in [0]:
+            print('The game is a draw.')
+            break
+        elif result in [-2, 1]:
+            print('Player one wins!')
+            break
+        elif result in [-1, 2]:
+            print('Computer wins!')
+            break
+    print('Game over.')
+
+def guessing_game_one():
+    import random
+    random_number = random.randint(1,9)
+    correct_guess = False
+    while correct_guess is False:
+        guess = int(input('Guess a number:\n'))
+        if guess == random_number:
+            print('That is the right number!')
+            correct_guess = True
+        else:
+            print('That is not the right number.')
+            pass
