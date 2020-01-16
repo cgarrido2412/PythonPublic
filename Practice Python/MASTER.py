@@ -6,7 +6,11 @@ def integer_check(x):
     except ValueError:
         return False
 
-def character_input():
+def character_input(): #X (denotes difficulty rating out of five)
+    '''
+    Create a program that asks the user to enter their name and their age.
+    Print out a message addressed to them that tells them the year that they will turn 100 years old.
+    '''
     from datetime import date
     today = date.today()
     year = today.strftime("%Y")
@@ -19,7 +23,11 @@ def character_input():
     lifespan = int(birth_year) + 100
     print('Hello', name + '! You will turn 100 years old in the year', lifespan)
 
-def odd_or_even():
+def odd_or_even(): #X
+    '''
+    Ask the user for a number. Depending on whether the number is even or odd, print out an appropriate message
+    to the user.
+    '''
     number = input('Enter a number:\n')
     if integer_check(number) is False:
         print('Invalid input.')
@@ -30,7 +38,13 @@ def odd_or_even():
     elif number % 2 != 0:
         print('That is an odd number.')
 
-def list_less_than_ten():
+def list_less_than_ten(): #XX
+    '''
+    Take a list, say for example this one:
+
+      a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+    and write a program that prints out all the elements of the list that are less than 5.
+    '''
     a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
     b = []
     for i in a:
@@ -40,7 +54,10 @@ def list_less_than_ten():
             pass
     print(b)
 
-def divisor_list():
+def divisor_list(): #XX
+    '''
+    Create a program that asks the user for a number and then prints out a list of all the divisors of that number.
+    '''
     number = int(input('Enter a number:\n'))
     divisor_list = []
     for x in range(1, number+1):
@@ -50,13 +67,24 @@ def divisor_list():
             pass
     print(divisor_list)
 
-def list_overlap():
+def list_overlap(): #XX
+    '''
+    Take two lists, say for example these two:
+
+      a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+      b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    and write a program that returns a list that contains only the elements that are common between the lists
+    (without duplicates). Make sure your program works on two lists of different sizes.
+    '''
     a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
     b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     c = [x for x in a if x in b]
     print(c)
 
-def string_lists():
+def string_lists(): #XX
+    '''
+    Ask the user for a string and print out whether this string is a palindrome or not. 
+    '''
     word = input("Please enter a word:\n")
     reverse_word = worrd[::-1]
     if word == reverse_word:
@@ -64,12 +92,19 @@ def string_lists():
     else:
         print("This word is not a palindrome")
 
-def list_comprehensions():
+def list_comprehensions(): #XX
+    '''
+    Let’s say I give you a list saved in a variable: a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]. Write one line of
+    Python that takes this list a and makes a new list that has only the even elements of this list in it.
+    '''
     a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
     b = [x for x in a if x % 2 == 0]
     print(b)
 
-def rock_paper_scissors():
+def rock_paper_scissors(): #XXX
+    '''
+    Make a two-player Rock-Paper-Scissors game.
+    '''
     import random
     print('Rock, paper, scissors!')
     while True:
@@ -95,7 +130,11 @@ def rock_paper_scissors():
             break
     print('Game over.')
 
-def guessing_game_one():
+def guessing_game_one(): #XXX
+    '''
+    Generate a random number between 1 and 9 (including 1 and 9). Ask the user to guess the number, then tell them
+    whether they guessed too low, too high, or exactly right. 
+    '''
     import random
     random_number = random.randint(1,9)
     correct_guess = False
@@ -104,11 +143,23 @@ def guessing_game_one():
         if guess == random_number:
             print('That is the right number!')
             correct_guess = True
-        else:
-            print('That is not the right number.')
-            pass
+        elif guess < random_number:
+            print('That guess is too low.')
+        elif guess > random_number:
+            print('That guess is too high.')
 
-def list_overlap_comprehensions():
+def list_overlap_comprehensions(): #XX
+    '''
+    This week’s exercise is going to be revisiting an old exercise (see Exercise 5), except require the solution
+    in a different way.
+
+    Take two lists, say for example these two:
+
+            a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+            b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    and write a program that returns a list that contains only the elements that are common between the lists
+    (without duplicates). Make sure your program works on two lists of different sizes.
+    '''
     import random
     a = random.sample(range(1, 100), 25)
     b = random.sample(range(1, 100), 25)
