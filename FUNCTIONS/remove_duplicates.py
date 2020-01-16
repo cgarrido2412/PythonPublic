@@ -1,15 +1,20 @@
-def remove_duplicates(list_one):
-    list_two = []
-    if list_one:
-        for item in list_one:
-            if item not in list_two:
-                list_two.append(item)
-    else:
-        return list_one
-    return list_two
-print(remove_duplicates([1,2,2,2,3]))
+#! /usr/bin/env python3
 
-def another_way(x):
+test = [1, 2, 3, 3, 4, 5, 6, 6, 7, 8, 8, 8, 9]
+
+def deduplicate_1(x):
     return list(dict.fromkeys(x))
-my_list = another_way([1,1,1,1,2])
-print(my_list)
+
+def deduplicate_2(x):
+    y = []
+    for i in x:
+        if i not in y:
+            y.append(i)
+    return y
+
+def deduplicate_3(x):
+    return list(set(x))
+
+print(deduplicate_1(test))
+print(deduplicate_2(test))
+print(deduplicate_3(test))
