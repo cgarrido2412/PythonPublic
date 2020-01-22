@@ -18,6 +18,7 @@ from datetime import date
 import xlrd
 import xlwt
 import time
+import subprocess
 
 #Function only returns True with an integer input
 def validate_integer(x):
@@ -152,6 +153,9 @@ try:
     #Ends timer for data analysis.
     endTime = time.time()
     print('The conversion function took %s seconds to calculate.' % (endTime - startTime))
+
+    #Open the file
+    subprocess.call([r"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE", full_file])
 
     #Starts second part of program, an outage minute calculator. 
     program_running = True
