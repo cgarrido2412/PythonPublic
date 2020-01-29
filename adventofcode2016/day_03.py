@@ -25,26 +25,26 @@ for i in range(len(lines)):
     number_line = lines[i].split(' ')
     rows.append(number_line)
 
-next_list = []
+string_list = []
 for i in range(len(rows)):
     for x in rows[i]:
         if x == '':
             pass
         else:
-            next_list.append(x)
+            string_list.append(x)
 
-integer_list = [int(x) for x in next_list]
+integer_list = [int(x) for x in string_list]
 
-final_list = []
+three_in_row_list = []
 for group in chunker(integer_list, 3):
-    final_list.append(group)
+    three_in_row_list.append(group)
 
 triangle_count = 0
-for x in range(len(final_list)):
+for x in range(len(three_in_row_list)):
     results = []
-    results.append(final_list[x][0] + final_list[x][1] > final_list[x][2])
-    results.append(final_list[x][2] + final_list[x][1] > final_list[x][0])
-    results.append(final_list[x][2] + final_list[x][0] > final_list[x][1])
+    results.append(three_in_row_list[x][0] + three_in_row_list[x][1] > three_in_row_list[x][2])
+    results.append(three_in_row_list[x][2] + three_in_row_list[x][1] > three_in_row_list[x][0])
+    results.append(three_in_row_list[x][2] + three_in_row_list[x][0] > three_in_row_list[x][1])
     if sum(results) == 3:
         triangle_count += 1
     else:
