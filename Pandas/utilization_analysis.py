@@ -35,10 +35,14 @@ integer_format('Average Receive bps',
                'Peak Transmit bps',
                'Transmit Bandwidth')
 
-final_data['Average Receive Utilization %'] = (data['Average Receive bps'].astype(float)/data['Received Bandwidth'].astype(float))*100
-final_data['Peak Receive Utilization %'] = (data['Peak Receive bps'].astype(float)/data['Received Bandwidth'].astype(float))*100
-final_data['Average Upload Utilization %'] = (data['Average Transmit bps'].astype(float)/data['Transmit Bandwidth'].astype(float))*100
-final_data['Peak Upload Utilization %'] = (data['Peak Transmit bps'].astype(float)/data['Transmit Bandwidth'].astype(float))*100
+final_data['Average Receive Utilization %'] = (data['Average Receive bps'].astype(float)/
+                                               data['Received Bandwidth'].astype(float))*100
+final_data['Peak Receive Utilization %'] = (data['Peak Receive bps'].astype(float)/
+                                            data['Received Bandwidth'].astype(float))*100
+final_data['Average Upload Utilization %'] = (data['Average Transmit bps'].astype(float)/
+                                              data['Transmit Bandwidth'].astype(float))*100
+final_data['Peak Upload Utilization %'] = (data['Peak Transmit bps'].astype(float)/
+                                           data['Transmit Bandwidth'].astype(float))*100
 
 final_data.to_excel('lab.xlsx', 'w+')
 subprocess.call([r'C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE', r'C:\Users\cgarrido\Desktop\lab.xlsx'])
