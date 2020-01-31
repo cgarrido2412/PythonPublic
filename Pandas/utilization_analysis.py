@@ -9,7 +9,7 @@ def file_test(file):
                 print('Unable to open:', file)
                 exit()
 
-def integer_format(a, b, c, d, e, f):
+def float_format(a, b, c, d, e, f):
         for x in range(len(data[a])):
                 data[a][x] = data[a][x].replace(' Mbps', '')
         for x in range(len(data[b])):
@@ -28,7 +28,7 @@ file_test(file)
 data = pd.read_excel(file, header=[2])
 final_data = pd.read_excel(file, header=[2])
 
-integer_format('Average Receive bps',
+float_format('Average Receive bps',
                'Peak Receive bps',
                'Received Bandwidth',
                'Average Transmit bps',
