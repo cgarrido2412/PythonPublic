@@ -9,21 +9,31 @@ def file_test(file):
                 print('Unable to open:', file)
                 exit()
 
-def integer_format(y):
-        for x in range(len(data[y])):
-                data[y][x] = data[y][x].replace(' Mbps', '')
+def integer_format(a, b, c, d, e, f):
+        for x in range(len(data[a])):
+                data[a][x] = data[a][x].replace(' Mbps', '')
+        for x in range(len(data[b])):
+                data[b][x] = data[b][x].replace(' Mbps', '')
+        for x in range(len(data[c])):
+                data[c][x] = data[c][x].replace(' Mbps', '')                
+        for x in range(len(data[d])):
+                data[d][x] = data[d][x].replace(' Mbps', '')
+        for x in range(len(data[e])):
+                data[e][x] = data[e][x].replace(' Mbps', '')
+        for x in range(len(data[f])):
+                data[f][x] = data[f][x].replace(' Mbps', '')
 
 file = r'Ben Test Utilization.xls'
 file_test(file)
 data = pd.read_excel(file, header=[2])
 final_data = pd.read_excel(file, header=[2])
 
-integer_format('Average Receive bps')
-integer_format('Peak Receive bps')
-integer_format('Received Bandwidth')
-integer_format('Average Transmit bps')
-integer_format('Peak Transmit bps')
-integer_format('Transmit Bandwidth')
+integer_format('Average Receive bps',
+               'Peak Receive bps',
+               'Received Bandwidth',
+               'Average Transmit bps',
+               'Peak Transmit bps',
+               'Transmit Bandwidth')
 
 final_data['Average Receive Utilization %'] = (data['Average Receive bps'].astype(float)/data['Received Bandwidth'].astype(float))*100
 final_data['Peak Receive Utilization %'] = (data['Peak Receive bps'].astype(float)/data['Received Bandwidth'].astype(float))*100
