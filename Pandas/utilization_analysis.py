@@ -32,23 +32,35 @@ def float_check(x):
 
 def float_format(a, b, c, d, e, f):
         for x in range(len(data[a])):
-                float_check(data[a][x])
-                data[a][x] = float(data[a][x][:-5])
+                if float_check(data[a][x][:-5]) is True:
+                        data[a][x] = float(data[a][x][:-5])
+                else:
+                        exit()
         for x in range(len(data[b])):
-                float_check(data[b][x])
-                data[b][x] = float(data[b][x][:-5])
+                if float_check(data[b][x][:-5]) is True:
+                        data[b][x] = float(data[b][x][:-5])
+                else:
+                        exit()
         for x in range(len(data[c])):
-                float_check(data[c][x])
-                data[c][x] = float(data[c][x][:-5])
+                if float_check(data[c][x][:-5]) is True:
+                        data[c][x] = float(data[c][x][:-5])
+                else:
+                        exit()
         for x in range(len(data[d])):
-                float_check(data[d][x])
-                data[d][x] = float(data[d][x][:-5])
+                if float_check(data[d][x][:-5]) is True:
+                        data[d][x] = float(data[d][x][:-5])
+                else:
+                        exit()
         for x in range(len(data[e])):
-                float_check(data[e][x])
-                data[e][x] = float(data[e][x][:-5])
+                if float_check(data[e][x][:-5]) is True:
+                        data[e][x] = float(data[e][x][:-5])
+                else:
+                        exit()
         for x in range(len(data[f])):
-                float_check(data[f][x])
-                data[f][x] = float(data[f][x][:-5])
+                if float_check(data[f][x][:-5]) is True:
+                        data[f][x] = float(data[f][x][:-5])
+                else:
+                        exit()
 
 if __name__ == '__main__':
         try:
