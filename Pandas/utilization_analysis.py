@@ -16,6 +16,13 @@ def analyze_data(r1, r2, r3, r4, r5, t1, t2, t3, t4, t5):
         final_data[t5] = (data[t2].astype(float)/
                           data[t3].astype(float))*100
 
+def file_test(file):
+        try:
+                open(file)
+        except:
+                print('Unable to open:', file)
+                exit()
+
 def float_format(a, b, c, d, e, f):
         for x in range(len(data[a])):
                 data[a][x] = data[a][x][:-5]
@@ -31,8 +38,8 @@ def float_format(a, b, c, d, e, f):
                 data[f][x] = data[f][x][:-5]
 
 if __name__ == '__main__':
-
         file = r'C:\Users\cgarrido\Desktop\Ben Test Utilization.xls'
+        file_test(file)
         data = pd.read_excel(file, header=[2])
         final_data = pd.read_excel(file, header=[2])
 
