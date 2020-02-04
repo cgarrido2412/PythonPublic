@@ -6,9 +6,15 @@ Author: Charles Garrido
 import pandas as pd
 import subprocess
 
-def analyze(x, y, z):
-        final_data[z] = (data[x].astype(float)/
-                         data[y].astype(float))*100
+def analyze_data(r1, r2, r3, r4, r5, t1, t2, t3, t4, t5):
+        final_data[r4] = (data[r1].astype(float)/
+                          data[r3].astype(float))*100
+        final_data[r5] = (data[r2].astype(float)/
+                          data[r3].astype(float))*100
+        final_data[t4] = (data[t1].astype(float)/
+                          data[t3].astype(float))*100
+        final_data[t5] = (data[t2].astype(float)/
+                          data[t3].astype(float))*100
 
 def float_format(a, b, c, d, e, f):
         for x in range(len(data[a])):
@@ -35,18 +41,16 @@ float_format('Average Receive bps',
                'Peak Transmit bps',
                'Transmit Bandwidth')
 
-analyze('Average Receive bps',
-        'Received Bandwidth',
-        'Average Receive Utilization %')
-analyze('Peak Receive bps',
-        'Received Bandwidth',
-        'Peak Receive Utilization %')
-analyze('Average Transmit bps',
-        'Transmit Bandwidth',
-        'Average Upload Utilization %')
-analyze('Peak Transmit bps',
-        'Transmit Bandwidth',
-        'Peak Upload Utilization %')
+analyze_data('Average Receive bps',
+          'Peak Receive bps',
+          'Received Bandwidth',
+          'Average Receive Utilization %',
+          'Peak Receive Utilization %',
+          'Average Transmit bps',
+          'Peak Transmit bps',
+          'Transmit Bandwidth',
+          'Average Upload Utilization %',
+          'Peak Upload Utilization %')
 
 final_data.to_excel('lab.xlsx', 'w+')
 subprocess.call([r'C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE',
