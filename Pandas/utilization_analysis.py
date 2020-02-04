@@ -18,17 +18,17 @@ def analyze_data(r1, r2, r3, r4, r5, t1, t2, t3, t4, t5):
 
 def float_format(a, b, c, d, e, f):
         for x in range(len(data[a])):
-                data[a][x] = data[a][x].replace(' Mbps', '')
+                data[a][x] = data[a][x][:-5]
         for x in range(len(data[b])):
-                data[b][x] = data[b][x].replace(' Mbps', '')
+                data[b][x] = data[b][x][:-5]
         for x in range(len(data[c])):
-                data[c][x] = data[c][x].replace(' Mbps', '')                
+                data[c][x] = data[c][x][:-5]                
         for x in range(len(data[d])):
-                data[d][x] = data[d][x].replace(' Mbps', '')
+                data[d][x] = data[d][x][:-5]
         for x in range(len(data[e])):
-                data[e][x] = data[e][x].replace(' Mbps', '')
+                data[e][x] = data[e][x][:-5]
         for x in range(len(data[f])):
-                data[f][x] = data[f][x].replace(' Mbps', '')
+                data[f][x] = data[f][x][:-5]
 
 file = r'C:\Users\cgarrido\Desktop\Ben Test Utilization.xls'
 data = pd.read_excel(file, header=[2])
