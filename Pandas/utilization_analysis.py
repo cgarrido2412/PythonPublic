@@ -30,28 +30,30 @@ def float_format(a, b, c, d, e, f):
         for x in range(len(data[f])):
                 data[f][x] = data[f][x][:-5]
 
-file = r'C:\Users\cgarrido\Desktop\Ben Test Utilization.xls'
-data = pd.read_excel(file, header=[2])
-final_data = pd.read_excel(file, header=[2])
+if __name__ == '__main__':
 
-float_format('Average Receive bps',
-               'Peak Receive bps',
-               'Received Bandwidth',
-               'Average Transmit bps',
-               'Peak Transmit bps',
-               'Transmit Bandwidth')
+        file = r'C:\Users\cgarrido\Desktop\Ben Test Utilization.xls'
+        data = pd.read_excel(file, header=[2])
+        final_data = pd.read_excel(file, header=[2])
 
-analyze_data('Average Receive bps',
-          'Peak Receive bps',
-          'Received Bandwidth',
-          'Average Receive Utilization %',
-          'Peak Receive Utilization %',
-          'Average Transmit bps',
-          'Peak Transmit bps',
-          'Transmit Bandwidth',
-          'Average Upload Utilization %',
-          'Peak Upload Utilization %')
+        float_format('Average Receive bps',
+                       'Peak Receive bps',
+                       'Received Bandwidth',
+                       'Average Transmit bps',
+                       'Peak Transmit bps',
+                       'Transmit Bandwidth')
 
-final_data.to_excel('lab.xlsx', 'w+')
-subprocess.call([r'C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE',
-                 r'C:\Users\cgarrido\Desktop\lab.xlsx'])
+        analyze_data('Average Receive bps',
+                  'Peak Receive bps',
+                  'Received Bandwidth',
+                  'Average Receive Utilization %',
+                  'Peak Receive Utilization %',
+                  'Average Transmit bps',
+                  'Peak Transmit bps',
+                  'Transmit Bandwidth',
+                  'Average Upload Utilization %',
+                  'Peak Upload Utilization %')
+
+        final_data.to_excel('lab.xlsx', 'w+')
+        subprocess.call([r'C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE',
+                         r'C:\Users\cgarrido\Desktop\lab.xlsx'])
