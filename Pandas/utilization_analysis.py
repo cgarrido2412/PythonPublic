@@ -51,29 +51,32 @@ def float_format(a, b, c, d, e, f):
                 data[f][x] = float(data[f][x][:-5])
 
 if __name__ == '__main__':
-        file = r'C:\Users\cgarrido\Desktop\Ben Test Utilization.xls'
-        file_test(file)
-        data = pd.read_excel(file, header=[2])
-        final_data = pd.read_excel(file, header=[2])
+        try:
+                file = r'C:\Users\cgarrido\Desktop\Ben Test Utilization.xls'
+                file_test(file)
+                data = pd.read_excel(file, header=[2])
+                final_data = pd.read_excel(file, header=[2])
 
-        float_format('Average Receive bps',
-                       'Peak Receive bps',
-                       'Received Bandwidth',
-                       'Average Transmit bps',
-                       'Peak Transmit bps',
-                       'Transmit Bandwidth')
+                float_format('Average Receive bps',
+                               'Peak Receive bps',
+                               'Received Bandwidth',
+                               'Average Transmit bps',
+                               'Peak Transmit bps',
+                               'Transmit Bandwidth')
 
-        analyze_data('Average Receive bps',
-                  'Peak Receive bps',
-                  'Received Bandwidth',
-                  'Average Receive Utilization %',
-                  'Peak Receive Utilization %',
-                  'Average Transmit bps',
-                  'Peak Transmit bps',
-                  'Transmit Bandwidth',
-                  'Average Upload Utilization %',
-                  'Peak Upload Utilization %')
+                analyze_data('Average Receive bps',
+                          'Peak Receive bps',
+                          'Received Bandwidth',
+                          'Average Receive Utilization %',
+                          'Peak Receive Utilization %',
+                          'Average Transmit bps',
+                          'Peak Transmit bps',
+                          'Transmit Bandwidth',
+                          'Average Upload Utilization %',
+                          'Peak Upload Utilization %')
 
-        final_data.to_excel('lab.xlsx', 'w+')
-        subprocess.call([r'C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE',
-                         r'C:\Users\cgarrido\Desktop\lab.xlsx'])
+                final_data.to_excel('lab.xlsx', 'w+')
+                subprocess.call([r'C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE',
+                                 r'C:\Users\cgarrido\Desktop\lab.xlsx'])
+        except KeyboardInterrupt:
+                print('Program terminated.')
