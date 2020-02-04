@@ -80,3 +80,5 @@ if __name__ == '__main__':
                                  r'C:\Users\cgarrido\Desktop\lab.xlsx'])
         except KeyboardInterrupt:
                 print('Program terminated.')
+else:
+        print('utilization_analysis.py successfully imported.')
