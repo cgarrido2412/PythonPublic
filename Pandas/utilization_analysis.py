@@ -23,19 +23,32 @@ def file_test(file):
                 print('Unable to open:', file)
                 exit()
 
+def float_check(x):
+        try:
+                float(x)
+                return True
+        except ValueError:
+                return False
+
 def float_format(a, b, c, d, e, f):
         for x in range(len(data[a])):
-                data[a][x] = data[a][x][:-5]
+                float_check(data[a][x])
+                data[a][x] = float(data[a][x][:-5])
         for x in range(len(data[b])):
-                data[b][x] = data[b][x][:-5]
+                float_check(data[b][x])
+                data[b][x] = float(data[b][x][:-5])
         for x in range(len(data[c])):
-                data[c][x] = data[c][x][:-5]                
+                float_check(data[c][x])
+                data[c][x] = float(data[c][x][:-5])
         for x in range(len(data[d])):
-                data[d][x] = data[d][x][:-5]
+                float_check(data[d][x])
+                data[d][x] = float(data[d][x][:-5])
         for x in range(len(data[e])):
-                data[e][x] = data[e][x][:-5]
+                float_check(data[e][x])
+                data[e][x] = float(data[e][x][:-5])
         for x in range(len(data[f])):
-                data[f][x] = data[f][x][:-5]
+                float_check(data[f][x])
+                data[f][x] = float(data[f][x][:-5])
 
 if __name__ == '__main__':
         file = r'C:\Users\cgarrido\Desktop\Ben Test Utilization.xls'
