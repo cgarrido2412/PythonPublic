@@ -30,7 +30,7 @@ def float_format(a, b, c, d, e, f):
         for x in range(len(data[f])):
                 data[f][x] = data[f][x].replace(' Mbps', '')
 
-file = r'Ben Test Utilization.xls'
+file = r'C:\Users\cgarrido\Desktop\Ben Test Utilization.xls'
 data = pd.read_excel(file, header=[2])
 final_data = pd.read_excel(file, header=[2])
 
