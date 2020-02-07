@@ -28,8 +28,7 @@ if __name__ == '__main__':
             choice = str(input('Player one chooses:\n')).lower()
             choice = choice.strip()
             first_comparison = return_key(choice)
-            computer_choices = ['rock', 'paper', 'scissors']
-            computer_choice = random.sample(computer_choices, 1)
+            computer_choice = random.sample(['rock', 'paper', 'scissors'], 1)
             print('Computer chooses:', computer_choice[0])
             second_comparison = return_key(computer_choice[0])
             compare_results(first_comparison, second_comparison)
