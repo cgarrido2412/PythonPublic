@@ -9,8 +9,8 @@ def return_key(choice):
     gameDictionary = {'rock':1,
                       'paper':2,
                       'scissors':3}
-    first_return = gameDictionary.get(choice)
-    return first_return
+    return_value = gameDictionary.get(choice)
+    return return_value
 
 def compare_results(x,y):
     result = x - y
@@ -27,12 +27,12 @@ if __name__ == '__main__':
             print('Rock, paper, scissors!\nPress [ctrl+c] to exit.')
             choice = str(input('Player one chooses:\n')).lower()
             choice = choice.strip()
-            one = return_key(choice)
+            first_comparison = return_key(choice)
             computer_choices = ['rock', 'paper', 'scissors']
             computer_choice = random.sample(computer_choices, 1)
             print('Computer chooses:', computer_choice[0])
-            two = return_key(computer_choice[0])
-            compare_results(one, two)
+            second_comparison = return_key(computer_choice[0])
+            compare_results(first_comparison, second_comparison)
         except KeyboardInterrupt:
             print('Program termianted.')
             exit()
