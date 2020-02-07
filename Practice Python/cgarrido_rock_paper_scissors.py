@@ -39,7 +39,7 @@ if __name__ == '__main__':
             second_comparison = return_key(computer_choice[0])
             compare_results(first_comparison, second_comparison)
         except TypeError:
-            print('Invalid input!\nGame resetting...\n\n\n')
+            print('But wait, your choice is an invalid input!\nGame resetting...\n\n\n')
             time.sleep(3)
         except KeyboardInterrupt:
             print('Program termianted.')
