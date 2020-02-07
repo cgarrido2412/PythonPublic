@@ -35,3 +35,4 @@ if __name__ == '__main__':
             compare_results(one, two)
         except KeyboardInterrupt:
             print('Program termianted.')
+            exit()
