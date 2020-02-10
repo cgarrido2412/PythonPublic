@@ -149,9 +149,8 @@ if __name__ == '__main__':
             else:
                 exit()
         elif mode == 'filepath':
-            file = input('Enter full file path:\n')
-            file_test(file)
-            full_file = file
+            full_file = input('Enter full file path:\n')
+            file_test(full_file)
             data = pd.read_excel(full_file, header=[2])
         else:
             print('Invalid input.')
@@ -181,8 +180,6 @@ if __name__ == '__main__':
         program_running = True
         while program_running is True:
             print('Outage calculator\nHit [ctrl+c] to quit.\n')
-            storeOpen = 9
-            storeClose = 21
             outage_start = input('Enter outage start time:\n')
             if outage_start == '':
                 program_running = False
@@ -193,8 +190,8 @@ if __name__ == '__main__':
                 program_running = False
             else:
                 pass
-            string1 = '2019-08-11 ' + outage_start
-            string2 = '2019-08-11 ' + outage_end
+            string1 = year + '-' + month + '-' + day + ' ' + outage_start
+            string2 = year + '-' + month + '-' + day + ' ' + outage_end
             print(breakdown(string1,string2))
 
     #Exception handling for keyboardInterrupt
