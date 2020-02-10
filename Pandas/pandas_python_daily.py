@@ -86,6 +86,13 @@ def conversion_function(x: pd.Series) -> pd.Timestamp:
     loc_raw_time = raw_time.tz_localize("US/Pacific")
     return loc_raw_time.tz_convert(zones[x[0]]).replace(tzinfo=None)
 
+def file_test(file):
+    try:
+        open(file)
+    except:
+        print('Unable to open:', file)
+        exit()
+
 def validate_integer(x):
     try:
         int(x)
@@ -109,56 +116,25 @@ if __name__ == '__main__':
         mode = input('Is this [daily], or [manual]? \n')
         mode = mode.strip()
         mode = mode.lower()
-        acceptable_answer = False
-        while acceptable_answer is False:
-            if mode == 'daily':
-                try:
-                    data = pd.read_excel(full_file, header=[2])
-                    acceptable_answer = True
-                except:
-                    print('Unable to open:', full_file)
-            elif mode == 'manual':
-                try:
-                    day_integer = False
-                    day = input('Please enter the day[integer]: \n')
-                    while day_integer is False:
-                        try:
-                            if validate_integer(day) is True:
-                                day_integer = True
-                            else:
-                                pass
-                        except ValueError:
-                            print('You need to type an integer.')
-                    month_integer = False
-                    month = input("Please enter the month[integer]: \n")
-                    while month_integer is False:
-                        try:
-                            if validate_integer(month) is True:
-                                month_integer = True
-                            else:
-                                pass
-                        except ValueError:
-                            print('You need to type an integer.')
-                    year_integer = False
-                    year = input('Please enter the year[integer]: \n')
-                    while year_integer is False:
-                        try:
-                            if validate_integer(year) is True:
-                                year_integer = True
-                            else:
-                                pass
-                        except ValueError:
-                            print('You need to type an integer.')
-                    filename = (month + '_' + day + '_' + year + '.xls')
-                    full_file = 'E:\Savers\Spreadsheets\Outage\\' + year + '\outage_' + filename
-                    data = pd.read_excel(full_file, header=[2])
-                    acceptable_answer = True
-                except:
-                    print('Unable to open:', full_file)
+        if mode == 'daily':
+            file_test(full_file)
+            data = pd.read_excel(full_file, header=[2])
+        elif mode == 'manual':
+            manual_day = str(input('Please enter the day[integer]: \n'))
+            manual_month = str(input("Please enter the month[integer]: \n"))
+            manual_year = str(input('Please enter the year[integer]: \n'))
+            if validate_integer(manual_day) and validate_integer(manual_month) and validate_integer(manual_year) is True:
+                new_file = (manual_month + '_' + manual_day + '_' + manual_year + '.xls')
+                full_file = 'E:\Savers\Spreadsheets\Outage\\' + manual_year + '\outage_' + new_file
+                file_test(full_file)
+                data = pd.read_excel(full_file, header=[2])
             else:
-                print('Invalid input.')
-                break    
-        data = data.drop(data[data.Duration == 0].index) 
+                exit()
+        else:
+            print('Invalid input.')
+            exit()    
+        data = data.drop(data[data.Duration == 0].index)
+        data = data.drop(data[data.Duration == 1].index)
         data = data.drop(data[data.Store == '2955-FW-1'].index)
         data = data.drop(data[data.Store == 'TDX-ESX-VPN'].index)
         data['Site DOWN'] = pd.to_datetime(data['Site DOWN']) 
