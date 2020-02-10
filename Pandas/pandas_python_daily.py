@@ -7,6 +7,9 @@ Description: Takes the daily outage report from Orion and localizes all outages 
 Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'.
 '''
 
+#Imports for the code to function.
+#To install modules that are not native to python, navigate to C:\Users\USERNAME\AppData\Local\Programs\Python\Python37\Scripts>
+#Then, use C:\Users\cgarrido\AppData\Local\Programs\Python\Python37\Scripts>pip install MODULE
 import pandas as pd
 from pandas import Timestamp
 import pytz
@@ -18,6 +21,7 @@ import xlwt
 import time
 import subprocess
 
+#Following function applies conversion_function and adds 'During_Hours' and 'Notes' columns. Then saves the file.
 def apply(data):
     data['Adjusted_Down'] = data[['Time_Zone', 'Site DOWN']].apply(conversion_function, axis=1)
     data['Adjusted_Up'] = data[['Time_Zone', 'Site UP']].apply(conversion_function, axis=1)
@@ -25,6 +29,7 @@ def apply(data):
     data.insert(9, 'Notes', value='')
     data.to_excel(full_file)
 
+#Following function breaksdown the time formatted string for outage duration calculations
 def breakdown(x,y):
     #For downtime, time format 'YEAR-MONTH-DAY HOUR:MINUTE:SECOND'
     string1 = x.split() 
@@ -72,6 +77,7 @@ def breakdown(x,y):
     else:
         print(0)
 
+#Conversion function localizes outage time to PST and converts them to their local timezone
 def conversion_function(x: pd.Series) -> pd.Timestamp:
     zones = {'Atlantic': 'Canada/Atlantic',
              'Central': 'US/Central',
@@ -86,6 +92,7 @@ def conversion_function(x: pd.Series) -> pd.Timestamp:
     loc_raw_time = raw_time.tz_localize("US/Pacific")
     return loc_raw_time.tz_convert(zones[x[0]]).replace(tzinfo=None)
 
+#Function tests if a file can be opened. 
 def file_test(file):
     try:
         open(file)
@@ -93,6 +100,7 @@ def file_test(file):
         print('Unable to open:', file)
         exit()
 
+#Validates if input / variable can be converted to integer format
 def validate_integer(x):
     try:
         int(x)
@@ -100,8 +108,13 @@ def validate_integer(x):
     except ValueError:
         return False
 
+#Driving code that runs if program is being run directly
 if __name__ == '__main__':
+
+    #Try following code, built in exception KeyboardInterrupt handling
     try:
+
+        #Grab today's date, then assemble the expected file name and define the store hours
         today = date.today() 
         day = int(today.strftime('%d')) - 1
         day = str(day)
@@ -111,11 +124,16 @@ if __name__ == '__main__':
         print('filename is: outage_' + filename)
         storeOpen = 9
         storeClose = 21
+
+        #Start timer for script, define mode of the script
+        #Note that the default filepath is pointed towards my E:\ drive
         startTime = time.time()
         full_file = 'E:\Savers\Spreadsheets\Outage\\' + year + '\outage_' + filename
         mode = input('Is this [daily], or [manual]? \n')
         mode = mode.strip()
         mode = mode.lower()
+
+        #Depending if the script is run daily or as a manual task, exectute the following
         if mode == 'daily':
             file_test(full_file)
             data = pd.read_excel(full_file, header=[2])
@@ -132,19 +150,29 @@ if __name__ == '__main__':
                 exit()
         else:
             print('Invalid input.')
-            exit()    
+            exit()
+
+        #Start by removing outages < 1min. Even though Duration == 1, the way pandas interprets the line becomes < 1
         data = data.drop(data[data.Duration == 0].index)
         data = data.drop(data[data.Duration == 1].index)
+
+        #Remove the following lab environment and TDX VPN, these should not be included in the retail outage report
         data = data.drop(data[data.Store == '2955-FW-1'].index)
         data = data.drop(data[data.Store == 'TDX-ESX-VPN'].index)
         data['Site DOWN'] = pd.to_datetime(data['Site DOWN']) 
         data['Site UP'] = pd.to_datetime(data['Site UP'])
         apply(data)
+
+        #Drop duplicate adjusted_up times and save file. End timer
         data = data.drop_duplicates('Adjusted_Up')
         data.to_excel(full_file)
         endTime = time.time()
         print('The conversion function took %s seconds to calculate.' % (endTime - startTime))
+
+        #Use subprocess to open saved file
         subprocess.call([r"C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE", full_file])
+
+        #After the file is closed, the rest of the script runs to start an outage calculator on the terminal
         program_running = True
         while program_running is True:
             print('Outage calculator\nHit [ctrl+c] to quit.\n')
@@ -163,5 +191,7 @@ if __name__ == '__main__':
             string1 = '2019-08-11 ' + outage_start
             string2 = '2019-08-11 ' + outage_end
             print(breakdown(string1,string2))
+
+    #Exception handling for keyboardInterrupt
     except KeyboardInterrupt:
         print('Program terminated by user.')
