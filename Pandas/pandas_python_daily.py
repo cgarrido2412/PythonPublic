@@ -129,7 +129,7 @@ if __name__ == '__main__':
         #Note that the default filepath is pointed towards my E:\ drive
         startTime = time.time()
         full_file = 'E:\Savers\Spreadsheets\Outage\\' + year + '\outage_' + filename
-        mode = input('Is this [daily], or [manual]? \n')
+        mode = input('Is this [daily], or [manual]? \nType [filepath] if Charles is not running this script.\n')
         mode = mode.strip()
         mode = mode.lower()
 
@@ -148,6 +148,11 @@ if __name__ == '__main__':
                 data = pd.read_excel(full_file, header=[2])
             else:
                 exit()
+        elif mode == 'filepath':
+            file = input('Enter full file path:\n')
+            file_test(file)
+            full_file = file
+            data = pd.read_excel(full_file, header=[2])
         else:
             print('Invalid input.')
             exit()
