@@ -95,29 +95,43 @@ def rock_paper_scissors(): #XXX
     Make a two-player Rock-Paper-Scissors game.
     '''
     import random
-    print('Rock, paper, scissors!')
-    while True:
+    import time 
+    def return_key(choice):
         gameDictionary = {'rock':1,
                           'paper':2,
                           'scissors':3}
-        player1 = str(input('Player one chooses:\n')).lower()
-        player1 = player1.strip()
-        one = gameDictionary.get(player1)
-        computer_choice_list = ['rock', 'paper', 'scissors']
-        computer_choice = random.sample(computer_choice_list, 1)
-        print('Computer chooses:', computer_choice[0])
-        two = gameDictionary.get(computer_choice[0])
-        result = one - two
+        return_value = gameDictionary.get(choice)
+        return return_value
+    def compare_results(x,y):
+        result = x - y
         if result in [0]:
-            print('The game is a draw.')
-            break
+            print("The game is a draw.\nGame resetting...\n\n\n")
+            time.sleep(3)
         elif result in [-2, 1]:
-            print('Player one wins!')
-            break
+            print('Player one wins!\nGame resetting...\n\n\n')
+            time.sleep(3)
         elif result in [-1, 2]:
-            print('Computer wins!')
-            break
-    print('Game over.')
+            print('Computer player wins!\nGame resetting...\n\n\n')
+            time.sleep(3)
+    if __name__ == '__main__':
+        while True:
+            try:
+                print('Rock, paper, scissors!\nPress [ctrl+c] to exit.')
+                choice = str(input('Player one chooses:\n')).lower()
+                choice = choice.strip()
+                first_comparison = return_key(choice)
+                computer_choice = random.sample(['rock', 'paper', 'scissors'], 1)
+                time.sleep(1)
+                print('Computer chooses:', computer_choice[0])
+                time.sleep(1)
+                second_comparison = return_key(computer_choice[0])
+                compare_results(first_comparison, second_comparison)
+            except TypeError:
+                print('But wait, your choice is an invalid input!\nGame resetting...\n\n\n')
+                time.sleep(3)
+            except KeyboardInterrupt:
+                print('Program termianted.')
+                exit()
 
 def guessing_game_one(): #XXX
     '''
