@@ -105,22 +105,28 @@ cards = ['Ace',
          'Queen',
          'King']
 
-suit_selection = random.sample(suits, 1)
+while True:
+    suit_selection = random.sample(suits, 1)
 
-if suit_selection[0] == 'Spades':
-    print('The deck has been shuffled, your card is in the suit of Spades.\n')
-    print(the_suit_of_spades)
-elif suit_selection[0] == 'Hearts':
-    print('The deck has been shuffled, your card is in the suit of Hearts.\n')
-    print(the_suit_of_hearts)
-elif suit_selection[0] == 'Clubs':
-    print('The deck has been shuffled, your card is in the suit of Clubs.\n')
-    print(the_suit_of_clubs)
-elif suit_selection[0] == 'Diamonds':
-    print('The deck has been shuffled, your card is in the suit of Diamonds.\n')
-    print(the_suit_of_diamonds)
+    if suit_selection[0] == 'Spades':
+        print('The deck has been shuffled, your card is in the suit of Spades.\n')
+        print(the_suit_of_spades)
+    elif suit_selection[0] == 'Hearts':
+        print('The deck has been shuffled, your card is in the suit of Hearts.\n')
+        print(the_suit_of_hearts)
+    elif suit_selection[0] == 'Clubs':
+        print('The deck has been shuffled, your card is in the suit of Clubs.\n')
+        print(the_suit_of_clubs)
+    elif suit_selection[0] == 'Diamonds':
+        print('The deck has been shuffled, your card is in the suit of Diamonds.\n')
+        print(the_suit_of_diamonds)
 
-card_selection = random.sample(cards, 1)
-final_card = card_selection[0] + ' of ' + suit_selection[0]
-print('Your tarot card is:\n' + final_card)
-print(playing_cards.get(final_card))
+    card_selection = random.sample(cards, 1)
+    final_card = card_selection[0] + ' of ' + suit_selection[0]
+    print('Your tarot card is:\n' + final_card)
+    print(playing_cards.get(final_card))
+    question = input('\n\n\nDraw another card?\n[y/n]\n')
+    if question == 'y':
+        continue
+    elif question == 'n':
+        exit()
