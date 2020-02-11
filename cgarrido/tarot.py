@@ -1,4 +1,10 @@
 #! /usr/bin/env python3
+'''
+Author: Charles Garrido
+'''
+
+import random
+
 playing_cards = {'Joker':'taking a risk | doing something foolish | innocence',
                  'Ace of Clubs':'Spark of inspiration, passion. A new love affair, the idea for a business or life-change.',
                  'Two of Clubs':'Planning, delays, waiting for the signal to move.',
@@ -79,3 +85,28 @@ They cover such areas as money, work, practical projects, homes, etcetera.
 Diamonds can also represent the practical aspects of relationships.
 Diamonds are associated with earth.
 '''
+
+suits = ['Spades',
+         'Diamonds',
+         'Hearts',
+         'Clubs']
+
+cards = ['Ace',
+         'Two',
+         'Three',
+         'Four',
+         'Five',
+         'Six',
+         'Seven',
+         'Eight',
+         'Nine',
+         'Ten',
+         'Jack',
+         'Queen',
+         'King']
+
+suit_selection = random.sample(suits, 1)
+card_selection = random.sample(cards, 1)
+final_card = card_selection[0] + ' of ' + suit_selection[0]
+print('Your tarot card is:\n' + final_card)
+print(playing_cards.get(final_card))
