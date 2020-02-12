@@ -4,7 +4,6 @@ Author: Charles Garrido
 '''
 
 import random
-import time
 
 class Card(object):
     card_values = {
