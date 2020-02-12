@@ -171,8 +171,7 @@ cards = ['Ace',
 if __name__ == '__main__':
     try:
         while True:
-            question = input('\n\n\nDraw a card?\n[y/n]\n').lower()
-            question = question.strip()
+            question = input('\n\n\nDraw a card?\n[y/n]\n').lower().strip()
             if question == 'y':
                 suit_selection = random.sample(suits, 1)
                 if suit_selection[0] == 'Spades':
