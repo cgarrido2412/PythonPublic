@@ -173,25 +173,44 @@ if __name__ == '__main__':
         while True:
             question = input('\n\n\nDraw a card?\n[y/n]\n').lower().strip()
             if question == 'y':
-                suit_selection = random.sample(suits, 1)
-                if suit_selection[0] == 'Spades':
-                    print('The deck has been shuffled, your card is in the suit of Spades.\n')
-                    print(the_suit_of_spades)
-                elif suit_selection[0] == 'Hearts':
-                    print('The deck has been shuffled, your card is in the suit of Hearts.\n')
-                    print(the_suit_of_hearts)
-                elif suit_selection[0] == 'Clubs':
-                    print('The deck has been shuffled, your card is in the suit of Clubs.\n')
-                    print(the_suit_of_clubs)
-                elif suit_selection[0] == 'Diamonds':
-                    print('The deck has been shuffled, your card is in the suit of Diamonds.\n')
-                    print(the_suit_of_diamonds)
-                card_selection = random.sample(cards, 1)
-                final_card = card_selection[0] + ' of ' + suit_selection[0]
-                converted_card_selection = card_selection_conversion.get(card_selection[0]) 
-                print('Your tarot card is:\n' + final_card)
-                print(ascii_version_of_card(Card(suit_selection[0], converted_card_selection)))
-                print(playing_cards.get(final_card))
+                try:
+                    suit_selection = random.sample(suits, 1)
+                    if suit_selection[0] == 'Spades':
+                        print('The deck has been shuffled, your card is in the suit of Spades.\n')
+                        print(the_suit_of_spades)
+                    elif suit_selection[0] == 'Hearts':
+                        print('The deck has been shuffled, your card is in the suit of Hearts.\n')
+                        print(the_suit_of_hearts)
+                    elif suit_selection[0] == 'Clubs':
+                        print('The deck has been shuffled, your card is in the suit of Clubs.\n')
+                        print(the_suit_of_clubs)
+                    elif suit_selection[0] == 'Diamonds':
+                        print('The deck has been shuffled, your card is in the suit of Diamonds.\n')
+                        print(the_suit_of_diamonds)
+                    card_selection = random.sample(cards, 1)
+                    final_card = card_selection[0] + ' of ' + suit_selection[0]
+                    converted_card_selection = card_selection_conversion.get(card_selection[0]) 
+                    print('Your tarot card is:\n' + final_card)
+                    print(ascii_version_of_card(Card(suit_selection[0], converted_card_selection)))
+                    print(playing_cards.get(final_card))
+                    del playing_cards[final_card]
+                except KeyError:
+                    print(final_card, 'has already been drawn.\nInstead, your fortune is THE JOKER...')
+                    final_card = playing_cards.get('Joker')
+                    joker = '''
+                    ┌─────────┐
+                    │JOKER    │
+                    │         │
+                    │         │
+                    │    X    │
+                    │         │
+                    │         │
+                    │    JOKER│
+                    └─────────┘
+                    '''
+                    print(joker)
+                    print(final_card)
+                    exit()
             elif question == 'n':
                 exit()
     except KeyboardInterrupt:
