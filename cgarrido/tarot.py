@@ -106,37 +106,42 @@ cards = ['Ace',
          'Queen',
          'King']
 
-while True:
-    question = input('\n\n\nDraw a card?\n[y/n]\n')
-    if question == 'y':
-        suit_selection = random.sample(suits, 1)
+if __name__ == '__main__':
+    try:
+        while True:
+            question = input('\n\n\nDraw a card?\n[y/n]\n')
+            if question == 'y':
+                suit_selection = random.sample(suits, 1)
 
-        if suit_selection[0] == 'Spades':
-            time.sleep(3)
-            print('The deck has been shuffled, your card is in the suit of Spades.\n')
-            time.sleep(3)
-            print(the_suit_of_spades)
-        elif suit_selection[0] == 'Hearts':
-            time.sleep(3)
-            print('The deck has been shuffled, your card is in the suit of Hearts.\n')
-            time.sleep(3)
-            print(the_suit_of_hearts)
-        elif suit_selection[0] == 'Clubs':
-            time.sleep(3)
-            print('The deck has been shuffled, your card is in the suit of Clubs.\n')
-            time.sleep(3)
-            print(the_suit_of_clubs)
-        elif suit_selection[0] == 'Diamonds':
-            time.sleep(3)
-            print('The deck has been shuffled, your card is in the suit of Diamonds.\n')
-            time.sleep(3)
-            print(the_suit_of_diamonds)
+                if suit_selection[0] == 'Spades':
+                    time.sleep(3)
+                    print('The deck has been shuffled, your card is in the suit of Spades.\n')
+                    time.sleep(3)
+                    print(the_suit_of_spades)
+                elif suit_selection[0] == 'Hearts':
+                    time.sleep(3)
+                    print('The deck has been shuffled, your card is in the suit of Hearts.\n')
+                    time.sleep(3)
+                    print(the_suit_of_hearts)
+                elif suit_selection[0] == 'Clubs':
+                    time.sleep(3)
+                    print('The deck has been shuffled, your card is in the suit of Clubs.\n')
+                    time.sleep(3)
+                    print(the_suit_of_clubs)
+                elif suit_selection[0] == 'Diamonds':
+                    time.sleep(3)
+                    print('The deck has been shuffled, your card is in the suit of Diamonds.\n')
+                    time.sleep(3)
+                    print(the_suit_of_diamonds)
 
-        card_selection = random.sample(cards, 1)
-        final_card = card_selection[0] + ' of ' + suit_selection[0]
-        time.sleep(3)
-        print('Your tarot card is:\n' + final_card)
-        time.sleep(3)
-        print(playing_cards.get(final_card))
-    elif question == 'n':
+                card_selection = random.sample(cards, 1)
+                final_card = card_selection[0] + ' of ' + suit_selection[0]
+                time.sleep(3)
+                print('Your tarot card is:\n' + final_card)
+                time.sleep(3)
+                print(playing_cards.get(final_card))
+            elif question == 'n':
+                exit()
+    except KeyboardInterrupt:
+        print('Program terminated.')
         exit()
