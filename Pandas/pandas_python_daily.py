@@ -96,7 +96,7 @@ def conversion_function(x: pd.Series) -> pd.Timestamp:
 def file_test(file):
     try:
         open(file)
-    except:
+    except FileNotFoundError:
         print('Unable to open:', file)
         exit()
 
