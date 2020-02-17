@@ -20,6 +20,6 @@ if __name__ == '__main__':
         x = first_function()
         y = second_function()
         z = third_function()
-        print(x[0] + z[0] + x[len(x) - 1] + y)
+        print(x[0] + z[0] + x[::-1][0] + y)
     except KeyboardInterrupt:
         print('Program terminated.')
