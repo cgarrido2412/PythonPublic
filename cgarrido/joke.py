@@ -21,5 +21,5 @@ if __name__ == '__main__':
         y = second_function()
         z = third_function()
         print(x[0] + z[0] + x[len(x) - 1] + y)
-    except:
+    except KeyboardInterrupt:
         print('Program terminated.')
