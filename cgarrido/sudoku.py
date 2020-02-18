@@ -43,7 +43,11 @@ if __name__ == '__main__':
             if len(grid[i]) != 9:
                 print('You have missed a number.')
                 break
-            grid[i] = [int(x) for x in grid[i]]
+            try:
+                grid[i] = [int(x) for x in grid[i]]
+            except ValueError:
+                print('One of your inputs could not be converted to an integer.')
+                exit()
         print(np.matrix(grid))
         solve()
     except IndexError:
