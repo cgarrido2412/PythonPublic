@@ -48,8 +48,13 @@ if __name__ == '__main__':
                 [0,0,0,0,0,0,0,0,0]]
         for i in range(len(grid)):
             grid[i] = list(input('Enter row:\n'))
+            if len(grid[i]) != 9:
+                print('You have missed a number.')
+                break
             grid[i] = [int(x) for x in grid[i]]
         print(np.matrix(grid))
         solve()
+    except IndexError:
+        print('The puzzle could not be solved.')
     except KeyboardInterrupt:
         print('Program terminated.')
