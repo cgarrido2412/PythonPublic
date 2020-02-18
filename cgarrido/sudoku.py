@@ -37,41 +37,18 @@ def solve():
     
 if __name__ == '__main__':
     try:
-        grid = [[4,0,7,0,0,8,0,0,3],
+        grid = [[0,0,0,0,0,0,0,0,0],
                 [0,0,0,0,0,0,0,0,0],
-                [0,0,0,0,9,0,5,2,0],
-                [0,0,8,7,3,0,0,0,2],
-                [0,6,0,0,0,0,0,0,0],
-                [1,0,0,6,0,0,0,0,0],
-                [0,0,0,0,2,0,4,0,5],
-                [0,4,0,8,0,1,0,7,0],
-                [0,0,6,0,0,0,0,8,0]]
-        grid[0] = list(input('Enter first row:\n'))
-        grid[0] = [int(x) for x in grid[0]]
-        
-        grid[1] = list(input('Enter second row:\n'))
-        grid[1] = [int(x) for x in grid[1]]
-
-        grid[2] = list(input('Enter thrid row:\n'))
-        grid[2] = [int(x) for x in grid[2]]
-
-        grid[3] = list(input('Enter fourth row:\n'))
-        grid[3] = [int(x) for x in grid[3]]
-
-        grid[4] = list(input('Enter fifth row:\n'))
-        grid[4] = [int(x) for x in grid[4]]
-
-        grid[5] = list(input('Enter sixth row:\n'))
-        grid[5] = [int(x) for x in grid[5]]
-
-        grid[6] = list(input('Enter seventh row:\n'))
-        grid[6] = [int(x) for x in grid[6]]
-
-        grid[7] = list(input('Enter eigth row:\n'))
-        grid[7] = [int(x) for x in grid[7]]
-
-        grid[8] = list(input('Enter ninth row:\n'))
-        grid[8] = [int(x) for x in grid[8]]
+                [0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0]]
+        for i in range(len(grid)):
+            grid[i] = list(input('Enter row:\n'))
+            grid[i] = [int(x) for x in grid[i]]
         print(np.matrix(grid))
         solve()
     except KeyboardInterrupt:
