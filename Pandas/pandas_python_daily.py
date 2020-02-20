@@ -2,7 +2,7 @@
 '''
 Author: Charles Garrido.
 Creation Date: 4 Aug. 2019.
-Last Revision: 10 Feb. 2020.
+Last Revision: 20 Feb. 2020.
 Description: Takes the daily outage report from Orion and localizes all outages to local time, adds a note column for analysis. 
 Saved file must be in the format 'outage_MONTH_DAY_YEAR.xls'.
 '''
@@ -108,9 +108,7 @@ def validate_integer(x):
     except ValueError:
         return False
 
-#Driving code that runs if program is being run directly
-if __name__ == '__main__':
-
+def main():
     #Try following code, built in exception KeyboardInterrupt handling
     try:
 
@@ -178,7 +176,7 @@ if __name__ == '__main__':
 
         #After the file is closed, the rest of the script runs to start an outage calculator on the terminal
         program_running = True
-        while program_running is True:
+        while program_running:
             print('Outage calculator\nHit [ctrl+c] to quit.\n')
             outage_start = input('Enter outage start time:\n')
             if outage_start == '':
@@ -197,3 +195,8 @@ if __name__ == '__main__':
     #Exception handling for keyboardInterrupt
     except KeyboardInterrupt:
         print('Program terminated by user.')
+
+
+#Driving code that runs if program is being run directly
+if __name__ == '__main__':
+    main()
