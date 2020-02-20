@@ -56,8 +56,8 @@ def solve():
                grid[8][0], grid[8][1], grid[8][2], grid[8][3], grid[8][4], grid[8][5], grid[8][6], grid[8][7], grid[8][8])
     print(clean_grid)
     input('More?')
-
-def main():
+    
+if __name__ == '__main__':
     try:
         grid = [[] for x in range(9)]
         for i in range(len(grid)):
@@ -76,6 +76,3 @@ def main():
         print('The puzzle could not be solved.')
     except KeyboardInterrupt:
         print('Program terminated.')
-    
-if __name__ == '__main__':
-    main()
