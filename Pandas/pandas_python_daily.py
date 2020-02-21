@@ -108,7 +108,8 @@ def validate_integer(x):
     except ValueError:
         return False
 
-def main():
+#Driving code that runs if program is being run directly
+if __name__ == '__main__':
     #Try following code, built in exception KeyboardInterrupt handling
     try:
 
@@ -195,8 +196,3 @@ def main():
     #Exception handling for keyboardInterrupt
     except KeyboardInterrupt:
         print('Program terminated by user.')
-
-
-#Driving code that runs if program is being run directly
-if __name__ == '__main__':
-    main()
