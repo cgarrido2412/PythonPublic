@@ -48,6 +48,7 @@ def outer_most_column():
 if __name__ == '__main__':
     try:
         t = turtle.Turtle()
+        t.hideturtle()
         main_column()
 
         #right side
