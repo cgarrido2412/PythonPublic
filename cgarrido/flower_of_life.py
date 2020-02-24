@@ -12,44 +12,39 @@ def main_column():
         draw_circle(t)
         starting_y += 50
 
+def outer_column():
+        starting_y = -125
+        t.sety(starting_y)
+        draw_circle(t)
+        t.up()
+        starting_y += 50
+        t.sety(starting_y)
+        draw_circle(t)
+        t.up()
+        starting_y += 50
+        t.sety(starting_y)
+        draw_circle(t)
+        t.up()
+        starting_y += 50
+        t.sety(starting_y)
+        draw_circle(t)
+
 if __name__ == '__main__':
     try:
         t = turtle.Turtle()
         main_column()
+
+        #right side
         t.up()
-        starting_y = -125
-        t.sety(starting_y)
         t.setx(45)
-        draw_circle(t)
+        outer_column()
+
+        #left side
         t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
-        t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
-        t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
-        t.up()
-        starting_y = -125
-        t.sety(starting_y)
         t.setx(-45)
-        draw_circle(t)
+        outer_column()
+
         t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
-        t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
-        t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
     except turtle.Terminator:
         print('Program terminated.')
     except KeyboardInterrupt:
