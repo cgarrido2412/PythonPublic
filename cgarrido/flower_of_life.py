@@ -72,6 +72,13 @@ if __name__ == '__main__':
         t.up()
         t.setx(90)
         outer_most_column()
+
+        #perimeter circle
+        t.up()
+        t.home()
+        t.sety(-150)
+        t.down()
+        t.circle(150)
     except turtle.Terminator:
         print('Program terminated.')
     except KeyboardInterrupt:
