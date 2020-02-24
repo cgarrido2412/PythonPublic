@@ -46,8 +46,8 @@ if __name__ == '__main__':
                     turtle.color(color)
                     turtle.forward(x)
                     turtle.right(98)
-                    x = x + 1
-                    c = c + 0.1
+                    x += 1
+                    c += 0.1
 
                 turtle.exitonclick()
         except KeyboardInterrupt:
