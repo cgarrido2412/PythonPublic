@@ -29,6 +29,22 @@ def outer_column():
         t.sety(starting_y)
         draw_circle(t)
 
+def outer_most_column():
+        starting_y = -100
+        t.sety(-100)
+        draw_circle(t)
+        t.up()
+        starting_y += 50
+        t.sety(starting_y)
+        draw_circle(t)
+        t.up()
+        starting_y += 50
+        t.sety(starting_y)
+        draw_circle(t)
+        t.up()
+        starting_y += 50
+        t.sety(starting_y)
+
 if __name__ == '__main__':
     try:
         t = turtle.Turtle()
@@ -44,7 +60,15 @@ if __name__ == '__main__':
         t.setx(-45)
         outer_column()
 
+        #outer left
         t.up()
+        t.setx(-90)
+        outer_most_column()
+
+        #outer right
+        t.up()
+        t.setx(90)
+        outer_most_column()
     except turtle.Terminator:
         print('Program terminated.')
     except KeyboardInterrupt:
