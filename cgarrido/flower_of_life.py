@@ -12,5 +12,11 @@ def main_column():
         draw_circle(t)
         starting_y += 100
 
-t = turtle.Turtle()
-main_column()
+if __name__ == '__main__':
+    try:
+        t = turtle.Turtle()
+        main_column()
+    except turtle.Terminator:
+        print('Program terminated.')
+    except KeyboardInterrupt:
+        print('Program terminated.')
