@@ -19,37 +19,37 @@ def main_column():
         starting_y += 50
 
 def outer_column():
-        starting_y = -125
-        t.sety(starting_y)
-        draw_circle(t)
-        t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
-        t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
-        t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
+    starting_y = -125
+    t.sety(starting_y)
+    draw_circle(t)
+    t.up()
+    starting_y += 50
+    t.sety(starting_y)
+    draw_circle(t)
+    t.up()
+    starting_y += 50
+    t.sety(starting_y)
+    draw_circle(t)
+    t.up()
+    starting_y += 50
+    t.sety(starting_y)
+    draw_circle(t)
 
 def outer_most_column():
-        starting_y = -100
-        t.sety(-100)
-        draw_circle(t)
-        t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
-        t.up()
-        starting_y += 50
-        t.sety(starting_y)
-        draw_circle(t)
-        t.up()
-        starting_y += 50
-        t.sety(starting_y)
+    starting_y = -100
+    t.sety(-100)
+    draw_circle(t)
+    t.up()
+    starting_y += 50
+    t.sety(starting_y)
+    draw_circle(t)
+    t.up()
+    starting_y += 50
+    t.sety(starting_y)
+    draw_circle(t)
+    t.up()
+    starting_y += 50
+    t.sety(starting_y)
 
 if __name__ == '__main__':
     try:
