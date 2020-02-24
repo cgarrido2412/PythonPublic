@@ -85,6 +85,7 @@ if __name__ == '__main__':
         t.sety(-150)
         t.down()
         t.circle(150)
+        input('Finished.')
     except turtle.Terminator:
         print('Program terminated.')
     except KeyboardInterrupt:
