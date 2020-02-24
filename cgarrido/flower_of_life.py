@@ -49,6 +49,8 @@ if __name__ == '__main__':
     try:
         t = turtle.Turtle()
         t.hideturtle()
+        turtle.bgcolor('black')
+        t.pencolor('white')
         main_column()
 
         #right side
