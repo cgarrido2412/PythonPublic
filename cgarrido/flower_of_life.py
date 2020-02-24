@@ -1,3 +1,9 @@
+#! /usr/bin/env python3
+'''
+Author: Charles Garrido
+Date: 24 February 2020
+'''
+
 import turtle
 
 def draw_circle(t):
