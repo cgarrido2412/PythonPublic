@@ -48,6 +48,7 @@ def main():
             print (result)
         except KeyboardInterrupt:
             print('Program terminated.')
+            exit()
 
 if __name__ == '__main__': 
 	main() 
