@@ -1,4 +1,4 @@
-#!Python3
+#! /usr/bin/env Python3
 
 def validate_integer(x):
 
