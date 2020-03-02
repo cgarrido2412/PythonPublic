@@ -66,7 +66,7 @@ def file_test(file):
         print('Unable to open:', file)
         exit()
 
-if __name__ == '__main__':
+def main():
     file_test(r'C:\Users\cgarrido\Desktop\lab.txt')
     file = open(r'C:\Users\cgarrido\Desktop\lab.txt').read() #3x11x24\n13x5x19\n1x9x27\n
     lines = file.split('\n') #'3x11x24'
@@ -92,4 +92,7 @@ if __name__ == '__main__':
     total_square_feet = sum(list_of_square_feet)
     total_length_of_ribbon = sum(total_ribbon)
     print('Total amount of wrapping paper: {} SqFt'.format(total_square_feet))
-    print('Total amount of ribbon: {} Ft'.format(total_length_of_ribbon))
+    print('Total amount of ribbon: {} Ft'.format(total_length_of_ribbon))    
+
+if __name__ == '__main__':
+    main()
