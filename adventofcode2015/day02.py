@@ -91,5 +91,5 @@ if __name__ == '__main__':
 
     total_square_feet = sum(list_of_square_feet)
     total_length_of_ribbon = sum(total_ribbon)
-    print(total_square_feet)
-    print(total_length_of_ribbon)
+    print('Total amount of wrapping paper:', total_square_feet)
+    print('Total amount of ribbon:', total_length_of_ribbon)
