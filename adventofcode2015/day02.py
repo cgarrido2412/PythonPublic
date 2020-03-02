@@ -68,14 +68,14 @@ def file_test(file):
 
 if __name__ == '__main__':
     file_test(r'C:\Users\cgarrido\Desktop\lab.txt')
-    file = open(r'C:\Users\cgarrido\Desktop\lab.txt').read()
-    lines = file.split('\n')
-    numbers = []
+    file = open(r'C:\Users\cgarrido\Desktop\lab.txt').read() #3x11x24\n13x5x19\n1x9x27\n
+    lines = file.split('\n') #'3x11x24'
+    numbers = [] #['3', '11', '24']
     for x in range(len(lines)):
         extracted_numbers = lines[x].split('x')
         numbers.append(extracted_numbers)
 
-    integers = []
+    integers = [] #[3, 11, 24]
     for x in range(len(numbers)):
         extracted_integers = [int(y) for y in numbers[x]]
         integers.append(extracted_integers)
@@ -83,7 +83,7 @@ if __name__ == '__main__':
     list_of_square_feet = []
     total_ribbon = []
     for x in range(len(integers)):
-        present = Gift(integers[x][0], integers[x][1], integers[x][2])
+        present = Gift(integers[x][0], integers[x][1], integers[x][2]) #Gift(3, 11, 24)
         area = present.wrapper()
         ribbon_amount = present.ribbon()
         list_of_square_feet.append(area)
