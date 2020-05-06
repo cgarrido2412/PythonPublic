@@ -2,7 +2,7 @@
 
 '''
 Author: Charles Garrido
-Last Updated: 4 May 2020
+Last Updated: 5 May 2020
 
 This script will allow the user to choose between adding keyphrases to a list
 or generating a passowrd.
@@ -18,6 +18,7 @@ then a password will be randomly created from the keyphrase list.
 import random
 
 def leet_conversion(string):
+    string = string.replace(' ', '_')
     overwrite = (('a', '4'), ('e', '3'), ('i', '1'), ('o', '0'), ('t', '7'))
     for old, new in overwrite:
         string = string.replace(old, new)
