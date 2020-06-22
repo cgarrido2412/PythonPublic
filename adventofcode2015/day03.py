@@ -24,63 +24,31 @@ def file_test(file):
         print('Unable to open file.')
         exit()
 
-def move_up(location, visited_locations):
-    location = (x,y+1)
-    if location not in visited_locations:
-        visited_locations[location] = 1
-    else:
-        visited_locations[location] += 1
-    return location
-
-def move_right(location, visited_locations):
-    location = (x+1,y)
-    if location not in visited_locations:
-        visited_locations[location] = 1
-    else:
-        visited_locations[location] += 1
-    return location
-
-def move_down(location, visited_locations):
-    location = (x,y-1)
-    if location not in visited_locations:
-        visited_locations[location] = 1
-    else:
-        visited_locations[location] += 1
-    return location
-
-def move_left(location, visited_locations):
-    location = (x-1,y)
-    if location not in visited_locations:
-        visited_locations[location] = 1
-    else:
-        visited_locations[location] += 1
-    return location
-
-def main(location):
+def main():
     puzzle = r'C:\Users\I539067\Desktop\lab.txt'
     file_test(puzzle)
     file = open(puzzle).read()
     
-    visited_locations = {}
-    visited_locations[location] = 1
+    location = [0,0]
+    visited = []
 
-    for i in file: 
-        if i == "^":
-            location = move_up(location, visited_locations)
-        elif i == '>':
-            location = move_right(location, visited_locations)
-        elif i == 'v':
-            location = move_down(location, visited_locations)
-        elif i == '<':
-            location = move_left(location, visited_locations)
+    for direction in file:
+        if direction == '^':
+            location[1] += 1
+        elif direction == '>':
+            location[0] += 1
+        elif direction == 'v':
+            location[1] -= 1
+        elif direction == '<':
+            location[0] -= 1
 
-    print(visited_locations) #{(0, 0): 1, (0, 1): 1981, (-1, 0): 2051, (0, -1): 2068, (1, 0): 2092}
+        if str(location) not in visited:
+            visited.append(str(location))
+
+    print(len(visited))
 
 if __name__ == "__main__":
     try:
-        x = 0
-        y = 0
-        location = (x,y)
-        main(location)
+        main()
     except KeyboardInterrupt:
         print('Program terminated.')
