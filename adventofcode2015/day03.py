@@ -24,49 +24,63 @@ def file_test(file):
         print('Unable to open file.')
         exit()
 
-def main():
+def move_up(location, visited_locations):
+    location = (x,y+1)
+    if location not in visited_locations:
+        visited_locations[location] = 1
+    else:
+        visited_locations[location] += 1
+    return location
+
+def move_right(location, visited_locations):
+    location = (x+1,y)
+    if location not in visited_locations:
+        visited_locations[location] = 1
+    else:
+        visited_locations[location] += 1
+    return location
+
+def move_down(location, visited_locations):
+    location = (x,y-1)
+    if location not in visited_locations:
+        visited_locations[location] = 1
+    else:
+        visited_locations[location] += 1
+    return location
+
+def move_left(location, visited_locations):
+    location = (x-1,y)
+    if location not in visited_locations:
+        visited_locations[location] = 1
+    else:
+        visited_locations[location] += 1
+    return location
+
+def main(location):
     puzzle = r'C:\Users\I539067\Desktop\lab.txt'
     file_test(puzzle)
     file = open(puzzle).read()
     
-    x = 0
-    y = 0
-    location = (x,y)
-    
     visited_locations = {}
     visited_locations[location] = 1
-    print(visited_locations)
 
-    for i in file:
+    for i in file: 
         if i == "^":
-            location = (x,y+1)
-            if location not in visited_locations:
-                visited_locations[location] = 1
-            else:
-                visited_locations[location] += 1
+            location = move_up(location, visited_locations)
         elif i == '>':
-            location = (x+1,y)
-            if location not in visited_locations:
-                visited_locations[location] = 1
-            else:
-                visited_locations[location] += 1
+            location = move_right(location, visited_locations)
         elif i == 'v':
-            location = (x,y-1)
-            if location not in visited_locations:
-                visited_locations[location] = 1
-            else:
-                visited_locations[location] += 1
+            location = move_down(location, visited_locations)
         elif i == '<':
-            location = (x-1,y)
-            if location not in visited_locations:
-                visited_locations[location] = 1
-            else:
-                visited_locations[location] += 1
+            location = move_left(location, visited_locations)
 
     print(visited_locations) #{(0, 0): 1, (0, 1): 1981, (-1, 0): 2051, (0, -1): 2068, (1, 0): 2092}
 
 if __name__ == "__main__":
     try:
-        main()
+        x = 0
+        y = 0
+        location = (x,y)
+        main(location)
     except KeyboardInterrupt:
         print('Program terminated.')
