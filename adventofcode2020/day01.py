@@ -27,14 +27,30 @@ In this list, the two entries that sum to 2020 are 1721 and 299. Multiplying the
 Of course, your expense report is much larger. Find the two entries that sum to 2020; what do you get if you multiply them together?
 '''
 
-expense_report = open(r'C:\Users\I539067\Desktop\Prisma API\Documents\puzzle_input.txt').read()
-expenses = expense_report.split('\n')
+if __name__ == "__main__":
+    #Load the puzzle and split by line to get each individual expense in a list. 
+    expense_report = open(r'C:\Users\I539067\Desktop\Prisma API\Documents\puzzle_input.txt').read()
+    expenses = expense_report.split('\n')
 
-for x in range(len(expenses)):
-    for y in range(x + 1, len(expenses)):
-        if int(expenses[x]) + int(expenses[y]) == 2020:
-            first_item = expenses[x]
-            second_item = expenses[y]
-            answer = int(expenses[x]) * int(expenses[y])
-            reveal = 'First item: {}\nSecond item: {}\nAnswer: {}'.format(first_item, second_item, answer)
-            print(reveal)
+    #Part one is to find two numbers in the list of expenses that add to 2020 and find their product. 
+    def part_one():
+        for x in range(len(expenses)):
+            for y in range(x + 1, len(expenses)):
+                if int(expenses[x]) + int(expenses[y]) == 2020:
+                    first_item = expenses[x]
+                    second_item = expenses[y]
+                    product = int(expenses[x]) * int(expenses[y])
+                    answer = 'First item: {}\nSecond item: {}\nAnswer: {}'.format(first_item, second_item, product)
+                    print(answer)
+
+    #Part two is to find three numbers in the list of expenses that add to 2020 and find their product. 
+    for x in range(len(expenses)):
+        for y in range(x + 1, len(expenses)):
+            for z in range(x + 2, len(expenses)):
+                if int(expenses[x]) + int(expenses[y]) + int(expenses[z]) == 2020:
+                    first_item = expenses[x]
+                    second_item = expenses[y]
+                    third_item = expenses[z]
+                    product = int(expenses[x]) * int(expenses[y]) * int(expenses[z])
+                    answer = 'First item: {}\nSecond item: {}\nThird item: {}\nAnswer: {}'.format(first_item, second_item,third_item, product)
+                    print(answer)
