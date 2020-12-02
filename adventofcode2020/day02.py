@@ -60,16 +60,58 @@ if __name__ == "__main__":
     print(new) 4
     '''
 
-    valid_count = 0
-    for x in range(len(number_frequency_list)):
-        range_parameters = number_frequency_list[x].split('-')
-        low_end = int(range_parameters[0]) 
-        low_check = 'Low end value: {}'.format(low_end)
-        print(low_check)
+    #Part one is to find number of occurences of letter within range parameters for each password. 
+    def part_one():
+        valid_count = 0
+        for x in range(len(number_frequency_list)):
+            range_parameters = number_frequency_list[x].split('-')
+            low_end = int(range_parameters[0]) 
+            low_check = 'Low end value: {}'.format(low_end)
+            print(low_check)
 
-        high_end = int(range_parameters[1])
-        high_check = 'High end value: {}'.format(high_end)
-        print(high_check)
+            high_end = int(range_parameters[1])
+            high_check = 'High end value: {}'.format(high_end)
+            print(high_check)
+
+            match_character = letter_list[x][:-1]
+            match_check = 'Match character: {}'.format(match_character)
+            print(match_check)
+
+            test_password = password_string_list[x]
+            password_check = 'Password: {}'.format(test_password)
+            print(password_check)
+
+            occurences = test_password.count(match_character)
+            occur_check = 'Occurences: {}'.format(occurences)
+            print(occur_check)
+
+            '''
+            Low end value: 16
+            High end value: 20
+            Match character: j
+            Password: vjkjjcjjrjjmtnbjjjnj
+            Occurences: 11
+            '''
+
+            if occurences in range(low_end, high_end+1):
+                valid_count += 1
+                print('The valid count is:', valid_count)
+            else:
+                pass 
+
+        print('The final valid count is:', valid_count) #Correct answer! 
+
+    #Part two is to compare the positional indecies of the password string according to the match letter
+    valid_count = 0 
+    for x in range(len(number_frequency_list)):
+        index_parameters = number_frequency_list[x].split('-')
+
+        if int(index_parameters[0]) - 1 < 0:
+            first_index = 0
+        else:
+            first_index = int(index_parameters[0]) - 1
+
+        second_index = int(index_parameters[1]) - 1
 
         match_character = letter_list[x][:-1]
         match_check = 'Match character: {}'.format(match_character)
@@ -79,22 +121,11 @@ if __name__ == "__main__":
         password_check = 'Password: {}'.format(test_password)
         print(password_check)
 
-        occurences = test_password.count(match_character)
-        occur_check = 'Occurences: {}'.format(occurences)
-        print(occur_check)
-
-        '''
-        Low end value: 16
-        High end value: 20
-        Match character: j
-        Password: vjkjjcjjrjjmtnbjjjnj
-        Occurences: 11
-        '''
-
-        if occurences in range(low_end, high_end+1):
+        if test_password[first_index] == test_password[second_index]:
+            pass
+        elif test_password[first_index] == match_character:
             valid_count += 1
-            print('The valid count is:', valid_count)
-        else:
-            pass 
+        elif test_password[second_index] == match_character:
+            valid_count += 1
 
-    print('The final valid count is:', valid_count) #Correct answer! 
+    print('The final valid count is:', valid_count) #Correct answer!
