@@ -29,7 +29,7 @@ Of course, your expense report is much larger. Find the two entries that sum to 
 
 if __name__ == "__main__":
     #Load the puzzle and split by line to get each individual expense in a list. 
-    expense_report = open(r'C:\Users\I539067\Desktop\Prisma API\Documents\puzzle_input.txt').read()
+    expense_report = open(r'C:\Users\\Desktop\Prisma API\Documents\puzzle_input.txt').read()
     expenses = expense_report.split('\n')
 
     #Part one is to find two numbers in the list of expenses that add to 2020 and find their product. 
