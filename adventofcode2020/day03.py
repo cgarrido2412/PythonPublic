@@ -91,7 +91,7 @@ def count_trees(yslope, xslope):
 
 if __name__ == "__main__":
     #Load the puzzle
-    puzzle_input = open(r'C:\Users\I539067\Desktop\Prisma API\Documents\puzzle_input.txt').read()
+    puzzle_input = open(r'C:\Users\\Desktop\Prisma API\Documents\puzzle_input.txt').read()
     tree_map = puzzle_input.split('\n')
 
     #Define width and height
