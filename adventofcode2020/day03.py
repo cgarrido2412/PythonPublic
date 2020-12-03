@@ -68,6 +68,26 @@ In the above example, these slopes would find 2, 7, 3, 4, and 2 tree(s) respecti
 What do you get if you multiply together the number of trees encountered on each of the listed slopes?
 '''
 
+#The function that will solve part 1 when passed the parameters of (1,3)
+def count_trees(yslope, xslope):
+    #Starting position and tree count
+    position = [0,0]
+    trees = 0
+
+    while position[0] < height:
+
+        #Add one to trees if the coordinate is equal to '#'
+        trees += tree_map[position[0]][position[1]] == '#'
+
+        #Move to the right 3, because the puzzle repeats itself horizontally we can use modulo to "spill over" to the correct position on what "the next puzzle" would be
+        position[1] = (position[1] + xslope) % width 
+
+        #Move down 1 until we hit the height of the map
+        position[0] += yslope 
+
+    #Total number of trees encountered
+    return trees 
+
 if __name__ == "__main__":
     #Load the puzzle
     puzzle_input = open(r'C:\Users\I539067\Desktop\Prisma API\Documents\puzzle_input.txt').read()
@@ -76,26 +96,6 @@ if __name__ == "__main__":
     #Define width and height
     width = len(tree_map[0])
     height = len(tree_map)
-
-    #The function that will serve part 1 when passed the parameters of (1,3)
-    def count_trees(yslope, xslope):
-        #Starting position and tree count
-        position = [0,0]
-        trees = 0
-
-        while position[0] < height:
-
-            #Add one to trees if the coordinate is equal to '#'
-            trees += tree_map[position[0]][position[1]] == '#'
-
-            #Move to the right 3, because the puzzle repeats itself horizontally we can use modulo to "spill over" to the correct position on what "the next puzzle" would be
-            position[1] = (position[1] + xslope) % width 
-
-            #Move down 1 until we hit the height of the map
-            position[0] += yslope 
-
-        #Total number of trees encountered
-        return trees 
 
     #We'll multiply all the answers together, start initial multiplier to 1
     product = 1
