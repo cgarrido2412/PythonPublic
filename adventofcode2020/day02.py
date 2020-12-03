@@ -25,7 +25,7 @@ How many passwords are valid according to their policies?
 
 if __name__ == "__main__":
     #Load the puzzle
-    password_manifest = open(r'C:\Users\I539067\Desktop\Prisma API\Documents\puzzle_input.txt').read()
+    password_manifest = open(r'C:\Users\\Desktop\Prisma API\Documents\puzzle_input.txt').read()
 
     #Method, split by lines and spaces. Range length indexing for comparing numbers to letter to string. 
 
