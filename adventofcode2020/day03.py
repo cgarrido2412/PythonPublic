@@ -77,7 +77,8 @@ def count_trees(yslope, xslope):
     while position[0] < height:
 
         #Add one to trees if the coordinate is equal to '#'
-        trees += tree_map[position[0]][position[1]] == '#'
+        if tree_map[position[0]][position[1]] == '#':
+            trees += 1
 
         #Move to the right 3, because the puzzle repeats itself horizontally we can use modulo to "spill over" to the correct position on what "the next puzzle" would be
         position[1] = (position[1] + xslope) % width 
