@@ -23,10 +23,12 @@ both within the limits of their respective policies.
 How many passwords are valid according to their policies?
 '''
 
+import os 
+
 if __name__ == "__main__":
     #Load the puzzle
-    password_manifest = open(r'C:\Users\\Desktop\Prisma API\Documents\puzzle_input.txt').read()
-
+    password_manifest = open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Prisma API\Documents\puzzle_input.txt').read()
+    
     #Method, split by lines and spaces. Range length indexing for comparing numbers to letter to string. 
 
     #Split into lines for each password policy (use grouper)
