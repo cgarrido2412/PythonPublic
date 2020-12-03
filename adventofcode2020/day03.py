@@ -68,6 +68,8 @@ In the above example, these slopes would find 2, 7, 3, 4, and 2 tree(s) respecti
 What do you get if you multiply together the number of trees encountered on each of the listed slopes?
 '''
 
+import os 
+
 #The function that will solve part 1 when passed the parameters of (1,3)
 def count_trees(yslope, xslope):
     #Starting position and tree count
@@ -91,7 +93,7 @@ def count_trees(yslope, xslope):
 
 if __name__ == "__main__":
     #Load the puzzle
-    puzzle_input = open(r'C:\Users\\Desktop\Prisma API\Documents\puzzle_input.txt').read()
+    puzzle_input = open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Prisma API\Documents\puzzle_input.txt').read()
     tree_map = puzzle_input.split('\n')
 
     #Define width and height
