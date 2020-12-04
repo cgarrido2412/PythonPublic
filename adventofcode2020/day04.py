@@ -26,14 +26,10 @@ if __name__ == "__main__":
 
     #Convert each passport into a string dictionary
     for x in range(len(passports)):
-        passports[x] = passports[x].replace('\n', ' ') 
-        passports[x] = passports[x].replace(' ', ', ') 
-        passports[x] = "'" + '{' + passports[x] + '}' + "'"
-        passports[x] = {k:v for (k,v) in [s.split(':') for s in passports[x].strip('{}').split(', ')]}
-        
-    for x in range(len(passports)):
-        for y in passports:
-            if validate(passports[x]):
-                count += 1
+        passports[x] = passports[x].replace('\n', ' ')  
+        passports[x] = {k:v for (k,v) in [s.split(':') for s in passports[x].split(' ')]}
 
-    print(count) #Fuck me, my answer is too high. :( 
+    for x in range(len(passports)):
+        count += validate(ast.literal_eval(str(passports[x])))
+
+    print(count)
