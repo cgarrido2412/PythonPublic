@@ -39,9 +39,17 @@ if __name__ == "__main__":
     print(passports[2]) #{"ecl":"gry", "hcl":#"888785", "eyr":"2023", "cid":"63", "iyr":"2019", "hgt":"177cm", "pid":"656793259"}
 
     '''
-    The problem right now is that I wrapped quotes around alphanumeric characters
+    The problem right now is that I had a string
+        '{ecl:gry, hcl:#888785, eyr:2023, cid:63, iyr:2019, hgt:177cm, pid:656793259}'
+
+    I wouldn't be able to ast.literal_eval convert this to a dict because it isn't properly formatted. 
+    So I tried wrapping alphanumeric characters with quotations. 
+    However, some of the key, value pairs have values with special character beginnings. 
     Which has caused:
         "hcl":#"888785",
     Instead of:
         "hcl":"#888785", 
+
+    So on the conversion, one of my dictionaries is still formatted incorrectly:
+        {"ecl":"gry", "hcl":#"888785", "eyr":"2023", "cid":"63", "iyr":"2019", "hgt":"177cm", "pid":"656793259"}
     '''
