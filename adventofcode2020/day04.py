@@ -3,6 +3,14 @@
 import ast
 import os 
 
+def validate(passport):
+    for f in fields:
+        if f in passport.keys():
+            continue
+        else:
+            return False
+    return True
+
 if __name__ == "__main__":
     #Load the puzzle and break into individual passports based on whitespace line
     puzzle_input = open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Prisma API\Documents\puzzle_input.txt').read()
@@ -21,35 +29,11 @@ if __name__ == "__main__":
         passports[x] = passports[x].replace('\n', ' ') 
         passports[x] = passports[x].replace(' ', ', ') 
         passports[x] = "'" + '{' + passports[x] + '}' + "'"
-        print(passports[x])
-        output = ""
-        quoting = False
-        for char in passports[x]:
-            if char.isalnum():
-                if not quoting:
-                    output += '"'
-                    quoting = True
-            elif quoting:
-                output += '"'
-                quoting = False 
-            output += char
-        passports[x] = output 
-        passports[x] = ast.literal_eval(passports[x])
+        passports[x] = {k:v for (k,v) in [s.split(':') for s in passports[x].strip('{}').split(', ')]}
+        
+    for x in range(len(passports)):
+        for y in passports:
+            if validate(passports[x]):
+                count += 1
 
-    print(passports[2]) #{"ecl":"gry", "hcl":#"888785", "eyr":"2023", "cid":"63", "iyr":"2019", "hgt":"177cm", "pid":"656793259"}
-
-    '''
-    The problem right now is that I had a string
-        '{ecl:gry, hcl:#888785, eyr:2023, cid:63, iyr:2019, hgt:177cm, pid:656793259}'
-
-    I wouldn't be able to ast.literal_eval convert this to a dict because it isn't properly formatted. 
-    So I tried wrapping alphanumeric characters with quotations. 
-    However, some of the key, value pairs have values with special character beginnings. 
-    Which has caused:
-        "hcl":#"888785",
-    Instead of:
-        "hcl":"#888785", 
-
-    So on the conversion, one of my dictionaries is still formatted incorrectly:
-        {"ecl":"gry", "hcl":#"888785", "eyr":"2023", "cid":"63", "iyr":"2019", "hgt":"177cm", "pid":"656793259"}
-    '''
+    print(count) #Fuck me, my answer is too high. :( 
