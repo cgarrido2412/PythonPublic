@@ -55,6 +55,9 @@ def find_column(boarding_pass):
             pass
     return column 
 
+def find_missing(number_list):
+    return [x for x in range(number_list[0], number_list[-1]+1) if x not in number_list]
+
 if __name__ == '__main__':
     boarding_passes = open(r'C:\Users\I539067\Desktop\Prisma API\Documents\puzzle_input.txt').read().splitlines()
     seat_ids = []
@@ -64,5 +67,11 @@ if __name__ == '__main__':
         seat_id = row[0] * 8 + column[0]
         seat_ids.append(seat_id)
         announcement = 'Your seat is row {}, column {}, seat ID {}'.format(row, column, seat_id)
-        print(announcement)
-    print('The highest seat ID is:', max(seat_ids))
+        #print(announcement)
+    
+    #Answer to part 1
+    #print('The highest seat ID is:', max(seat_ids))
+
+    #Answer to part 2
+    empty_seats = find_missing(sorted(seat_ids))
+    print(empty_seats)
