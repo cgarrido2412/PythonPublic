@@ -1,12 +1,13 @@
 #! /usr/bin/env python3
 
+import os 
 from functools import reduce
 
 def deduplicate(x):
     return list(set(x))
 
 if __name__ == '__main__':
-    forms = open(r'C:\Users\I539067\Desktop\Prisma API\Documents\puzzle_input.txt').read()
+    forms = open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Prisma API\Documents\puzzle_input.txt').read()
     groups = forms.split('\n\n')
     people = []
     for x in range(len(groups)):
@@ -20,6 +21,8 @@ if __name__ == '__main__':
             uniques = deduplicate(uniques)
             answered += len(uniques)
         print(answered)
+
+    part_one()
 
     unanimous = 0
     for x in range(len(people)):
