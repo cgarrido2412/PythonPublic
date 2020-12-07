@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+import os
+
 '''
 >>> x = list(range(11,21))
 >>> x
@@ -59,7 +61,7 @@ def find_missing(number_list):
     return [x for x in range(number_list[0], number_list[-1]+1) if x not in number_list]
 
 if __name__ == '__main__':
-    boarding_passes = open(r'C:\Users\I539067\Desktop\Prisma API\Documents\puzzle_input.txt').read().splitlines()
+    boarding_passes = open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Prisma API\Documents\puzzle_input.txt').read().splitlines()
     seat_ids = []
     for x in range(len(boarding_passes)):
         row = find_row(boarding_passes[x])
