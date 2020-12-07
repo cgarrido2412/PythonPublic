@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+from functools import reduce
+
 def deduplicate(x):
     return list(set(x))
 
@@ -11,11 +13,17 @@ if __name__ == '__main__':
         person = groups[x].split('\n')
         people.append(person)
 
-    answered = 0
+    def part_one():
+        answered = 0
+        for x in range(len(people)):
+            uniques = ''.join(people[x])
+            uniques = deduplicate(uniques)
+            answered += len(uniques)
+        print(answered)
 
+    unanimous = 0
     for x in range(len(people)):
-        uniques = ''.join(people[x])
-        uniques = deduplicate(uniques)
-        answered += len(uniques)
+        res = list(reduce(lambda i, j: i & j, (set(y) for y in people[x]))) #https://www.geeksforgeeks.org/python-find-common-elements-in-list-of-lists/
+        unanimous += len(res)
 
-    print(answered)
+    print(unanimous)
