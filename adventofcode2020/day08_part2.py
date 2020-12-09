@@ -21,11 +21,8 @@ def run(program):
         acc, jmp = execute(program[line_number])
         accumulator += acc
         line_number += jmp
-
     if line_number >= len(program):
         return accumulator
-    
-    return None 
 
 if __name__ == '__main__':
     boot_code = open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Prisma API\Documents\puzzle_input.txt').read()  
