@@ -27,4 +27,18 @@ if __name__ == "__main__":
             shopping_list.append(random_selection)
 
     #shopping list
-    print(shopping_list)
+    recipe = '''
+Your stir fry recipe list!
+Protein: {}
+Aromatic: {}
+Vegetables: {}, {}, {}
+Finish: {}
+Garnish: {}
+    '''.format(shopping_list[0],
+               shopping_list[1],
+               shopping_list[2],
+               shopping_list[3],
+               shopping_list[4],
+               shopping_list[5],
+               shopping_list[6])
+    print(recipe)
