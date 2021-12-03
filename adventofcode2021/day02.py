@@ -90,8 +90,7 @@ def part_two(directions):
     return answer 
 
 if __name__ == "__main__":
-    navigational_directions = open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Prisma API\Documents\puzzle_input.txt').read()
-    directions = navigational_directions.split('\n')
+    navigational_directions = open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Advent Of Code\day02.txt').read().split('\n')
     
-    print(part_one(directions))
-    print(part_two(directions))
+    print(part_one(navigational_directions))
+    print(part_two(navigational_directions))
