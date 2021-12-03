@@ -103,9 +103,8 @@ def part_two(same_list):
     return increased
 
 if __name__ == "__main__":
-    depth_measurements = open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Prisma API\Documents\puzzle_input.txt').read()
-    measurements = depth_measurements.split('\n')
-    measurements = [int(x) for x in measurements]
+    depth_measurements = open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Advent Of Code\day01.txt').read().split('\n')
+    measurements = [int(x) for x in depth_measurements]
 
     print(part_one(measurements))
     print(part_two(measurements))
