@@ -35,16 +35,13 @@ Use the binary numbers in your diagnostic report to calculate the gamma rate and
 
 import os
 
-if __name__ == "__main__":
-    with open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Advent Of Code\day03.txt') as diagnostic_file:
-        binary = diagnostic_file.read().strip().split('\n')
-
-    length = len(binary[0]) 
+def part_one(some_list):
+    length = len(some_list[0]) 
     gamma_rate = [None] * length
     epsilon_rate = [None] * length
     for i in range(length):
-        zeros = sum([binary[x][i] == "0" for x in range(len(binary))])
-        ones = sum([binary[x][i] == "1" for x in range(len(binary))])
+        zeros = sum([some_list[x][i] == "0" for x in range(len(some_list))])
+        ones = sum([some_list[x][i] == "1" for x in range(len(some_list))])
         if zeros > ones:
             gamma_rate[i] = "0"
             epsilon_rate[i] = "1"
@@ -52,5 +49,11 @@ if __name__ == "__main__":
             gamma_rate[i] = "1"
             epsilon_rate[i] = "0"
 
-    ans = int("".join(gamma_rate), 2) * int("".join(epsilon_rate), 2)
-    print(ans)
+    power_consumption = int("".join(gamma_rate), 2) * int("".join(epsilon_rate), 2)
+    return power_consumption
+
+if __name__ == "__main__":
+    with open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Advent Of Code\day03.txt') as diagnostic_file:
+        binary = diagnostic_file.read().strip().split('\n')
+
+        print(part_one(binary))
