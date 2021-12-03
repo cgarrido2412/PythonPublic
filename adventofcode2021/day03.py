@@ -56,4 +56,4 @@ if __name__ == "__main__":
     with open(os.getenv('HOMEDRIVE')+os.getenv('HOMEPATH')+'\Desktop\Advent Of Code\day03.txt') as diagnostic_file:
         binary = diagnostic_file.read().strip().split('\n')
 
-        print(part_one(binary))
+    print(part_one(binary))
