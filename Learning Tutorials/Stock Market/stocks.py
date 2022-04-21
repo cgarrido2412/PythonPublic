@@ -11,7 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt 
 
 if __name__ == '__main__':
-    data = yf.download('AAPL MSFT SAP PTON LULU PYPL NKE VOO COP COST KO PG')
+    data = yf.download('NFLX COST')
     data.head()
     data['Adj Close'].plot(figsize=(10,7))
     plt.legend() 
