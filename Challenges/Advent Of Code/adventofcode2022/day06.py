@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-from signal import signal 
 
 def signal_lock(packet_size):
     for (x, character) in enumerate(data):
