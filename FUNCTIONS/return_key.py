@@ -10,6 +10,12 @@ import random
 def return_key(some_dictionary, value):
     return list(some_dictionary.keys())[list(some_dictionary.values()).index(value)]
 
+#Simpler method
+def get_key(my_dict, val):
+    for key, value in my_dict.items():
+         if val == value:
+             return key
+
 if __name__ == "__main__":
     #Define dicitonary
     characters = {'evangelo':1, 'walker':2, 'holly':3, 'mom':4, 'doc':5, 'hoffman':6, 'jim':7, 'karlee':8, 'heng':9, 'sharice':10, 'dan':11, 'tala':12}
