@@ -20,9 +20,7 @@ if __name__ == "__main__":
     #Define dicitonary
     characters = {'evangelo':1, 'walker':2, 'holly':3, 'mom':4, 'doc':5, 'hoffman':6, 'jim':7, 'karlee':8, 'heng':9, 'sharice':10, 'dan':11, 'tala':12}
 
-    #Select a random value
-    number = random.randint(1,12)
-
     #Print key from value
-    selected_character = return_key(characters, number)
-    print(selected_character)
+    selected_character = return_key(characters, random.randint(1,12))
+    second_character = get_key(characters, random.randint(1,12))
+    print(selected_character, second_character)
